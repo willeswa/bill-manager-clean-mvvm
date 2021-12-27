@@ -24,6 +24,8 @@ class MainActivity : AppCompatActivity() {
         val bottomNav = binding.bottomNavigationView
         val toolbar = binding.mainToolbar
 
+        //Setup support action manually instead of in theme
+        //Gives us more flexibility with other screens
         setSupportActionBar(toolbar)
 
         val navHostFragment = supportFragmentManager
@@ -32,6 +34,9 @@ class MainActivity : AppCompatActivity() {
 
         bottomNav.setupWithNavController(navController)
 
+
+        //The menu items have to have the same ids as the destinations
+        //for the bottom nav to setupwithnavcontroller
         val appBarConfig = AppBarConfiguration(setOf(
                 R.id.home_nav,
                 R.id.new_nav,
@@ -39,14 +44,6 @@ class MainActivity : AppCompatActivity() {
 
         setupActionBarWithNavController(navController, appBarConfig)
 
-        navController.addOnDestinationChangedListener{_, destination, _ ->
-            if(destination.id == R.id.home_nav){
-                toolbar.visibility = View.GONE
-            } else {
-                toolbar.visibility = View.VISIBLE
-            }
-
-        }
 
     }
 
