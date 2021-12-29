@@ -11,6 +11,7 @@ class HomeScreenFragment : Fragment() {
 
     private lateinit var mainCollectionsAdapter: MainRecyclerAdapter
     private lateinit var binding: FragmentHomeScreenBinding
+    private lateinit var viewModel: HomeScreenViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
