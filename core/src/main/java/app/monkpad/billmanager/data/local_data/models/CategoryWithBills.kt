@@ -6,8 +6,8 @@ import androidx.room.Relation
 data class CategoryWithBills(
     @Embedded val category: CategoryEntity,
     @Relation(
-        parentColumn = "categoryId",
-        entityColumn = "billId"
+        parentColumn = "title",
+        entityColumn = "description"
     )
     val billEntities: List<BillEntity>
 )

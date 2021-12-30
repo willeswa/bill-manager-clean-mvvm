@@ -1,25 +1,24 @@
 package app.monkpad.billmanager.data.local_data.datasource
 
-import app.monkpad.billmanager.data.BillsLocalDataSource
+import android.content.Context
 import app.monkpad.billmanager.data.local_data.database.BillsManagerDatabase
-import app.monkpad.billmanager.data.mappers.asDomain
+import app.monkpad.billmanager.data.mappers.asDomainModel
 import app.monkpad.billmanager.data.mappers.asEntityModel
-import app.monkpad.billmanager.domain.Bill
-import app.monkpad.billmanager.domain.Category
+import app.monkpad.billmanager.domain.models.Bill
 
-class BillsLocalDataSource(private val localDatabase: BillsManagerDatabase): BillsLocalDataSource {
 
-    override suspend fun getCategoriesWithBills(): List<Category> {
-        val categories = localDatabase.billsDao.getBillsWithCategories()
-        return categories.map{it.asDomain()}
+class BillsLocalDataSource (context: Context){
+
+    private val billsDao = BillsManagerDatabase.getDatabase(context.applicationContext)
+        .billDao()
+
+    suspend fun getBills(categoryTitle: String): List<Bill>{
+        return billsDao.getBills(categoryTitle).map{it.asDomainModel()}
     }
 
-    override suspend fun addBill(bill: Bill, categoryId: Int) {
-        localDatabase.billsDao.addBill(bill.asEntityModel(categoryId))
+    suspend fun addBill(bill: Bill, title: String){
+        billsDao.addBill(bill.asEntityModel(title))
     }
-
-    override suspend fun getBill(billId: Int): Bill {
-        TODO("Not yet implemented")
-    }
-
 }
+
+

@@ -13,21 +13,28 @@ import app.monkpad.billmanager.data.local_data.models.CategoryEntity
     version = 1,
     exportSchema = false)
 abstract class BillsManagerDatabase: RoomDatabase(){
-    abstract val billsDao: BillDao
 
-    abstract val categoryDao: CategoryDao
-}
+    companion object {
+        private lateinit var INSTANCE: BillsManagerDatabase
 
-private lateinit var INSTANCE: BillsManagerDatabase
-
-fun getDatabase(context: Context){
-    synchronized(BillsManagerDatabase::class.java){
-        if(!::INSTANCE.isInitialized){
-            INSTANCE = Room.databaseBuilder(
-                context.applicationContext,
-                BillsManagerDatabase::class.java,
-                "bills_database"
-            ).build()
+        fun getDatabase(context: Context): BillsManagerDatabase{
+            synchronized(BillsManagerDatabase::class.java){
+                if(!::INSTANCE.isInitialized){
+                    INSTANCE = Room.databaseBuilder(
+                        context.applicationContext,
+                        BillsManagerDatabase::class.java,
+                        "bills_database"
+                    ).build()
+                }
+            }
+            return INSTANCE
         }
     }
+
+    abstract fun billDao(): BillDao
+
+    abstract fun categoryDao(): CategoryDao
 }
+
+
+

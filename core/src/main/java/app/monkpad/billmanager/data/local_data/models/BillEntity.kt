@@ -6,12 +6,12 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "bills_table")
 data class BillEntity(
-    @PrimaryKey(autoGenerate = true)
-    val billId: Int = 1,
-    val amount: Float,
+
+    @PrimaryKey
     val description: String,
+    val amount: Float,
     @ColumnInfo(name = "due_date") val dueDate: String,
-    @ColumnInfo(name = "category_id") val categoryId: Int,
+    @ColumnInfo(name =  "category_title") val categoryTitle: String,
     val repeat: Boolean, //we will use this to setup a job
     val settled: Boolean
 )
