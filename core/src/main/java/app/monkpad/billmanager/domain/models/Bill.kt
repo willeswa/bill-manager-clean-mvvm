@@ -1,4 +1,4 @@
-package app.monkpad.billmanager.domain
+package app.monkpad.billmanager.domain.models
 
 data class Bill(
     val description: String,

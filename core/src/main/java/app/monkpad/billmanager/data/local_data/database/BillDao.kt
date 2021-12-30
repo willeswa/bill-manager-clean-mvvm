@@ -1,17 +1,22 @@
 package app.monkpad.billmanager.data.local_data.database
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 import app.monkpad.billmanager.data.local_data.models.BillEntity
 import app.monkpad.billmanager.data.local_data.models.CategoryWithBills
 
 @Dao
 interface BillDao {
 
-    @Query("SELECT * FROM bills_table")
+    @Transaction
+    @Query("SELECT * FROM categories_table")
     suspend fun getBillsWithCategories(): List<CategoryWithBills>
 
-    @Insert
+    @Query("SELECT * FROM bills_table WHERE category_title=:categoryTitle")
+    suspend fun getBills(categoryTitle: String): List<BillEntity>
+
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addBill(vararg bills: BillEntity)
+
+
 }

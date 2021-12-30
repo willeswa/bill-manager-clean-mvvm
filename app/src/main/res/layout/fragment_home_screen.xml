@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="viewmodel"
+            type="app.monkpad.billmanager.presentation.homescreen.HomeScreenViewModel" />
     </data>
 
     <androidx.core.widget.NestedScrollView
@@ -24,7 +26,7 @@
                 android:layout_margin="8dp"
                 app:cardBackgroundColor="@color/background_default"
                 app:cardCornerRadius="15dp"
-                app:cardElevation="4dp"
+                app:cardElevation="2dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -112,40 +114,70 @@
 
             </com.google.android.material.card.MaterialCardView>
 
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/tabLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:background="@color/background_default"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/materialCardView">
+           <com.google.android.material.card.MaterialCardView
+               android:id="@+id/card_tab"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               app:layout_constraintEnd_toEndOf="parent"
+               app:layout_constraintHorizontal_bias="1.0"
+               app:layout_constraintStart_toStartOf="parent"
+               app:layout_constraintTop_toBottomOf="@+id/materialCardView"
+               app:cardCornerRadius="25dp"
+               app:cardElevation="0dp"
+               android:layout_marginLeft="8dp"
+               android:layout_marginTop="16dp"
+               android:layout_marginRight="8dp"
+               app:cardBackgroundColor="@color/primary_darker_background">
+               <com.google.android.material.card.MaterialCardView
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   app:cardCornerRadius="25dp"
+                   android:layout_margin="3dp"
+                   app:cardElevation="0dp"
+                   app:cardBackgroundColor="@color/white"
+                 >
 
-                <com.google.android.material.tabs.TabItem
-                    android:id="@+id/tab_pending"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Pending"
-                    />
+                   <com.google.android.material.tabs.TabLayout
+                       android:id="@+id/tabLayout"
+                       android:layout_width="match_parent"
+                       android:layout_height="40dp"
+                       app:tabSelectedTextColor="@color/primary"
+                       app:tabBackground="@drawable/selector"
+                       app:tabTextAppearance="@style/BillManager.Tab.TextAppearance"
+                       app:tabIndicatorColor="@color/white"
+                       app:tabMode="fixed"
+                       >
 
-                <com.google.android.material.tabs.TabItem
-                    android:id="@+id/setting"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Settled" />
-            </com.google.android.material.tabs.TabLayout>
+                       <com.google.android.material.tabs.TabItem
+                           android:id="@+id/tab_unpaid"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:text="Unpaid"
 
+                           />
+
+                       <com.google.android.material.tabs.TabItem
+                           android:id="@+id/tab_paid"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:text="Paid"
+                           />
+                   </com.google.android.material.tabs.TabLayout>
+
+               </com.google.android.material.card.MaterialCardView>
+           </com.google.android.material.card.MaterialCardView>
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/main_screen_recycler"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_marginTop="16dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:orientation="vertical"
+                app:submitList="@{viewmodel.paid ? viewmodel.paidBills : viewmodel.unpaidBills }"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tabLayout"
+                app:layout_constraintTop_toBottomOf="@+id/card_tab"
                 tools:listitem="@layout/bill_recycler_item" />
 
 

@@ -4,7 +4,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
-
+        <variable
+            name="bill"
+            type="app.monkpad.billmanager.domain.models.Bill" />
     </data>
 
 
@@ -32,6 +34,7 @@
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
                 android:textSize="18sp"
                 android:textStyle="bold"
+                android:text="@{bill.description}"
                 tools:text="Equity bank loan" />
 
             <androidx.constraintlayout.widget.ConstraintLayout

@@ -1,11 +1,12 @@
 package app.monkpad.billmanager.data.mappers
 
 import app.monkpad.billmanager.data.local_data.models.BillEntity
+import app.monkpad.billmanager.data.local_data.models.CategoryEntity
 import app.monkpad.billmanager.data.local_data.models.CategoryWithBills
-import app.monkpad.billmanager.domain.Bill
-import app.monkpad.billmanager.domain.Category
+import app.monkpad.billmanager.domain.models.Bill
+import app.monkpad.billmanager.domain.models.Category
 
-internal fun BillEntity.toDomain(): Bill =
+internal fun BillEntity.asDomainModel(): Bill =
     Bill(
         description = description,
         amount = amount,
@@ -14,9 +15,9 @@ internal fun BillEntity.toDomain(): Bill =
         settled = settled
     )
 
-internal fun CategoryWithBills.asDomain(): Category =
+internal fun CategoryEntity.asDomainModel(): Category =
     Category(
-        name = category.title,
-        logo = category.logo,
-        bills = billEntities.map { it.toDomain()}
+        name = title,
+        logo = logo,
     )
+
