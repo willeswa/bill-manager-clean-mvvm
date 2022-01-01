@@ -59,23 +59,27 @@
                                 android:id="@+id/bill_value_title"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:alpha="0.7"
                                 android:paddingTop="4dp"
                                 android:paddingBottom="4dp"
                                 android:text="@string/total_value_title"
+                                android:textAppearance="@style/BillManager.TextAppearance.Light.Faded"
                                 android:textColor="@color/primary"
-                                android:textSize="18sp"
+                                android:textSize="14sp"
                                 tools:text="@string/total_value_title" />
 
                             <TextView
                                 android:id="@+id/bill_value"
+                                style="@style/BillManager.TextAppearance.Bold"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="@font/ubuntu_bold"
+                                android:autoSizeTextType="uniform"
+                                android:maxLines="1"
                                 android:paddingTop="4dp"
                                 android:paddingBottom="4dp"
-                                android:text="@string/total_value_placeholder"
-                                android:textColor="@color/secondary"
+                                android:textColor="@color/primary"
                                 android:textSize="50sp"
+                                app:setFloat="@{viewmodel.billValue}"
                                 tools:text="@string/total_value_placeholder" />
                         </LinearLayout>
 
@@ -90,9 +94,11 @@
                                 android:id="@+id/next_bill_title"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:alpha="0.7"
                                 android:paddingTop="4dp"
                                 android:paddingBottom="4dp"
                                 android:text="@string/next_bill_due_title"
+                                android:textAppearance="@style/BillManager.TextAppearance.Light"
                                 android:textSize="12sp" />
 
                             <TextView
@@ -104,10 +110,10 @@
                                 android:alpha="0.8"
                                 android:paddingTop="4dp"
                                 android:paddingBottom="4dp"
-                                android:text="@string/next_bill_due_date_value"
+                                app:setDate="@{viewmodel.unpaidBills[0].dueDate}"
+                                android:textAppearance="@style/BillManager.TextAppearance.Light"
                                 android:textColor="@color/error_color"
-                                android:textSize="12sp"
-                                android:textStyle="bold" />
+                                android:textSize="12sp" />
                         </LinearLayout>
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
@@ -143,7 +149,7 @@
                        android:layout_height="40dp"
                        app:tabSelectedTextColor="@color/primary"
                        app:tabBackground="@drawable/selector"
-                       app:tabTextAppearance="@style/BillManager.Tab.TextAppearance"
+                       app:tabTextAppearance="@style/BillManager.TextAppearance.Bold"
                        app:tabIndicatorColor="@color/white"
                        app:tabMode="fixed"
                        >

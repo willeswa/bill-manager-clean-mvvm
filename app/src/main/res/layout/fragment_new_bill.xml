@@ -1,21 +1,199 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <import type="android.view.View"/>
+        <variable
+            name="viewmodel"
+            type="app.monkpad.billmanager.presentation.newbill.NewBillViewModel" />
     </data>
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.NewBillFragment">
+        tools:context=".presentation.NewBillFragment"
+        android:background="@color/primary_variant"
+        >
 
-        <!-- TODO: Update blank fragment layout -->
-        <TextView
+        <LinearLayout
+            style="@style/Widget.BillManager.Backdrop"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="@string/hello_blank_fragment" />
+            android:gravity="center_horizontal"
+            android:background="@color/primary_variant"
+            android:orientation="vertical"
+            android:paddingTop="100dp"
+            android:paddingBottom="100dp">
+
+        </LinearLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/background_rounded_corner_shape"
+            android:padding="32dp"
+           >
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text='@{(viewmodel.error != null) ? viewmodel.error : "Bill Value" }'
+                android:textColor='@{(viewmodel.error != null) ? @color/error_color : @color/primary}'
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/bill_value_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:boxBackgroundColor="@color/background_default"
+                app:hintEnabled="false"
+                app:startIconTint="@color/primary_light"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView"
+                app:boxStrokeWidth="0dp"
+                app:boxStrokeWidthFocused="0dp"
+              >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    style="@style/BillManager.TextAppearance.Bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:hint="0.00"
+                    android:inputType="numberSigned|numberDecimal"
+                    android:textSize="50sp"
+                    app:autoSizeMaxTextSize="13sp"
+                    app:autoSizeMinTextSize="5sp"
+                    app:autoSizeStepGranularity="1sp"
+                    app:autoSizeTextType="uniform"
+                    app:maxLines="1"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/bill_description_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:boxBackgroundColor="@color/background_default"
+                app:hintEnabled="false"
+                app:startIconTint="@color/primary_light"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/bill_value_edittext"
+                app:startIconDrawable="@drawable/ic_twotone_edit_24"
+             >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:hint="Description"
+                    android:paddingVertical="24dp"
+                    android:textAppearance="@style/BillManager.TextAppearance.Light"
+                    app:autoSizeStepGranularity="1sp"
+                    app:autoSizeTextType="uniform"
+                    app:maxLines="1" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/bill_duedate_edittext"
+                style="@style/BillManager.Button.TextButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:startIconTint="@color/primary_light"
+                android:onClick="@{() -> viewmodel.startShowingDatePicker()}"
+                android:padding="16dp"
+                android:text="Due Date"
+                android:textAllCaps="false"
+                app:iconPadding="12dp"
+                android:textAlignment="viewStart"
+                app:icon="@drawable/ic_twotone_calendar_month_24"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/bill_description_edittext"
+               />
+
+            <View
+                android:id="@+id/custom_view"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:alpha="0.4"
+                android:background="@color/primary_variant"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/bill_duedate_edittext"
+               />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/bill_category_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:boxBackgroundColor="@color/background_default"
+                app:hintEnabled="false"
+                app:startIconTint="@color/primary_light"
+                app:layout_constraintTop_toBottomOf="@+id/custom_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:startIconDrawable="@drawable/ic_twotone_category_24"
+                tools:layout_editor_absoluteY="279dp"
+             >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Category"
+                    android:textAppearance="@style/BillManager.TextAppearance.Light"
+                    android:paddingVertical="24dp"
+                    app:autoSizeStepGranularity="1sp"
+                    app:autoSizeTextType="uniform"
+                    app:maxLines="1" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/bill_rep_switch"
+                android:layout_width="match_parent"
+                android:padding="16dp"
+                android:layout_height="wrap_content"
+                android:drawablePadding="16dp"
+                android:text="Repeat"
+                style="@style/Widget.App.Switch"
+                android:drawableTint="@color/primary_light"
+                android:drawableStart="@drawable/ic_twotone_event_repeat_24"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/bill_category_edittext"
+               />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/add_new_bill"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:paddingLeft="50dp"
+                android:paddingTop="16dp"
+                android:paddingRight="50dp"
+                android:paddingBottom="16dp"
+                android:onClick="@{() -> viewmodel.startSubmitting()}"
+                android:text="Add Bill"
+                app:cornerRadius="35dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/bill_rep_switch"
+           />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </FrameLayout>
 </layout>

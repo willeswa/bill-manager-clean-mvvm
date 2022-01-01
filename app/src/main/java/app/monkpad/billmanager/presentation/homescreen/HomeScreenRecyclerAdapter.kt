@@ -6,9 +6,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import app.monkpad.billmanager.databinding.BillRecyclerItemBinding
 import app.monkpad.billmanager.domain.models.Bill
+import app.monkpad.billmanager.framework.models.BillDTO
 
 class HomeScreenRecyclerAdapter: RecyclerView.Adapter<HomeScreenRecyclerAdapter.MainViewHolder>() {
-    var bills = listOf<Bill>()
+    var bills = listOf<BillDTO>()
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
@@ -23,7 +24,7 @@ class HomeScreenRecyclerAdapter: RecyclerView.Adapter<HomeScreenRecyclerAdapter.
     override fun getItemCount() = bills.size
 
 
-    fun setItems(list: List<Bill>) {
+    fun setItems(list: List<BillDTO>) {
         bills = list
         notifyDataSetChanged()
     }
@@ -31,7 +32,7 @@ class HomeScreenRecyclerAdapter: RecyclerView.Adapter<HomeScreenRecyclerAdapter.
 
     class MainViewHolder(private val binding: BillRecyclerItemBinding): RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(billItem: Bill){
+        fun bind(billItem: BillDTO){
             binding.bill = billItem
             binding.executePendingBindings()
         }
