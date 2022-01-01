@@ -6,7 +6,7 @@
     <data>
         <variable
             name="bill"
-            type="app.monkpad.billmanager.domain.models.Bill" />
+            type="app.monkpad.billmanager.framework.models.BillDTO" />
     </data>
 
 
@@ -31,9 +31,8 @@
                 android:paddingStart="16dp"
                 android:paddingTop="8dp"
                 android:paddingEnd="16dp"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
                 android:textSize="18sp"
-                android:textStyle="bold"
+                style="@style/BillManager.TextAppearance.Bold"
                 android:text="@{bill.description}"
                 tools:text="Equity bank loan" />
 
@@ -63,7 +62,8 @@
                     android:layout_marginStart="10dp"
                     android:layout_weight="1"
                     android:alpha="0.7"
-                    android:text="Debt"
+                    style="@style/BillManager.TextAppearance.Light"
+                    android:text="@{bill.categoryName}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/imageView"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -73,10 +73,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="5"
-                    android:text="500"
-                    android:textColor="@color/primary_variant"
+                    app:setFloat="@{bill.amount}"
                     android:textSize="20sp"
-                    android:textStyle="bold"
+                    style="@style/BillManager.TextAppearance.Bold"
                     app:layout_constraintBaseline_toBaselineOf="@+id/bill_item_category"
                     app:layout_constraintEnd_toEndOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -102,7 +101,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:srcCompat="@drawable/ic_twotone_history_toggle_off_24" />
+                    app:srcCompat="@drawable/ic_twotone_history_toggle_off_24" />
 
                 <TextView
                     android:id="@+id/bill_item_due_date"
@@ -112,7 +111,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/imageView2"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:text="29 Dec 2021" />
+                    app:setDate="@{bill.dueDate}" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>

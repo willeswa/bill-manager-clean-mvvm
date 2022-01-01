@@ -6,6 +6,8 @@ import app.monkpad.billmanager.domain.models.Bill
 import app.monkpad.billmanager.domain.models.Category
 import app.monkpad.billmanager.framework.BillManagerViewModel
 import app.monkpad.billmanager.framework.UseCases
+import app.monkpad.billmanager.framework.mappers.asPresentationModel
+import app.monkpad.billmanager.framework.models.BillDTO
 import kotlinx.coroutines.*
 import kotlinx.coroutines.coroutineScope
 
@@ -28,41 +30,6 @@ class HomeScreenViewModel(
             }
         }
 
-        viewModelScope.launch{
-            withContext(Dispatchers.IO){
-                useCases.addBillUseCase(
-                    Bill(
-                        description = "Bill 2",
-                        amount = 10f,
-                        dueDate = "May 11",
-                        repeat = true,
-                        settled = false
-                    ),
-                    "Food"
-                )
-                useCases.addBillUseCase(
-                    Bill(
-                        description = "Bill 3",
-                        amount = 10f,
-                        dueDate = "May 11",
-                        repeat = true,
-                        settled = true
-                    ),
-                    "Food"
-                )
-                useCases.addBillUseCase(
-                    Bill(
-                        description = "Bill 5",
-                        amount = 10f,
-                        dueDate = "May 11",
-                        repeat = true,
-                        settled = false
-                    ),
-                    "Food"
-                )
-            }
-        }
-
         viewModelScope.launch {
             categories.postValue(
                 withContext(Dispatchers.IO){
@@ -70,35 +37,37 @@ class HomeScreenViewModel(
                 }
             )
         }
-
     }
-
 
     val paid: LiveData<Boolean> = _paid
 
-
-    val bills = MediatorLiveData<List<Bill>>().apply {
-        addSource(categories){
-            it.map{
+    val bills = MediatorLiveData<List<BillDTO>>().apply {
+        addSource(categories){catList ->
+            catList.map{category ->
                 viewModelScope.launch{
-                    postValue(useCases.getBillUseCase(it))
+                    postValue(useCases.getBillUseCase(category).map{ it ->
+                        it.asPresentationModel(category)
+                    }.sortedBy { it.dueDate })
                 }
             }
         }
         }
 
-    val unpaidBills: LiveData<List<Bill>> = Transformations.map(bills){bills ->
-        bills.filter{!it.settled}
+    val billValue: LiveData<Float> = Transformations.map(bills){ billsToSum ->
+        billsToSum.sumOf { it.amount.toDouble() }.toFloat()
     }
 
-    val paidBills: LiveData<List<Bill>> = Transformations.map(bills){bills ->
-        bills.filter{it.settled}
+    val unpaidBills: LiveData<List<BillDTO>> = Transformations.map(bills){ bills ->
+        bills.filter{!it.paid}
+    }
+
+    val paidBills: LiveData<List<BillDTO>> = Transformations.map(bills){ bills ->
+        bills.filter{it.paid}
     }
 
     fun showPaid(tabText: String){
         _paid.postValue(tabText == "Paid")
     }
-
 
 
 }

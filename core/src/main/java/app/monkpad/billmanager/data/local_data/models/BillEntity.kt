@@ -10,7 +10,7 @@ data class BillEntity(
     @PrimaryKey
     val description: String,
     val amount: Float,
-    @ColumnInfo(name = "due_date") val dueDate: String,
+    @ColumnInfo(name = "due_date") val dueDate: Long,
     @ColumnInfo(name =  "category_title") val categoryTitle: String,
     val repeat: Boolean, //we will use this to setup a job
     val settled: Boolean
