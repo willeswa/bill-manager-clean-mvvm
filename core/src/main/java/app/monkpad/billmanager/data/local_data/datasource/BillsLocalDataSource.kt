@@ -19,6 +19,11 @@ class BillsLocalDataSource (context: Context){
     suspend fun addBill(bill: Bill, title: String){
         billsDao.addBill(bill.asEntityModel(title))
     }
+
+    suspend fun toggleBillStatus(bill: Bill, category: String) =
+        billsDao.toggleBillStatus(bill.asEntityModel(category))
+
+
 }
 
 

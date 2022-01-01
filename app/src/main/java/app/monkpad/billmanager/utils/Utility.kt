@@ -62,8 +62,16 @@ class Utility  {
             repeat: Boolean,
             paid: Boolean
         ): BillDTO {
-
-            return BillDTO(description, amount, dueDate, categoryName, categoryLogo, repeat, paid)
+            val overdue = System.currentTimeMillis() > dueDate && !paid
+            return BillDTO(
+                description,
+                amount,
+                dueDate,
+                categoryName,
+                categoryLogo,
+                repeat,
+                paid,
+                overdue)
         }
 
         @Throws(Exception::class)

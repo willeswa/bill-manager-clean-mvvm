@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@drawable/background_rounded_corner_shape">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/bill_description_dialog"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="16dp"
+            android:text="TextView"
+            style="@style/BillManager.TextAppearance.Bold"
+            android:textSize="18sp"
+            />
+
+        <ImageView
+            android:id="@+id/edit_bill_dialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/ic_twotone_more_vert_24"
+            tools:srcCompat="@drawable/ic_twotone_more_vert_24" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="8dp"
+        android:paddingLeft="16dp"
+        android:paddingBottom="8dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/ic_twotone_category_24"
+            tools:srcCompat="@drawable/ic_twotone_category_24" />
+
+        <TextView
+            android:id="@+id/bill_category_dialog"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_marginLeft="16dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="TextView"
+            style="@style/BillManager.TextAppearance.Light"
+            android:textSize="14sp"
+            />
+    </LinearLayout>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingTop="8dp"
+    android:paddingLeft="16dp"
+    android:paddingBottom="8dp">
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        app:srcCompat="@drawable/ic_twotone_account_balance_wallet_24"
+        tools:srcCompat="@drawable/ic_twotone_account_balance_wallet_24" />
+
+    <TextView
+        android:id="@+id/bill_value_dialog"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_marginLeft="16dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:text="TextView"
+        style="@style/BillManager.TextAppearance.Light"
+        android:textSize="14sp"
+       />
+</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="8dp"
+        android:paddingLeft="16dp"
+        android:paddingBottom="8dp">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/ic_twotone_history_toggle_off_24"
+            tools:srcCompat="@drawable/ic_twotone_history_toggle_off_24" />
+
+        <TextView
+            android:id="@+id/due_date_dialog"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_marginLeft="16dp"
+            android:layout_gravity="center_vertical"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            style="@style/BillManager.TextAppearance.Light"
+            android:textSize="14sp"
+            />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/toggle_paid_dialog"
+        style="@style/BillManager.Button.TextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        app:textAllCaps="true"
+        />
+
+
+</LinearLayout>

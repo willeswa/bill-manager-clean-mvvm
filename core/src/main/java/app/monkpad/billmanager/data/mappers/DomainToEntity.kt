@@ -21,3 +21,4 @@ internal fun Category.asEntityModel(): CategoryEntity =
         title = name,
         logo = logo
     )
+

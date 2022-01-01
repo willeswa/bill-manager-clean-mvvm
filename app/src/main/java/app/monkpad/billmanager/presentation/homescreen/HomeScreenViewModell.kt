@@ -6,6 +6,7 @@ import app.monkpad.billmanager.domain.models.Bill
 import app.monkpad.billmanager.domain.models.Category
 import app.monkpad.billmanager.framework.BillManagerViewModel
 import app.monkpad.billmanager.framework.UseCases
+import app.monkpad.billmanager.framework.mappers.asDomainModel
 import app.monkpad.billmanager.framework.mappers.asPresentationModel
 import app.monkpad.billmanager.framework.models.BillDTO
 import kotlinx.coroutines.*
@@ -18,6 +19,9 @@ class HomeScreenViewModel(
     private val _paid = MutableLiveData(false)
 
     private val categories = MutableLiveData<List<Category>>()
+
+    private val job = Job()
+    private val coroutineScope = CoroutineScope(Dispatchers.Main + job)
 
     init {
         viewModelScope.launch {
@@ -53,9 +57,7 @@ class HomeScreenViewModel(
         }
         }
 
-    val billValue: LiveData<Float> = Transformations.map(bills){ billsToSum ->
-        billsToSum.sumOf { it.amount.toDouble() }.toFloat()
-    }
+
 
     val unpaidBills: LiveData<List<BillDTO>> = Transformations.map(bills){ bills ->
         bills.filter{!it.paid}
@@ -65,8 +67,26 @@ class HomeScreenViewModel(
         bills.filter{it.paid}
     }
 
+    val billValue: LiveData<Float> = Transformations.map(unpaidBills){ billsToSum ->
+        billsToSum.sumOf { it.amount.toDouble() }.toFloat()
+    }
+
     fun showPaid(tabText: String){
         _paid.postValue(tabText == "Paid")
+    }
+
+    fun toggleBillStatus(bill: BillDTO) {
+        coroutineScope.launch{
+            withContext(Dispatchers.IO){
+                useCases.toggleBillStatusUseCase(bill.asDomainModel(), bill.categoryName)
+            }
+        }
+    }
+
+
+    override fun onCleared() {
+        super.onCleared()
+        job.cancel()
     }
 
 

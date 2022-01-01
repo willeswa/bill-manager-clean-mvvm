@@ -12,4 +12,7 @@ class BillsRepository(
 
     suspend fun getBills(category: Category): List<Bill> =
         localDataSource.getBills(category.name)
+
+    suspend fun toggleBillStatus(bill: Bill, category: String) =
+        localDataSource.toggleBillStatus(bill, category)
 }
