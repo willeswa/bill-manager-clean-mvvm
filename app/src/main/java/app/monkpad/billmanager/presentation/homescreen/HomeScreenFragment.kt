@@ -5,9 +5,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
+import app.monkpad.billmanager.R
 import app.monkpad.billmanager.databinding.FragmentHomeScreenBinding
 import app.monkpad.billmanager.framework.BillManagerViewModelFactory
+import app.monkpad.billmanager.presentation.interactions.BillClickListener
+import app.monkpad.billmanager.utils.Utility
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.tabs.TabLayout
 
 class HomeScreenFragment : Fragment() {
@@ -33,10 +40,47 @@ class HomeScreenFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        mainCollectionsAdapter = HomeScreenRecyclerAdapter()
+        var togglePaid: Button?
+
+
+        mainCollectionsAdapter = HomeScreenRecyclerAdapter(BillClickListener {
+            val dialog = BottomSheetDialog(requireContext(), R.style.AppBottomSheetDialogTheme).apply {
+                setContentView(R.layout.view_bill_to_edit_dialog)
+
+                val dialogTitle = findViewById<TextView>(R.id.bill_description_dialog)
+                val dialogCategoryTitle = findViewById<TextView>(R.id.bill_category_dialog)
+                val dialogValue = findViewById<TextView>(R.id.bill_value_dialog)
+                val dialogDueDate = findViewById<TextView>(R.id.due_date_dialog)
+                togglePaid = findViewById(R.id.toggle_paid_dialog)
+
+                dialogTitle?.text = it.description
+                dialogCategoryTitle?.text = it.categoryName
+                dialogValue?.text = it.amount.toString()
+                dialogDueDate?.text = "To be paid before ${Utility.formattedDate(it.dueDate)}"
+
+                if(it.paid){
+                    togglePaid?.text = "Mark as pending"
+                    togglePaid?.setTextColor(ContextCompat.getColor(requireContext(), R.color.error_color))
+                } else {
+                    togglePaid?.text = "Mark as paid"
+                    togglePaid?.setTextColor(ContextCompat.getColor(requireContext(), R.color.secondary_light))
+                }
+
+
+            }
+            dialog.show()
+
+            togglePaid?.setOnClickListener { _ ->
+                it.paid = !it.paid
+                viewModel.toggleBillStatus(it)
+                dialog.dismiss()
+            }
+        })
+
         binding.mainScreenRecycler.adapter = mainCollectionsAdapter
         binding.viewmodel = viewModel
-        mainCollectionsAdapter.notifyDataSetChanged()
+
+
 
         binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {

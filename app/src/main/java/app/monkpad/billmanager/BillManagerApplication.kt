@@ -5,10 +5,7 @@ import app.monkpad.billmanager.data.local_data.datasource.BillsLocalDataSource
 import app.monkpad.billmanager.data.local_data.datasource.CategoryLocalDataSource
 import app.monkpad.billmanager.data.repositories.BillsRepository
 import app.monkpad.billmanager.data.repositories.CategoriesRepository
-import app.monkpad.billmanager.domain.usecases.AddBillUseCase
-import app.monkpad.billmanager.domain.usecases.AddCategoryUseCase
-import app.monkpad.billmanager.domain.usecases.GetBillsUseCase
-import app.monkpad.billmanager.domain.usecases.GetCategoryUseCase
+import app.monkpad.billmanager.domain.usecases.*
 import app.monkpad.billmanager.framework.BillManagerViewModelFactory
 import app.monkpad.billmanager.framework.UseCases
 
@@ -26,7 +23,8 @@ class BillManagerApplication: Application() {
                 AddBillUseCase(billRepository),
                 GetBillsUseCase(billRepository),
                 AddCategoryUseCase(categoryRepository),
-                GetCategoryUseCase(categoryRepository)
+                GetCategoryUseCase(categoryRepository),
+                ToggleBillStatusUseCase(billRepository)
             )
         )
     }

@@ -20,3 +20,4 @@ internal fun CategoryEntity.asDomainModel(): Category =
         logo = logo,
     )
 
+

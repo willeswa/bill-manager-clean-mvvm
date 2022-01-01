@@ -13,4 +13,5 @@ fun Bill.asPresentationModel(category: Category): BillDTO =
         categoryName = category.name,
         categoryLogo = category.logo,
         repeat = repeat,
-        paid = settled)
+        paid = settled,
+        overdue = System.currentTimeMillis() > dueDate && !settled)
