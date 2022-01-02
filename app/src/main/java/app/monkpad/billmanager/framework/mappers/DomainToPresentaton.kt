@@ -3,15 +3,22 @@ package app.monkpad.billmanager.framework.mappers
 import app.monkpad.billmanager.domain.models.Bill
 import app.monkpad.billmanager.domain.models.Category
 import app.monkpad.billmanager.framework.models.BillDTO
+import app.monkpad.billmanager.framework.models.CategoryDTO
 
 
-fun Bill.asPresentationModel(category: Category): BillDTO =
+fun Bill.asPresentationModel(): BillDTO =
     BillDTO(
         description = description,
         amount = amount,
         dueDate = dueDate,
-        categoryName = category.name,
-        categoryLogo = category.logo,
+        categoryName = categoryName,
         repeat = repeat,
         paid = settled,
         overdue = System.currentTimeMillis() > dueDate && !settled)
+
+
+fun Category.asPresentationModel(): CategoryDTO =
+    CategoryDTO(
+        logo = logo,
+        name = name
+    )

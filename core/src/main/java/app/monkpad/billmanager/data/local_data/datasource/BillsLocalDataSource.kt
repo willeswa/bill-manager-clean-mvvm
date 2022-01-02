@@ -12,16 +12,20 @@ class BillsLocalDataSource (context: Context){
     private val billsDao = BillsManagerDatabase.getDatabase(context.applicationContext)
         .billDao()
 
-    suspend fun getBills(categoryTitle: String): List<Bill>{
-        return billsDao.getBills(categoryTitle).map{it.asDomainModel()}
+    suspend fun getBills(): List<Bill>{
+        return billsDao.getBills().map{it.asDomainModel()}
     }
 
-    suspend fun addBill(bill: Bill, title: String){
-        billsDao.addBill(bill.asEntityModel(title))
+    suspend fun addBill(bill: Bill){
+        billsDao.addBill(bill.asEntityModel())
     }
 
-    suspend fun toggleBillStatus(bill: Bill, category: String) =
-        billsDao.toggleBillStatus(bill.asEntityModel(category))
+    suspend fun toggleBillStatus(bill: Bill) =
+        billsDao.toggleBillStatus(bill.asEntityModel())
+
+    suspend  fun deleteBill(bill: Bill) {
+        billsDao.deleteBill(bill.asEntityModel())
+    }
 
 
 }

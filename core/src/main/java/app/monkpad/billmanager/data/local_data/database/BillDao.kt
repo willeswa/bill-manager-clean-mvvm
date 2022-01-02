@@ -8,12 +8,9 @@ import app.monkpad.billmanager.domain.models.Bill
 @Dao
 interface BillDao {
 
-    @Transaction
-    @Query("SELECT * FROM categories_table")
-    suspend fun getBillsWithCategories(): List<CategoryWithBills>
 
-    @Query("SELECT * FROM bills_table WHERE category_title=:categoryTitle")
-    suspend fun getBills(categoryTitle: String): List<BillEntity>
+    @Query("SELECT * FROM bills_table")
+    suspend fun getBills(): List<BillEntity>
 
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -21,5 +18,8 @@ interface BillDao {
 
     @Update
     suspend fun toggleBillStatus(vararg bill: BillEntity)
+
+    @Delete
+    suspend fun deleteBill(vararg bill: BillEntity)
 
 }

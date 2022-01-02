@@ -5,7 +5,6 @@ data class BillDTO(
     val amount: Float,
     val dueDate: Long,
     val categoryName: String,
-    val categoryLogo: String,
     val repeat: Boolean = false,
     var paid: Boolean = false,
     val overdue: Boolean

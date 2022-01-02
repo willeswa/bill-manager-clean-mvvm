@@ -24,7 +24,8 @@ class BillManagerApplication: Application() {
                 GetBillsUseCase(billRepository),
                 AddCategoryUseCase(categoryRepository),
                 GetCategoryUseCase(categoryRepository),
-                ToggleBillStatusUseCase(billRepository)
+                ToggleBillStatusUseCase(billRepository),
+                DeleteBillUseCase(billRepository)
             )
         )
     }

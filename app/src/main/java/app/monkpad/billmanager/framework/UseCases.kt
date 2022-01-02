@@ -7,5 +7,6 @@ class UseCases(
     val getBillUseCase: GetBillsUseCase,
     val addCategoryUseCase: AddCategoryUseCase,
     val getCategoryUseCase: GetCategoryUseCase,
-    val toggleBillStatusUseCase: ToggleBillStatusUseCase
+    val toggleBillStatusUseCase: ToggleBillStatusUseCase,
+    val deleteBillUseCase: DeleteBillUseCase
 )

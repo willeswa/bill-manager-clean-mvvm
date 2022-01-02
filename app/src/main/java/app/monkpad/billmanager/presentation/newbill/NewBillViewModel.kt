@@ -7,6 +7,7 @@ import app.monkpad.billmanager.framework.BillManagerViewModel
 import app.monkpad.billmanager.framework.UseCases
 import app.monkpad.billmanager.framework.mappers.asDomainModel
 import app.monkpad.billmanager.framework.models.BillDTO
+import app.monkpad.billmanager.framework.models.CategoryDTO
 import kotlinx.coroutines.*
 
 class NewBillViewModel(application: Application, useCases: UseCases):
@@ -27,6 +28,12 @@ class NewBillViewModel(application: Application, useCases: UseCases):
     private val job = Job()
     private val coroutineScope = CoroutineScope(Dispatchers.Main + job)
 
+    private val _showCategories = MutableLiveData(false)
+    val showCategories: LiveData<Boolean> = _showCategories
+    
+    private val _category = MutableLiveData<CategoryDTO>()
+    val category: LiveData<CategoryDTO> = _category
+
     fun startShowingDatePicker(){
         _showDatePicker.postValue(true)
     }
@@ -35,10 +42,30 @@ class NewBillViewModel(application: Application, useCases: UseCases):
         _showDatePicker.postValue(false)
     }
 
+    fun startShowingCategoriesDialog(){
+        _showCategories.postValue(true)
+    }
+
+    fun finishShowingCategoriesDialog(){
+        _showCategories.postValue(false)
+    }
+
+    fun addCategoryIfDoesNotExist(category: CategoryDTO){
+        coroutineScope.launch {
+            withContext(Dispatchers.IO){
+                useCases.addCategoryUseCase(category.asDomainModel())
+            }
+        }
+    }
+    
+    fun setCategory(category: CategoryDTO){
+        _category.postValue(category)
+    }
+
     fun addNewBill(bill: BillDTO){
         coroutineScope.launch{
             withContext(Dispatchers.IO){
-                 useCases.addBillUseCase(bill.asDomainModel(), bill.categoryName)
+                 useCases.addBillUseCase(bill.asDomainModel())
             }
         }
     }

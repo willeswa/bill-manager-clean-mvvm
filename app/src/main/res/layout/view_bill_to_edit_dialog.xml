@@ -25,10 +25,11 @@
             />
 
         <ImageView
-            android:id="@+id/edit_bill_dialog"
+            android:id="@+id/edit_bill_menu_flow_dialog"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:paddingEnd="20dp"
             app:srcCompat="@drawable/ic_twotone_more_vert_24"
             tools:srcCompat="@drawable/ic_twotone_more_vert_24" />
     </LinearLayout>
@@ -55,7 +56,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:text="TextView"
-            style="@style/BillManager.TextAppearance.Light"
+            android:textColor="@color/primary_light"
+            style="@style/BillManager.TextAppearance.Bold"
             android:textSize="14sp"
             />
     </LinearLayout>
@@ -81,7 +83,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:text="TextView"
-        style="@style/BillManager.TextAppearance.Light"
+        android:textColor="@color/primary_light"
+        style="@style/BillManager.TextAppearance.Bold"
         android:textSize="14sp"
        />
 </LinearLayout>
@@ -103,21 +106,25 @@
             android:id="@+id/due_date_dialog"
             android:layout_weight="1"
             android:layout_width="0dp"
+            android:textColor="@color/primary_light"
             android:layout_marginLeft="16dp"
             android:layout_gravity="center_vertical"
             android:layout_height="wrap_content"
             android:text="TextView"
-            style="@style/BillManager.TextAppearance.Light"
+            style="@style/BillManager.TextAppearance.Bold"
             android:textSize="14sp"
             />
     </LinearLayout>
 
     <Button
         android:id="@+id/toggle_paid_dialog"
-        style="@style/BillManager.Button.TextButton"
+        style="@style/BillManager.Button.Outline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:textStyle="bold"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
         app:textAllCaps="true"
         />
 
