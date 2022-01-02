@@ -2,20 +2,37 @@ package app.monkpad.billmanager.utils
 
 import android.content.Context
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.FragmentManager
 import androidx.navigation.NavDestination
 import app.monkpad.billmanager.R
 import app.monkpad.billmanager.databinding.FragmentNewBillBinding
 import app.monkpad.billmanager.framework.models.BillDTO
+import app.monkpad.billmanager.framework.models.CategoryDTO
 import app.monkpad.billmanager.presentation.newbill.NewBillViewModel
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.datepicker.MaterialDatePicker
 import java.text.SimpleDateFormat
 
-class Utility  {
+class Utility {
 
     companion object {
+        val categories = setOf(
+            CategoryDTO("category_housing", "Housing"),
+            CategoryDTO("category_education", "Education"),
+            CategoryDTO("category_electronics", "Electronics"),
+            CategoryDTO("category_food", "Food"),
+            CategoryDTO("category_health", "Health Care"),
+            CategoryDTO("category_clothing", "Clothing"),
+            CategoryDTO("category_investment", "Investment"),
+            CategoryDTO("category_home", "Home Improvement"),
+            CategoryDTO("category_transport", "Transport"),
+            CategoryDTO("category_debt", "Debt"),
+            CategoryDTO("category_leisure", "Leisure"),
+            CategoryDTO("category_others", "Others")
+        )
+
         fun styleToolbar(
             destination: NavDestination,
             toolbar: MaterialToolbar,
@@ -57,8 +74,7 @@ class Utility  {
             amount: Float,
             description: String,
             dueDate: Long,
-            categoryName: String,
-            categoryLogo: String,
+            category: CategoryDTO,
             repeat: Boolean,
             paid: Boolean
         ): BillDTO {
@@ -67,30 +83,42 @@ class Utility  {
                 description,
                 amount,
                 dueDate,
-                categoryName,
-                categoryLogo,
+                category.name,
                 repeat,
                 paid,
-                overdue)
+                overdue
+            )
         }
 
         @Throws(Exception::class)
-        fun validateEntries (
+        fun validateEntries(
             dueDate: Long,
             amount: String,
-            description: String)  {
+            description: String,
+            categoryName: CategoryDTO?
+        ) {
             when {
                 amount < 1.toString() -> throw Exception("Bill value cannot be 0 or negative")
                 dueDate < System.currentTimeMillis() -> throw Exception("Please set a valid due date")
-                description.isEmpty() -> throw Exception("Description cannot be empty")
+                description.isEmpty() || description.length < 2 -> throw Exception("Please provide a valid description")
+                categoryName == null -> throw Exception("Please select a category")
             }
         }
 
-        fun listenOnDatePicker(binding: FragmentNewBillBinding, viewModel: NewBillViewModel, picker: MaterialDatePicker<Long>) {
+        fun listenOnDatePicker(
+            binding: FragmentNewBillBinding,
+            viewModel: NewBillViewModel,
+            picker: MaterialDatePicker<Long>
+        ) {
             picker.addOnPositiveButtonClickListener {
                 binding.billDuedateEdittext.text = Utility.formattedDate(it)
                 viewModel.setDueDate(it)
             }
+        }
+
+        fun notifyUser(message: String, context: Context) {
+            val toast = Toast.makeText(context, message, Toast.LENGTH_LONG)
+            toast.show()
         }
     }
 }

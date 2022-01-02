@@ -11,7 +11,8 @@ internal fun BillEntity.asDomainModel(): Bill =
         amount = amount,
         dueDate = dueDate,
         repeat = repeat,
-        settled = settled
+        settled = settled,
+        categoryName = categoryTitle
     )
 
 internal fun CategoryEntity.asDomainModel(): Category =

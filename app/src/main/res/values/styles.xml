@@ -33,6 +33,11 @@
 
     </style>
 
+    <style name="BillManager.Button.Outline" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="cornerRadius">35dp</item>
+        <item name="android:textAppearance">@style/BillManager.TextAppearance.Bold</item>
+    </style>
+
     <style name="Widget.App.Switch" parent="Widget.MaterialComponents.CompoundButton.Switch">
         <item name="materialThemeOverlay">@style/ThemeOverlay.App.Switch</item>
     </style>

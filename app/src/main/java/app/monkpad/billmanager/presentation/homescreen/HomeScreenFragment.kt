@@ -1,17 +1,19 @@
 package app.monkpad.billmanager.presentation.homescreen
 
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.widget.PopupMenu
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import app.monkpad.billmanager.R
 import app.monkpad.billmanager.databinding.FragmentHomeScreenBinding
 import app.monkpad.billmanager.framework.BillManagerViewModelFactory
+import app.monkpad.billmanager.framework.models.BillDTO
 import app.monkpad.billmanager.presentation.interactions.BillClickListener
 import app.monkpad.billmanager.utils.Utility
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -21,6 +23,7 @@ class HomeScreenFragment : Fragment() {
 
     private lateinit var mainCollectionsAdapter: HomeScreenRecyclerAdapter
     private lateinit var binding: FragmentHomeScreenBinding
+    private lateinit var dialog: BottomSheetDialog
     private val viewModel: HomeScreenViewModel by viewModels{
         BillManagerViewModelFactory
     }
@@ -42,23 +45,38 @@ class HomeScreenFragment : Fragment() {
 
         var togglePaid: Button?
 
-
-        mainCollectionsAdapter = HomeScreenRecyclerAdapter(BillClickListener {
-            val dialog = BottomSheetDialog(requireContext(), R.style.AppBottomSheetDialogTheme).apply {
+        mainCollectionsAdapter = HomeScreenRecyclerAdapter(BillClickListener {billDTO ->
+            dialog = BottomSheetDialog(requireContext(), R.style.AppBottomSheetDialogTheme).apply {
                 setContentView(R.layout.view_bill_to_edit_dialog)
 
                 val dialogTitle = findViewById<TextView>(R.id.bill_description_dialog)
                 val dialogCategoryTitle = findViewById<TextView>(R.id.bill_category_dialog)
                 val dialogValue = findViewById<TextView>(R.id.bill_value_dialog)
                 val dialogDueDate = findViewById<TextView>(R.id.due_date_dialog)
+                val dialogEditMenu = findViewById<ImageView>(R.id.edit_bill_menu_flow_dialog)
+
+                dialogEditMenu?.setOnClickListener{
+                    PopupMenu(requireContext(), it).apply {
+                        inflate(R.menu.edit_box_diag_menu)
+                        show()
+                        setOnMenuItemClickListener { menuItem ->
+                            when (menuItem.itemId) {
+                                R.id.action_diag_delete -> deletedItem(billDTO)
+                                else -> false
+                            }
+                        }
+                    }
+
+                }
+
                 togglePaid = findViewById(R.id.toggle_paid_dialog)
 
-                dialogTitle?.text = it.description
-                dialogCategoryTitle?.text = it.categoryName
-                dialogValue?.text = it.amount.toString()
-                dialogDueDate?.text = "To be paid before ${Utility.formattedDate(it.dueDate)}"
+                dialogTitle?.text = billDTO.description
+                dialogCategoryTitle?.text = billDTO.categoryName
+                dialogValue?.text = billDTO.amount.toString()
+                dialogDueDate?.text = "To be paid before ${Utility.formattedDate(billDTO.dueDate)}"
 
-                if(it.paid){
+                if(billDTO.paid){
                     togglePaid?.text = "Mark as pending"
                     togglePaid?.setTextColor(ContextCompat.getColor(requireContext(), R.color.error_color))
                 } else {
@@ -71,8 +89,8 @@ class HomeScreenFragment : Fragment() {
             dialog.show()
 
             togglePaid?.setOnClickListener { _ ->
-                it.paid = !it.paid
-                viewModel.toggleBillStatus(it)
+                billDTO.paid = !billDTO.paid
+                viewModel.toggleBillStatus(billDTO)
                 dialog.dismiss()
             }
         })
@@ -96,4 +114,13 @@ class HomeScreenFragment : Fragment() {
             }
         })
     }
+
+    private fun deletedItem(bill: BillDTO): Boolean {
+        dialog.dismiss()
+        viewModel.deleteBill(bill)
+        val message = "Bill has been deleted!"
+        Utility.notifyUser(message, requireContext())
+        return true
+    }
+
 }
