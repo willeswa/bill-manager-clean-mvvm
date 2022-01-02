@@ -21,15 +21,13 @@ class Utility {
         val categories = setOf(
             CategoryDTO("category_housing", "Housing"),
             CategoryDTO("category_education", "Education"),
-            CategoryDTO("category_electronics", "Electronics"),
             CategoryDTO("category_food", "Food"),
+            CategoryDTO("category_utility", "Utility"),
             CategoryDTO("category_health", "Health Care"),
-            CategoryDTO("category_clothing", "Clothing"),
+            CategoryDTO("category_personal", "Personal"),
             CategoryDTO("category_investment", "Investment"),
-            CategoryDTO("category_home", "Home Improvement"),
             CategoryDTO("category_transport", "Transport"),
             CategoryDTO("category_debt", "Debt"),
-            CategoryDTO("category_leisure", "Leisure"),
             CategoryDTO("category_others", "Others")
         )
 

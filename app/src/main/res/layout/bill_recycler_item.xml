@@ -68,10 +68,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:alpha="0.5"
+                    app:tint="@color/primary_light"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_twotone_account_balance_24" />
+                    app:setCategoryLogo="@{bill}" />
 
                 <TextView
                     android:id="@+id/bill_item_category"

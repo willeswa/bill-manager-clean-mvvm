@@ -9,9 +9,11 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.widget.PopupMenu
 import androidx.core.content.ContextCompat
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import app.monkpad.billmanager.R
 import app.monkpad.billmanager.databinding.FragmentHomeScreenBinding
+import app.monkpad.billmanager.databinding.ViewBillToEditDialogBinding
 import app.monkpad.billmanager.framework.BillManagerViewModelFactory
 import app.monkpad.billmanager.framework.models.BillDTO
 import app.monkpad.billmanager.presentation.interactions.BillClickListener
@@ -49,11 +51,12 @@ class HomeScreenFragment : Fragment() {
             dialog = BottomSheetDialog(requireContext(), R.style.AppBottomSheetDialogTheme).apply {
                 setContentView(R.layout.view_bill_to_edit_dialog)
 
+                val dialogEditMenu = findViewById<ImageView>(R.id.edit_bill_menu_flow_dialog)
                 val dialogTitle = findViewById<TextView>(R.id.bill_description_dialog)
                 val dialogCategoryTitle = findViewById<TextView>(R.id.bill_category_dialog)
                 val dialogValue = findViewById<TextView>(R.id.bill_value_dialog)
                 val dialogDueDate = findViewById<TextView>(R.id.due_date_dialog)
-                val dialogEditMenu = findViewById<ImageView>(R.id.edit_bill_menu_flow_dialog)
+
 
                 dialogEditMenu?.setOnClickListener{
                     PopupMenu(requireContext(), it).apply {
@@ -70,6 +73,7 @@ class HomeScreenFragment : Fragment() {
                 }
 
                 togglePaid = findViewById(R.id.toggle_paid_dialog)
+
 
                 dialogTitle?.text = billDTO.description
                 dialogCategoryTitle?.text = billDTO.categoryName
