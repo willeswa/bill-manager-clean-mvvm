@@ -9,6 +9,7 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import app.monkpad.billmanager.R
 import app.monkpad.billmanager.domain.models.Bill
+import app.monkpad.billmanager.framework.BillManagerViewModel
 import app.monkpad.billmanager.framework.models.BillDTO
 import app.monkpad.billmanager.utils.Utility
 import com.bumptech.glide.Glide
@@ -39,3 +40,12 @@ fun setCategoryLogo(imageView: ImageView, bill: BillDTO){
     imageView.setImageResource(resourceId)
 }
 
+
+@BindingAdapter("setEmptyViewText")
+fun setEmptyViewText(textView: TextView, unPaidList: List<BillDTO>?){
+    if(unPaidList?.size == 0){
+        textView.text = "Looks like you haven't created any bills. Hit the New Bill button below to add one."
+    } else {
+        textView.text = "Nothing going on here! Go ahead and pay off some bills to move them here \uD83D\uDE0A"
+    }
+}
