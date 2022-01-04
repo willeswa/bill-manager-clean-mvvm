@@ -4,13 +4,14 @@ import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.asLiveData
 import app.monkpad.billmanager.framework.BillManagerViewModel
 import app.monkpad.billmanager.framework.UseCases
 import app.monkpad.billmanager.framework.mappers.asDomainModel
 import app.monkpad.billmanager.framework.mappers.asPresentationModel
 import app.monkpad.billmanager.framework.models.BillDTO
 import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.map
 
 
 class HomeScreenViewModel(
@@ -23,18 +24,22 @@ class HomeScreenViewModel(
 
     private val _paid = MutableLiveData(false)
     val paid: LiveData<Boolean> = _paid
+    val loading = MutableLiveData(true)
 
-    private val _bills = MutableLiveData<List<BillDTO>>()
-
-    init {
-        viewModelScope.launch {
-            _bills.postValue(
-                withContext(Dispatchers.IO) {
-                    useCases.getBillUseCase().map { it.asPresentationModel() }
-                }.sortedBy { it.dueDate }
-            )
+    private val _bills = useCases.getBillUseCase().map { billList ->
+        billList.map { bill ->
+            bill.asPresentationModel()
         }
-    }
+            .sortedBy { billSorted ->
+                billSorted.dueDate
+            }
+
+    }.asLiveData().also {
+        coroutineScope.launch {
+            delay(2000)
+            loading.postValue(false)
+        }
+       }
 
     val unpaidBills: LiveData<List<BillDTO>> = Transformations.map(_bills) { bills ->
         bills.filter { !it.paid }
@@ -61,18 +66,21 @@ class HomeScreenViewModel(
     }
 
     fun deleteBill(bill: BillDTO) {
-        coroutineScope.launch{
-            withContext(Dispatchers.IO){
+        coroutineScope.launch {
+            withContext(Dispatchers.IO) {
                 useCases.deleteBillUseCase(bill.asDomainModel())
             }
         }
+    }
+
+    fun atHomeScreen(){
+        _paid.postValue(false)
     }
 
     override fun onCleared() {
         super.onCleared()
         job.cancel()
     }
-
 
 
 }

@@ -4,13 +4,14 @@ import androidx.room.*
 import app.monkpad.billmanager.data.local_data.models.BillEntity
 import app.monkpad.billmanager.data.local_data.models.CategoryWithBills
 import app.monkpad.billmanager.domain.models.Bill
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface BillDao {
 
 
     @Query("SELECT * FROM bills_table")
-    suspend fun getBills(): List<BillEntity>
+    fun getBills(): Flow<List<BillEntity>>
 
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

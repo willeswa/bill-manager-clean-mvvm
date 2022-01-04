@@ -2,8 +2,11 @@ package app.monkpad.billmanager.data.local_data.datasource
 
 import android.content.Context
 import app.monkpad.billmanager.data.local_data.database.BillsManagerDatabase
+import app.monkpad.billmanager.data.mappers.asDomainModel
 import app.monkpad.billmanager.data.mappers.asEntityModel
 import app.monkpad.billmanager.domain.models.Category
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 
 class CategoryLocalDataSource(context: Context) {
 
@@ -14,7 +17,7 @@ class CategoryLocalDataSource(context: Context) {
     suspend fun addCategory(category: Category) =
         categoriesDao.addCategory(category.asEntityModel())
 
-    suspend fun getCategories() =
-        categoriesDao.getAllCategories()
+    suspend fun getCategories(): Flow<List<Category>> =
+        categoriesDao.getAllCategories().map{it.map{cat -> cat.asDomainModel()}}
 
 }

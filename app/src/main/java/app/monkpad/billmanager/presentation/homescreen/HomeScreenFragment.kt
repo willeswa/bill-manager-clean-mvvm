@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.widget.PopupMenu
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import app.monkpad.billmanager.R
 import app.monkpad.billmanager.databinding.FragmentHomeScreenBinding
@@ -26,7 +27,7 @@ class HomeScreenFragment : Fragment() {
     private lateinit var mainCollectionsAdapter: HomeScreenRecyclerAdapter
     private lateinit var binding: FragmentHomeScreenBinding
     private lateinit var dialog: BottomSheetDialog
-    private val viewModel: HomeScreenViewModel by viewModels{
+    private val viewModel: HomeScreenViewModel by activityViewModels{
         BillManagerViewModelFactory
     }
 
