@@ -72,9 +72,9 @@
                     android:textSize="50sp"
                     app:autoSizeMaxTextSize="13sp"
                     app:autoSizeMinTextSize="5sp"
-                    app:autoSizeStepGranularity="1sp"
-                    app:autoSizeTextType="uniform"
-                    app:maxLines="1"
+                    android:autoSizeStepGranularity="1sp"
+                    android:autoSizeTextType="uniform"
+                    android:maxLines="1"
                     />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -97,12 +97,13 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:hint="Description"
+                    android:textSize="16sp"
                     android:textColorHint="@color/primary_light"
                     android:paddingVertical="24dp"
                     android:textAppearance="@style/BillManager.TextAppearance.Light"
-                    app:autoSizeStepGranularity="1sp"
-                    app:autoSizeTextType="uniform"
-                    app:maxLines="1" />
+                    android:autoSizeStepGranularity="1sp"
+                    android:autoSizeTextType="uniform"
+                    android:maxLines="1" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -116,6 +117,7 @@
                 android:padding="16dp"
                 android:text="Due Date"
                 android:textAllCaps="false"
+                android:textSize="16sp"
                 app:iconPadding="12dp"
                 android:textAlignment="viewStart"
                 app:icon="@drawable/ic_twotone_calendar_month_24"
@@ -143,6 +145,7 @@
                 android:onClick="@{() -> viewmodel.startShowingCategoriesDialog()}"
                 android:padding="16dp"
                 android:text="Categories"
+                android:textSize="16sp"
                 android:textAlignment="viewStart"
                 android:textAllCaps="false"
                 app:icon="@drawable/ic_twotone_category_24"
@@ -170,6 +173,7 @@
                 android:layout_height="wrap_content"
                 android:drawablePadding="16dp"
                 android:text="Repeat"
+                android:textSize="16sp"
                 android:textColor="@color/primary_light"
                 style="@style/Widget.App.Switch"
                 android:drawableTint="@color/primary_light"

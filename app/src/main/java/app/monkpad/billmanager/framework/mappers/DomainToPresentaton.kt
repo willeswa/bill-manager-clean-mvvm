@@ -8,6 +8,7 @@ import app.monkpad.billmanager.framework.models.CategoryDTO
 
 fun Bill.asPresentationModel(): BillDTO =
     BillDTO(
+        id = id,
         description = description,
         amount = amount,
         dueDate = dueDate,

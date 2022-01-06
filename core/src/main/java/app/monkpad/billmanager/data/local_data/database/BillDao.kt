@@ -23,4 +23,10 @@ interface BillDao {
     @Delete
     suspend fun deleteBill(vararg bill: BillEntity)
 
+    @Query("SELECT * FROM bills_table WHERE id = :id")
+    fun getBill(id: Int): Flow<BillEntity>
+
+    @Update
+    suspend fun updateBill(vararg bill: BillEntity)
+
 }

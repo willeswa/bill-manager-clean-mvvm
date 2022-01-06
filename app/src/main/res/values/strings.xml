@@ -6,6 +6,7 @@
     <string name="total_value_placeholder">0.00</string>
     <string name="next_bill_due_date_value">May 29, 2022</string>
     <string name="next_bill_due_title">Next bill on</string>
+    <string name="update_bill_string">Update Bill</string>
 
 
 </resources>

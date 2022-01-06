@@ -1,6 +1,7 @@
 package app.monkpad.billmanager.presentation.newbill
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -8,9 +9,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import app.monkpad.billmanager.R
 import app.monkpad.billmanager.databinding.FragmentNewBillBinding
 import app.monkpad.billmanager.framework.BillManagerViewModelFactory
+import app.monkpad.billmanager.framework.models.BillDTO
 import app.monkpad.billmanager.framework.models.CategoryDTO
 import app.monkpad.billmanager.utils.Utility
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -18,6 +21,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class NewBillFragment : Fragment() {
     private lateinit var binding: FragmentNewBillBinding
+    private val args: NewBillFragmentArgs by navArgs()
 
     private val viewModel: NewBillViewModel by viewModels(){
         BillManagerViewModelFactory
@@ -39,8 +43,22 @@ class NewBillFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         var dueDate = 0L
         var category: CategoryDTO? = null
-        val repeat = false
+        var repeat = false
         val paid = false
+
+        var billToEdit: BillDTO? = null
+
+        if(args.billId != -1){
+            binding.addNewBill.text = getString(R.string.update_bill_string)
+            viewModel.getBill(args.billId).observe(viewLifecycleOwner, {
+                billToEdit = it
+                populateFormWithBill(it)
+                dueDate = it.dueDate
+                category = Utility.categories.find{cat -> cat.name == it.categoryName}
+                repeat = it.repeat
+
+            })
+        }
 
         viewModel.showDatePicker.observe(viewLifecycleOwner, Observer(){yes ->
             if(yes){
@@ -80,8 +98,13 @@ class NewBillFragment : Fragment() {
 
                 try {
                     Utility.validateEntries(dueDate, amount, description, category)
-                    val bill = Utility.makeBill(amount.toFloat(), description, dueDate, category!!, repeat, paid)
-                    viewModel.addNewBill(bill)
+                    if(args.billId == -1){
+                        val bill = Utility.makeBill(amount.toFloat(), description, dueDate, category!!, repeat, paid)
+                        viewModel.addNewBill(bill)
+                    } else {
+                        val bill = Utility.updateBill(billToEdit!!, amount.toFloat(), description, dueDate, category!!, repeat)
+                        viewModel.updateBill(bill)
+                    }
                     viewModel.finishSubmitting()
                     findNavController().popBackStack()
                 } catch (e: Exception) {
@@ -89,5 +112,12 @@ class NewBillFragment : Fragment() {
                 }
             }
         })
+    }
+
+    private fun populateFormWithBill(bill: BillDTO?) {
+        binding.billValueEdittext.editText?.setText(bill?.amount.toString())
+        binding.billDescriptionEdittext.editText?.setText(bill?.description)
+        binding.billDuedateEdittext.text = Utility.formattedDate(bill?.dueDate)
+        binding.billCategoryEdittext.text = bill?.categoryName
     }
 }

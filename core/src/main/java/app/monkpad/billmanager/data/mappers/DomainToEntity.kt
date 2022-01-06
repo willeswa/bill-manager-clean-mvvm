@@ -7,12 +7,23 @@ import app.monkpad.billmanager.domain.models.Category
 
 internal fun Bill.asEntityModel(): BillEntity =
     BillEntity(
+        id = id,
         amount = amount,
         description = description,
         repeat = repeat,
         settled = settled,
         dueDate = dueDate,
         categoryTitle = categoryName
+    )
+
+internal fun Bill.asCreatedEntityModel(): BillEntity =
+    BillEntity(
+        description = description,
+        amount = amount,
+        dueDate = dueDate,
+        categoryTitle = categoryName,
+        repeat = repeat,
+        settled = settled
     )
 
 
