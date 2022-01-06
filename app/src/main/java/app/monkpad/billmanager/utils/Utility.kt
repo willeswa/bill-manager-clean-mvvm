@@ -78,6 +78,7 @@ class Utility {
         ): BillDTO {
             val overdue = System.currentTimeMillis() > dueDate && !paid
             return BillDTO(
+                0,
                 description,
                 amount,
                 dueDate,
@@ -117,6 +118,23 @@ class Utility {
         fun notifyUser(message: String, context: Context) {
             val toast = Toast.makeText(context, message, Toast.LENGTH_LONG)
             toast.show()
+        }
+
+        fun updateBill(
+            billToEdit: BillDTO,
+            amount: Float,
+            description: String,
+            dueDate: Long,
+            category: CategoryDTO,
+            repeat: Boolean
+        ): BillDTO {
+            billToEdit.description = description
+            billToEdit.amount = amount
+            billToEdit.dueDate = dueDate
+            billToEdit.categoryName = category.name
+            billToEdit.repeat = repeat
+
+           return billToEdit
         }
     }
 }

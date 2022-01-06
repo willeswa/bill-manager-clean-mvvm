@@ -7,6 +7,7 @@ import app.monkpad.billmanager.domain.models.Category
 
 internal fun BillEntity.asDomainModel(): Bill =
     Bill(
+        id = id,
         description = description,
         amount = amount,
         dueDate = dueDate,

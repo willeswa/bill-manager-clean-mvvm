@@ -21,4 +21,10 @@ class BillsRepository(
         localDataSource.deleteBill(bill)
     }
 
+    fun getBill(id: Int): Flow<Bill> =
+        localDataSource.getBill(id)
+
+    suspend fun updateBill(bill: Bill) =
+        localDataSource.updateBill(bill)
+
 }

@@ -3,12 +3,16 @@ package app.monkpad.billmanager.presentation.newbill
 import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.asLiveData
+import androidx.lifecycle.viewModelScope
 import app.monkpad.billmanager.framework.BillManagerViewModel
 import app.monkpad.billmanager.framework.UseCases
 import app.monkpad.billmanager.framework.mappers.asDomainModel
+import app.monkpad.billmanager.framework.mappers.asPresentationModel
 import app.monkpad.billmanager.framework.models.BillDTO
 import app.monkpad.billmanager.framework.models.CategoryDTO
 import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.map
 
 class NewBillViewModel(application: Application, useCases: UseCases):
     BillManagerViewModel(application, useCases) {
@@ -87,6 +91,17 @@ class NewBillViewModel(application: Application, useCases: UseCases):
         coroutineScope.launch{
             delay(2000)
             _error.postValue(null)
+        }
+    }
+
+    fun getBill(id: Int): LiveData<BillDTO> =
+        useCases.getBillUseCase(id).map{it.asPresentationModel()}.asLiveData()
+
+    fun updateBill(bill: BillDTO) {
+        viewModelScope.launch {
+            withContext(Dispatchers.IO){
+                useCases.updateBillUseCase(bill.asDomainModel())
+            }
         }
     }
 }

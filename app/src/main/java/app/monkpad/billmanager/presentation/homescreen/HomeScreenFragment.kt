@@ -12,6 +12,7 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import app.monkpad.billmanager.R
 import app.monkpad.billmanager.databinding.FragmentHomeScreenBinding
 import app.monkpad.billmanager.databinding.ViewBillToEditDialogBinding
@@ -66,6 +67,7 @@ class HomeScreenFragment : Fragment() {
                         setOnMenuItemClickListener { menuItem ->
                             when (menuItem.itemId) {
                                 R.id.action_diag_delete -> deletedItem(billDTO)
+                                R.id.action_diag_edit -> updateBillItem(billDTO)
                                 else -> false
                             }
                         }
@@ -118,6 +120,13 @@ class HomeScreenFragment : Fragment() {
                 viewModel.showPaid(tab?.text as String)
             }
         })
+    }
+
+    private fun updateBillItem(billDTO: BillDTO): Boolean {
+        dialog.dismiss()
+        val action = HomeScreenFragmentDirections.actionHomeNavToNewNav(billDTO.id)
+        findNavController().navigate(action)
+        return true
     }
 
     private fun deletedItem(bill: BillDTO): Boolean {

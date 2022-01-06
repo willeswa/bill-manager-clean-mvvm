@@ -26,7 +26,7 @@ class HomeScreenViewModel(
     val paid: LiveData<Boolean> = _paid
     val loading = MutableLiveData(true)
 
-    private val _bills = useCases.getBillUseCase().map { billList ->
+    private val _bills = useCases.getBillsUseCase().map { billList ->
         billList.map { bill ->
             bill.asPresentationModel()
         }

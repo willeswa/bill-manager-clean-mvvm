@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "bills_table")
 data class BillEntity(
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val description: String,
     val amount: Float,
     @ColumnInfo(name = "due_date") val dueDate: Long,
