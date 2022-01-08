@@ -1,21 +1,19 @@
 package app.monkpad.billmanager.presentation.homescreen
 
 import android.os.Bundle
-import android.view.*
-import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.widget.PopupMenu
 import androidx.core.content.ContextCompat
-import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import app.monkpad.billmanager.R
 import app.monkpad.billmanager.databinding.FragmentHomeScreenBinding
-import app.monkpad.billmanager.databinding.ViewBillToEditDialogBinding
 import app.monkpad.billmanager.framework.BillManagerViewModelFactory
 import app.monkpad.billmanager.framework.models.BillDTO
 import app.monkpad.billmanager.presentation.interactions.BillClickListener
@@ -28,7 +26,7 @@ class HomeScreenFragment : Fragment() {
     private lateinit var mainCollectionsAdapter: HomeScreenRecyclerAdapter
     private lateinit var binding: FragmentHomeScreenBinding
     private lateinit var dialog: BottomSheetDialog
-    private val viewModel: HomeScreenViewModel by activityViewModels{
+    private val viewModel: HomeScreenViewModel by activityViewModels {
         BillManagerViewModelFactory
     }
 
@@ -49,7 +47,7 @@ class HomeScreenFragment : Fragment() {
 
         var togglePaid: Button?
 
-        mainCollectionsAdapter = HomeScreenRecyclerAdapter(BillClickListener {billDTO ->
+        mainCollectionsAdapter = HomeScreenRecyclerAdapter(BillClickListener { billDTO ->
             dialog = BottomSheetDialog(requireContext(), R.style.AppBottomSheetDialogTheme).apply {
                 setContentView(R.layout.view_bill_to_edit_dialog)
 
@@ -60,7 +58,7 @@ class HomeScreenFragment : Fragment() {
                 val dialogDueDate = findViewById<TextView>(R.id.due_date_dialog)
 
 
-                dialogEditMenu?.setOnClickListener{
+                dialogEditMenu?.setOnClickListener {
                     PopupMenu(requireContext(), it).apply {
                         inflate(R.menu.edit_box_diag_menu)
                         show()
@@ -80,15 +78,35 @@ class HomeScreenFragment : Fragment() {
 
                 dialogTitle?.text = billDTO.description
                 dialogCategoryTitle?.text = billDTO.categoryName
-                dialogValue?.text = billDTO.amount.toString()
-                dialogDueDate?.text = "To be paid before ${Utility.formattedDate(billDTO.dueDate)}"
+                dialogValue?.text = Utility.formattedMoney(
+                    resources.getString(
+                        R.string.money_value_of_2,
+                        Utility.formattedDecimal(billDTO.amount)
+                    )
+                )
+                dialogDueDate?.text = Utility.formattedPaidStatus(
+                    resources.getString(
+                        R.string.unpaid_diag_string,
+                        Utility.formattedDate(billDTO.dueDate)
+                    )
+                )
 
-                if(billDTO.paid){
+                if (billDTO.paid) {
                     togglePaid?.text = "Mark as pending"
-                    togglePaid?.setTextColor(ContextCompat.getColor(requireContext(), R.color.error_color))
+                    togglePaid?.setTextColor(
+                        ContextCompat.getColor(
+                            requireContext(),
+                            R.color.error_color
+                        )
+                    )
                 } else {
                     togglePaid?.text = "Mark as paid"
-                    togglePaid?.setTextColor(ContextCompat.getColor(requireContext(), R.color.secondary_light))
+                    togglePaid?.setTextColor(
+                        ContextCompat.getColor(
+                            requireContext(),
+                            R.color.secondary_light
+                        )
+                    )
                 }
 
 
@@ -109,11 +127,11 @@ class HomeScreenFragment : Fragment() {
 
         binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
-              viewModel.showPaid(tab?.text as String)
+                viewModel.showPaid(tab?.text as String)
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {
-               tab?.position
+                tab?.position
             }
 
             override fun onTabReselected(tab: TabLayout.Tab?) {

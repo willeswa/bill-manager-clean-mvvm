@@ -1,6 +1,7 @@
 package app.monkpad.billmanager.presentation.newbill
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asLiveData
@@ -67,6 +68,7 @@ class NewBillViewModel(application: Application, useCases: UseCases):
     }
 
     fun addNewBill(bill: BillDTO){
+        Log.i("viewmodel_say_some", ""+bill.repeat)
         coroutineScope.launch{
             withContext(Dispatchers.IO){
                  useCases.addBillUseCase(bill.asDomainModel())

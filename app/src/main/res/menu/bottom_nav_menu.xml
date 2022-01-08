@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
         android:id="@+id/home_nav"
@@ -7,10 +8,12 @@
         android:title="Home" />
     <item
         android:id="@+id/new_nav"
-        android:icon="@drawable/ic_twotone_note_add_24"
-        android:title="New Bill" />
+        android:icon="@drawable/ic_twotone_add_24"
+        android:title="Add New"
+        app:showAsAction="always"
+        />
     <item
         android:id="@+id/savings_nav"
         android:icon="@drawable/ic_twotone_savings_24"
-        android:title="Money Tips" />
+        android:title="Money Habits" />
 </menu>

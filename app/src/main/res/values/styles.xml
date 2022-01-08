@@ -9,17 +9,17 @@
     <style name="BillManager.TextAppearance.Bold" parent="TextAppearance.Design.Tab">
         <item name="textAllCaps">false</item>
         <item name="android:textAllCaps">false</item>
-        <item name="fontFamily">@font/ubuntu_bold</item>
+        <item name="fontFamily">@font/roboto_bold</item>
         <item name="android:textColor">@color/primary</item>
     </style>
     <style name="BillManager.TextAppearance.Light" parent="TextAppearance.Design.Tab">
-        <item name="fontFamily">@font/ubuntu_light</item>
+        <item name="fontFamily">@font/roboto</item>
         <item name="textAllCaps">false</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:textColor">@color/primary</item>
     </style>
     <style name="BillManager.TextAppearance.Light.Faded" parent="TextAppearance.Design.Tab">
-        <item name="fontFamily">@font/ubuntu_light</item>
+        <item name="fontFamily">@font/roboto</item>
         <item name="textAllCaps">false</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:textColor">@color/primary</item>

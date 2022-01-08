@@ -6,6 +6,6 @@ data class Bill(
     val amount: Float,
     val categoryName: String,
     val dueDate: Long,
-    val repeat: Boolean,
+    val repeat: Int?,
     val settled: Boolean
 )
