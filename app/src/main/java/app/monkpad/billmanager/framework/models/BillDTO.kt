@@ -6,7 +6,7 @@ data class BillDTO(
     var amount: Float,
     var dueDate: Long,
     var categoryName: String,
-    var repeat: Boolean = false,
+    var repeat: Int?,
     var paid: Boolean = false,
     val overdue: Boolean
 )

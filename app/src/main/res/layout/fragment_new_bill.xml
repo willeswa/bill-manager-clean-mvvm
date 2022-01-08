@@ -97,7 +97,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:hint="Description"
-                    android:textSize="16sp"
+                    android:textSize="15sp"
                     android:textColorHint="@color/primary_light"
                     android:paddingVertical="24dp"
                     android:textAppearance="@style/BillManager.TextAppearance.Light"
@@ -117,7 +117,7 @@
                 android:padding="16dp"
                 android:text="Due Date"
                 android:textAllCaps="false"
-                android:textSize="16sp"
+                android:textSize="15sp"
                 app:iconPadding="12dp"
                 android:textAlignment="viewStart"
                 app:icon="@drawable/ic_twotone_calendar_month_24"
@@ -145,7 +145,7 @@
                 android:onClick="@{() -> viewmodel.startShowingCategoriesDialog()}"
                 android:padding="16dp"
                 android:text="Categories"
-                android:textSize="16sp"
+                android:textSize="15sp"
                 android:textAlignment="viewStart"
                 android:textAllCaps="false"
                 app:icon="@drawable/ic_twotone_category_24"
@@ -168,37 +168,68 @@
 
             <com.google.android.material.switchmaterial.SwitchMaterial
                 android:id="@+id/bill_rep_switch"
-                android:layout_width="match_parent"
-                android:padding="16dp"
-                android:layout_height="wrap_content"
-                android:drawablePadding="16dp"
-                android:text="Repeat"
-                android:textSize="16sp"
-                android:textColor="@color/primary_light"
                 style="@style/Widget.App.Switch"
-                android:drawableTint="@color/primary_light"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_twotone_event_repeat_24"
+                android:drawablePadding="16dp"
+                android:drawableTint="@color/primary_light"
+                android:padding="16dp"
+                android:text="Repeat"
+                android:textColor="@color/primary_light"
+                android:textSize="15sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/custom_view"
-               />
+                app:layout_constraintTop_toBottomOf="@+id/custom_view" />
+
+                <RadioGroup
+                    android:id="@+id/requency_group"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:background="@drawable/background_rounded_bottom_corners"
+                    android:paddingVertical="16dp"
+                    android:paddingHorizontal="32dp"
+                    app:layout_constraintBottom_toTopOf="@+id/add_new_bill"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/bill_rep_switch">
+
+                    <RadioButton
+                        android:id="@+id/weekly_radio_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Weekly"/>
+
+                    <RadioButton
+                        android:id="@+id/bi_monthly_radio_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Bi-monthly"/>
+
+                    <RadioButton
+                        android:id="@+id/monthly_radio_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Monthly"/>
+                </RadioGroup>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/add_new_bill"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
+                android:onClick="@{() -> viewmodel.startSubmitting()}"
                 android:paddingLeft="50dp"
                 android:paddingTop="16dp"
                 android:paddingRight="50dp"
+                android:layout_marginTop="10dp"
                 android:paddingBottom="16dp"
-                android:onClick="@{() -> viewmodel.startSubmitting()}"
                 android:text="Add Bill"
                 app:cornerRadius="35dp"
+                app:layout_constraintTop_toBottomOf="@id/requency_group"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/bill_rep_switch"
-           />
+                tools:layout_editor_absoluteY="448dp" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

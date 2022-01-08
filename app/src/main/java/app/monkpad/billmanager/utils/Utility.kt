@@ -1,8 +1,11 @@
 package app.monkpad.billmanager.utils
 
 import android.content.Context
+import android.text.Html
+import android.text.Spanned
 import android.view.View
 import android.widget.Toast
+import androidx.core.text.HtmlCompat
 import androidx.fragment.app.FragmentManager
 import androidx.navigation.NavDestination
 import app.monkpad.billmanager.R
@@ -13,6 +16,7 @@ import app.monkpad.billmanager.presentation.newbill.NewBillViewModel
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.datepicker.MaterialDatePicker
+import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 
 class Utility {
@@ -73,7 +77,7 @@ class Utility {
             description: String,
             dueDate: Long,
             category: CategoryDTO,
-            repeat: Boolean,
+            repeat: Int?,
             paid: Boolean
         ): BillDTO {
             val overdue = System.currentTimeMillis() > dueDate && !paid
@@ -126,7 +130,7 @@ class Utility {
             description: String,
             dueDate: Long,
             category: CategoryDTO,
-            repeat: Boolean
+            repeat: Int?,
         ): BillDTO {
             billToEdit.description = description
             billToEdit.amount = amount
@@ -135,6 +139,29 @@ class Utility {
             billToEdit.repeat = repeat
 
            return billToEdit
+        }
+
+        fun formattedDecimal(value: Float): String {
+            val formatter = DecimalFormat("#,###,###.00")
+            return formatter.format(value)
+        }
+
+        fun formattedMoney(text: String): Spanned {
+            return Html.fromHtml(text, HtmlCompat.FROM_HTML_MODE_LEGACY)
+        }
+
+
+        fun formattedPaidStatus(text: String): Spanned {
+            return Html.fromHtml(text, HtmlCompat.FROM_HTML_MODE_LEGACY)
+        }
+
+        fun whichButton(repeat: Int): Int {
+            return when (repeat) {
+                7 -> R.id.weekly_radio_button
+                14 -> R.id.bi_monthly_radio_button
+                30 -> R.id.monthly_radio_button
+                else -> 0
+            }
         }
     }
 }

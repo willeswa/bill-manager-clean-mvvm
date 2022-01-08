@@ -16,12 +16,12 @@ import app.monkpad.billmanager.framework.BillManagerViewModelFactory
 import app.monkpad.billmanager.framework.models.BillDTO
 import app.monkpad.billmanager.framework.models.CategoryDTO
 import app.monkpad.billmanager.utils.Utility
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class NewBillFragment : Fragment() {
     private lateinit var binding: FragmentNewBillBinding
     private val args: NewBillFragmentArgs by navArgs()
+    private var repeat: Int? = null
 
     private val viewModel: NewBillViewModel by viewModels(){
         BillManagerViewModelFactory
@@ -36,6 +36,17 @@ class NewBillFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewmodel = viewModel
 
+
+        binding.billRepSwitch.setOnCheckedChangeListener{_, isChecked ->
+            if(isChecked){
+                binding.requencyGroup.visibility = View.VISIBLE
+            } else {
+                binding.requencyGroup.clearCheck()
+                repeat = null
+                binding.requencyGroup.visibility = View.GONE
+            }
+        }
+
         return binding.root
     }
 
@@ -43,20 +54,19 @@ class NewBillFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         var dueDate = 0L
         var category: CategoryDTO? = null
-        var repeat = false
         val paid = false
 
         var billToEdit: BillDTO? = null
 
         if(args.billId != -1){
+
             binding.addNewBill.text = getString(R.string.update_bill_string)
             viewModel.getBill(args.billId).observe(viewLifecycleOwner, {
                 billToEdit = it
                 populateFormWithBill(it)
                 dueDate = it.dueDate
                 category = Utility.categories.find{cat -> cat.name == it.categoryName}
-                repeat = it.repeat
-
+                binding.billRepSwitch.isChecked = it.repeat != null
             })
         }
 
@@ -91,6 +101,14 @@ class NewBillFragment : Fragment() {
             viewModel.addCategoryIfDoesNotExist(it)
         })
 
+        binding.requencyGroup.setOnCheckedChangeListener{button, _ ->
+            when(button.checkedRadioButtonId){
+                R.id.monthly_radio_button -> repeat = 30
+                R.id.bi_monthly_radio_button -> repeat = 14
+                R.id.weekly_radio_button -> repeat = 7
+            }
+        }
+
         viewModel.submit.observe(viewLifecycleOwner, Observer(){readyToSubmit ->
             if(readyToSubmit){
                 val amount = binding.billValueEdittext.editText?.text.toString()
@@ -119,5 +137,10 @@ class NewBillFragment : Fragment() {
         binding.billDescriptionEdittext.editText?.setText(bill?.description)
         binding.billDuedateEdittext.text = Utility.formattedDate(bill?.dueDate)
         binding.billCategoryEdittext.text = bill?.categoryName
+        Log.i("BILL_REPEAT", ""+bill?.repeat)
+        if(bill?.repeat != null){
+            binding.requencyGroup.visibility = View.VISIBLE
+            binding.requencyGroup.check(Utility.whichButton(bill?.repeat!!))
+        }
     }
 }

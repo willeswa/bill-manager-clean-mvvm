@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Ping My Bill</string>
     <!-- TODO: Remove or change this placeholder text -->
@@ -7,6 +8,8 @@
     <string name="next_bill_due_date_value">May 29, 2022</string>
     <string name="next_bill_due_title">Next bill on</string>
     <string name="update_bill_string">Update Bill</string>
-
-
+    <string name="money_value_of"> &lt;small>ksh. &lt;/small> &lt;big> %s &lt;/big></string>
+    <string name="money_value_of_2">KSh. %s</string>
+    <string name="unpaid_diag_string">To be paid before &lt;u>%s&lt;/u></string>
+    <string name="paid_diag_string">To be paid before &lt;u>%s&lt;/u></string>
 </resources>

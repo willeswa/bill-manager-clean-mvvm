@@ -93,9 +93,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="5"
-                    app:setFloat="@{bill.amount}"
-                    android:textSize="20sp"
-                    style="@style/BillManager.TextAppearance.Bold"
+                    app:setFormattedMoney="@{bill.amount}"
+                    android:textSize="14sp"
+                    style="@style/BillManager.TextAppearance.Light"
                     app:layout_constraintBaseline_toBaselineOf="@+id/bill_item_category"
                     app:layout_constraintEnd_toEndOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
