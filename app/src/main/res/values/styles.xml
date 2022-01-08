@@ -13,17 +13,23 @@
         <item name="android:textColor">@color/primary</item>
     </style>
     <style name="BillManager.TextAppearance.Light" parent="TextAppearance.Design.Tab">
-        <item name="fontFamily">@font/roboto</item>
+        <item name="fontFamily">@font/roboto_light</item>
         <item name="textAllCaps">false</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:textColor">@color/primary</item>
     </style>
     <style name="BillManager.TextAppearance.Light.Faded" parent="TextAppearance.Design.Tab">
-        <item name="fontFamily">@font/roboto</item>
+        <item name="fontFamily">@font/roboto_light</item>
         <item name="textAllCaps">false</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:textColor">@color/primary</item>
         <item name="android:alpha">0.4</item>
+    </style>
+    <style name="BillManager.TextAppearance.Normal" parent="TextAppearance.Design.Tab">
+        <item name="fontFamily">@font/roboto</item>
+        <item name="textAllCaps">false</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@color/primary</item>
     </style>
     <style name="Widget.BillManager.Backdrop" parent="">
         <item name="background">@color/primary_variant</item>

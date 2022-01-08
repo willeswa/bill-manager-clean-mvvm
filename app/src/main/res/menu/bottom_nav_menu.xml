@@ -14,6 +14,6 @@
         />
     <item
         android:id="@+id/savings_nav"
-        android:icon="@drawable/ic_twotone_savings_24"
-        android:title="Money Habits" />
+        android:icon="@drawable/ic_twotone_account_box_24"
+        android:title="Profile" />
 </menu>
