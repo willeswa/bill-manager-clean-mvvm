@@ -1,4 +1,3 @@
-
 [![Build Status](https://app.travis-ci.com/willeswa/bill-manager.svg?branch=dev)](https://app.travis-ci.com/willeswa/bill-manager) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/fbabd5e62190436f9a930e97510983de)](https://www.codacy.com/gh/willeswa/bill-manager/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=willeswa/bill-manager&amp;utm_campaign=Badge_Grade)
 
 # Ping myBills
@@ -19,6 +18,8 @@ For better abstration, we split the application into three layers spread across 
 - :core
 - :app
 
+![Architecture Diagram](art/arch.png)
+
 The :app modules contains the UI layer while the :core module contains the domain and the data layer. This three layered architecture is inspired by the [Clean Architecture design pattern](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)
 
 ### :app module
@@ -31,4 +32,7 @@ The core module holds the domain and data layers.
 #### Domain Layer
 The `domain layer` defines data classes that are used to bridge the data needs of the data and presentation layer. It also defines the `UseCases` that the presentation layer reuses for various accessibility and manipulation of the data.
 #### Data Layer
+<<<<<<< Updated upstream
 The `data layer` holds the the data entity that implements our core business needs. It uses distinct `datasources` abstracted away by a repository to ensures a single channel for accessing and manipulation of the data. 
+=======
+The `data layer` holds the the data entity that implements our core business needs. It uses distinct `datasources` abstracted away by a repository to ensures a single channel for accessing and manipulation of the data.
