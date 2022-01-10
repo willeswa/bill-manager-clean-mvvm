@@ -8,7 +8,8 @@ android:
     - platform-tools
     - tools
     - extra-android-m2repository
-    - sys-img-x86-android-26
+    - sys-img-armeabi-v7a-android-24
+
 env:
   global:
     - TARGET_VERSION=31
