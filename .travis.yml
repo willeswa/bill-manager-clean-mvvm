@@ -35,7 +35,7 @@ before_script:
   - adb shell setprop dalvik.vm.dexopt-flags v=n,o=v
 
 script:
-  - ./gradlew connectedCheck
+  - ./gradlew testDebugUnitTest
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
