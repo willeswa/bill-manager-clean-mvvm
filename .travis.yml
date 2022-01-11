@@ -1,31 +1,23 @@
-sudo: false
-
 language: android
 dist: trusty
 jdk: openjdk11
 
 env:
   global:
-    - TARGET_VERSION=30
+    - TARGET_VERSION=31
     - ANDROID_BUILD_TOOLS_VERSION=30.0.2
     - ANDROID_HOME=~/android-sdk
+    - ANDROID_TARGET=android-22
+    - ANDROID_ABI=armeabi-v7a
 
 android:
-  licenses:
-    - 'android-sdk-preview-license-.+'
-    - 'android-sdk-license-.+'
-    - 'google-gdk-license-.+'
-
   components:
     - tools
-    - build-tools
+    - platform-tools
     - tools
-    - android-30
-    - android-22
-    - extra-google-google_play_services
-    - extra-google-m2repository
     - extra-android-m2repository
-    - sys-img-armeabi-v7a-android-22
+    - sys-img-${ANDROID_ABI}-${ANDROID_TARGET}
+
 
 before_install:
   - touch $HOME/.android/repositories.cfg
@@ -35,23 +27,15 @@ before_install:
   - yes | $ANDROID_HOME/cmdline-tools/bin/sdkmanager "build-tools;${ANDROID_BUILD_TOOLS_VERSION}" --sdk_root=$ANDROID_HOME
 
 before_script:
-  - echo no | android create avd --force -n test -t android-22 --abi armeabi-v7a
-  - emulator -avd test -no-audio -no-window &
+  - chmod +x gradlew
+  - ./gradlew build jacocoTestReport assembleAndroidTest
+  - echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI
+  - emulator -avd test -no-skin -no-audio -no-window &
   - bash android-wait-for-emulator
-  - adb kill-server
-  - adb start-server
-  - adb shell input keyevent 82 &
+  - adb shell setprop dalvik.vm.dexopt-flags v=n,o=v
 
 script:
-  - ./gradlew clean build
   - ./gradlew connectedCheck
 
-before_cache:
-  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
-  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
-
-cache:
-  directories:
-    - $HOME/.gradle/caches/
-    - $HOME/.gradle/wrapper/
-    - $HOME/.android/build-cache
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
