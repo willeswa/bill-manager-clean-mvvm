@@ -42,3 +42,4 @@ The following Libraries are used in the application:
     - [Data Binding](https://developer.android.com/topic/libraries/data-binding) - Used in combination with ViewModel to provide support for reactive views
     - [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) - Manages the UI state and provide the bridge between the UI and Domain layer.
     
+- [Hamcrest](http://hamcrest.org/) - Preferred assertion framework for tests to make our tests readable.

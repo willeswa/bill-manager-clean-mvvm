@@ -1,45 +1,37 @@
 package app.monkpad.billmanager.presentation.homescreen
 
 import android.app.Application
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
-import androidx.lifecycle.asLiveData
+import androidx.lifecycle.*
 import app.monkpad.billmanager.framework.BillManagerViewModel
 import app.monkpad.billmanager.framework.UseCases
 import app.monkpad.billmanager.framework.mappers.asDomainModel
 import app.monkpad.billmanager.framework.mappers.asPresentationModel
 import app.monkpad.billmanager.framework.models.BillDTO
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.map
-
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class HomeScreenViewModel(
     application: Application,
     useCases: UseCases
 ) : BillManagerViewModel(application, useCases) {
 
-    private val job = Job()
-    private val coroutineScope = CoroutineScope(Dispatchers.Main + job)
+    private val _showPaid = MutableLiveData(false)
+    val showPaid: LiveData<Boolean> = _showPaid
 
-    private val _paid = MutableLiveData(false)
-    val paid: LiveData<Boolean> = _paid
-    val loading = MutableLiveData(true)
+    val isLoading = MutableLiveData(true)
 
     private val _bills = useCases.getBillsUseCase().map { billList ->
-        billList.map { bill ->
-            bill.asPresentationModel()
-        }
-            .sortedBy { billSorted ->
-                billSorted.dueDate
-            }
-
+        billList.map { bill -> bill.asPresentationModel() }
+            .sortedBy { it.dueDate }
     }.asLiveData().also {
-        coroutineScope.launch {
-            delay(2000)
-            loading.postValue(false)
+        viewModelScope.launch {
+            delay(1500)
+            isLoading.postValue(false)
         }
-       }
+    }
 
     val unpaidBills: LiveData<List<BillDTO>> = Transformations.map(_bills) { bills ->
         bills.filter { !it.paid }
@@ -53,34 +45,28 @@ class HomeScreenViewModel(
         billsToSum.sumOf { it.amount.toDouble() }.toFloat()
     }
 
-    fun showPaid(tabText: String) {
-        _paid.postValue(tabText == "Paid")
+    fun onTabItemClicked(tabText: String) {
+        _showPaid.postValue(tabText == "Paid")
     }
 
-    fun toggleBillStatus(bill: BillDTO) {
-        coroutineScope.launch {
+    fun onBillStatusToggled(bill: BillDTO) {
+        viewModelScope.launch {
             withContext(Dispatchers.IO) {
                 useCases.toggleBillStatusUseCase(bill.asDomainModel())
             }
         }
     }
 
-    fun deleteBill(bill: BillDTO) {
-        coroutineScope.launch {
+    fun onBillDeleted(bill: BillDTO) {
+        viewModelScope.launch {
             withContext(Dispatchers.IO) {
                 useCases.deleteBillUseCase(bill.asDomainModel())
             }
         }
     }
 
-    fun atHomeScreen(){
-        _paid.postValue(false)
+    fun onHomeNavItemClicked() {
+        _showPaid.postValue(false)
     }
-
-    override fun onCleared() {
-        super.onCleared()
-        job.cancel()
-    }
-
 
 }

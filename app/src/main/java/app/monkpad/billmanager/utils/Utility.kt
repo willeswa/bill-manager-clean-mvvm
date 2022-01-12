@@ -62,7 +62,6 @@ class Utility {
             return formatter.format(it)
         }
 
-
         fun getDatePicker(fragmentManager: FragmentManager): MaterialDatePicker<Long> {
             val picker =
                 MaterialDatePicker.Builder.datePicker()
@@ -138,7 +137,7 @@ class Utility {
             billToEdit.categoryName = category.name
             billToEdit.repeat = repeat
 
-           return billToEdit
+            return billToEdit
         }
 
         fun formattedDecimal(value: Float): String {
@@ -149,7 +148,6 @@ class Utility {
         fun formattedMoney(text: String): Spanned {
             return Html.fromHtml(text, HtmlCompat.FROM_HTML_MODE_LEGACY)
         }
-
 
         fun formattedPaidStatus(text: String): Spanned {
             return Html.fromHtml(text, HtmlCompat.FROM_HTML_MODE_LEGACY)

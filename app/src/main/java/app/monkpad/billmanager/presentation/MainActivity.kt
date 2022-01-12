@@ -6,8 +6,6 @@ import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
-import androidx.lifecycle.get
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -60,11 +58,11 @@ class MainActivity : AppCompatActivity() {
         navController.addOnDestinationChangedListener{_, destination,_ ->
             styleToolbar(destination, toolbar, bottomNav, this)
             if(destination.id == R.id.home_nav){
-                viewModel.atHomeScreen()
+                viewModel.onHomeNavItemClicked()
             }
         }
 
-        viewModel.loading.observe(this, Observer {
+        viewModel.isLoading.observe(this, Observer {
             if(it){
                 toolbar.visibility = View.GONE
                 bottomNav.visibility = View.GONE
