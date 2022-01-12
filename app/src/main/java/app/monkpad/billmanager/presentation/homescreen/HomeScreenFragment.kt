@@ -115,7 +115,7 @@ class HomeScreenFragment : Fragment() {
 
             togglePaid?.setOnClickListener { _ ->
                 billDTO.paid = !billDTO.paid
-                viewModel.toggleBillStatus(billDTO)
+                viewModel.onBillStatusToggled(billDTO)
                 dialog.dismiss()
             }
         })
@@ -127,7 +127,7 @@ class HomeScreenFragment : Fragment() {
 
         binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
-                viewModel.showPaid(tab?.text as String)
+                viewModel.onTabItemClicked(tab?.text as String)
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {
@@ -135,7 +135,7 @@ class HomeScreenFragment : Fragment() {
             }
 
             override fun onTabReselected(tab: TabLayout.Tab?) {
-                viewModel.showPaid(tab?.text as String)
+                viewModel.onTabItemClicked(tab?.text as String)
             }
         })
     }
@@ -149,7 +149,7 @@ class HomeScreenFragment : Fragment() {
 
     private fun deletedItem(bill: BillDTO): Boolean {
         dialog.dismiss()
-        viewModel.deleteBill(bill)
+        viewModel.onBillDeleted(bill)
         val message = "Bill has been deleted!"
         Utility.notifyUser(message, requireContext())
         return true
