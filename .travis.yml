@@ -1,27 +1,43 @@
 language: android
-dist: trusty
 jdk: openjdk11
+sudo: false
 
 android:
+  licenses:
+    - android-sdk-license-.+
+    - google-gdk-license-.+
+    - android-sdk-preview-license-.+
   components:
-    - tools
-    - platform-tools
-    - tools
+    - build-tools-30.0.2
+    - android-31
+    - android-24
     - extra-android-m2repository
+    - extra-google-m2repository
+    - sys-img-armeabi-v7a-android-24
 env:
   global:
     - TARGET_VERSION=31
     - ANDROID_BUILD_TOOLS_VERSION=30.0.2
     - ANDROID_HOME=~/android-sdk
+    - ADB_INSTALL_TIMEOUT=8
 
 before_install:
   - touch $HOME/.android/repositories.cfg
-  - wget "https://dl.google.com/android/repository/commandlinetools-linux-7302050_latest.zip" -O commandlinetools.zip
+  - wget "https://dl.google.com/android/repository/commandlinetools-linux-7302050_latest.zip"
+    -O commandlinetools.zip
   - unzip commandlinetools.zip -d $ANDROID_HOME/
-  - yes | $ANDROID_HOME/cmdline-tools/bin/sdkmanager "platforms;android-${TARGET_VERSION}" --sdk_root=$ANDROID_HOME
-  - yes | $ANDROID_HOME/cmdline-tools/bin/sdkmanager "build-tools;${ANDROID_BUILD_TOOLS_VERSION}" --sdk_root=$ANDROID_HOME
+  - yes | $ANDROID_HOME/cmdline-tools/bin/sdkmanager "platforms;android-${TARGET_VERSION}"
+    --sdk_root=$ANDROID_HOME
+
 
 before_script:
+  - echo no | android create avd --force -n test -t android-24 --abi armeabi-v7a
+  - emulator -avd test -no-skin -no-window &
+  - bash android-wait-for-emulator
+  - adb shell input keyevent 82 &
   - chmod +x gradlew
 script:
-  - ./gradlew
+  - "./gradlew clean"
+  - "./gradlew connectedCheck"
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
