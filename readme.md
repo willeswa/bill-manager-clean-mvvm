@@ -48,4 +48,5 @@ The following Libraries are used in the application:
 |<img src="art/home_screen_1.jpg" width=200/>|<img src="art/home_screen_2.jpg" width=200/>|<img src="art/profile_screen.jpg" width=200/>|<img src="art/edit_screen_1.jpg" width=200/>|
 |:----:|:----:|:----:|:----:|
 
-|<img src="art/edit_screen_2.jpg" width=200/>|<img src="art/create_screen.jpg" width=200/>| |:----:|
+|<img src="art/create_screen.jpg" width=200/>|<img src="art/edit_screen_2.jpg" width=200/>|
+|:----:|:----:|
