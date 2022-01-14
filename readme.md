@@ -2,11 +2,11 @@
 
 # Ping myBills
 
-An android app to help you track your bills. It is built with clean architecture principles and the MVVM repository pattern using the power of Architecture Components.
+An android app to help you track your bills. It is built with the clean architecture principles in mind while following the MVVM repository pattern and powered by Architecture Components.
 
 ## Table of Contents
 - [Architecture](#architecture)
-- [Libraries](#librariries)
+- [Libraries](#libraries)
 - [Testing](#testing)
 - [Related Posts](#posts)
 - [Demo](#demo)
@@ -48,5 +48,4 @@ The following Libraries are used in the application:
 |<img src="art/home_screen_1.jpg" width=200/>|<img src="art/home_screen_2.jpg" width=200/>|<img src="art/profile_screen.jpg" width=200/>|<img src="art/edit_screen_1.jpg" width=200/>|
 |:----:|:----:|:----:|:----:|
 
-|<img src="art/edit_screen_2.jpg" width=200/>|<img src="art/create_screen.jpg" width=200/>| 
-|:----:|
+|<img src="art/edit_screen_2.jpg" width=200/>|<img src="art/create_screen.jpg" width=200/>| |:----:|
