@@ -10,4 +10,11 @@
     <color name="white">#FFFFFFFF</color>
     <color name="background_default">#F5F7FA</color>
     <color name="error_color">#B00020</color>
+    <color name="real_estate_blue">#08A7DC</color>
+    <color name="education_lilac">#C8A2C8</color>
+    <color name="food_maize">#FBEC5D</color>
+    <color name="investment_green">#228B22</color>
+    <color name="utility_orange">#FFA500</color>
+    <color name="health_care_pink">#FA8072</color>
+    <color name="personal_drab">#967117</color>
 </resources>

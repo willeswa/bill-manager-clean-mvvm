@@ -1,8 +1,8 @@
 package app.monkpad.billmanager.presentation
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -21,7 +21,6 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var navController: NavController
     private lateinit var viewModel: HomeScreenViewModel
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,35 +41,33 @@ class MainActivity : AppCompatActivity() {
         navController = navHostFragment.navController
 
         bottomNav.setupWithNavController(navController)
-        viewModel = ViewModelProvider(this, BillManagerViewModelFactory).get(HomeScreenViewModel::class.java)
-
-
-
+        viewModel = ViewModelProvider(this,
+            BillManagerViewModelFactory).get(HomeScreenViewModel::class.java)
 
         //The menu items have to have the same ids as the destinations
         //for the bottom nav to setupwithnavcontroller
-        val appBarConfig = AppBarConfiguration(setOf(
-                R.id.home_nav,
-                R.id.savings_nav))
+        val appBarConfig = AppBarConfiguration(navController.graph, binding.mainDrawerLayout)
 
-        setupActionBarWithNavController(navController, appBarConfig)
+//        setupActionBarWithNavController(navController, appBarConfig)
+        toolbar.setupWithNavController(navController, appBarConfig)
+        binding.navDrawer.setupWithNavController(navController)
 
-        navController.addOnDestinationChangedListener{_, destination,_ ->
+        navController.addOnDestinationChangedListener { _, destination, _ ->
             styleToolbar(destination, toolbar, bottomNav, this)
-            if(destination.id == R.id.home_nav){
+            if (destination.id == R.id.home_nav) {
                 viewModel.onHomeNavItemClicked()
             }
         }
 
         viewModel.isLoading.observe(this, Observer {
-            if(it){
+            if (it) {
                 toolbar.visibility = View.GONE
                 bottomNav.visibility = View.GONE
             } else {
                 toolbar.visibility = View.VISIBLE
                 bottomNav.visibility = View.VISIBLE
             }
-            })
+        })
 
     }
 
@@ -79,8 +76,6 @@ class MainActivity : AppCompatActivity() {
         navController.navigateUp()
         return super.onSupportNavigateUp()
     }
-
-
 
 
 }

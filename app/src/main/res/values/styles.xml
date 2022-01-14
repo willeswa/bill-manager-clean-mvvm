@@ -36,7 +36,7 @@
     </style>
 
     <style name="BillManager.Button.TextButton" parent="Widget.MaterialComponents.Button.TextButton">
-
+        <item name="android:textAppearance">@style/BillManager.TextAppearance.Normal</item>
     </style>
 
     <style name="BillManager.Button.Outline" parent="Widget.MaterialComponents.Button.OutlinedButton">
