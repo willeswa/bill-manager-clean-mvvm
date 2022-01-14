@@ -28,7 +28,7 @@
     </fragment>
     <fragment
         android:id="@+id/savings_nav"
-        android:name="app.monkpad.billmanager.BlankFragment"
-        android:label="Conversations on Money "
-        tools:layout="@layout/fragment_blank" />
+        android:name="app.monkpad.billmanager.presentation.profilescreen.ProfileScreenFragment"
+        android:label="Money Profile"
+        tools:layout="@layout/fragment_profile_screen" />
 </navigation>

@@ -42,7 +42,7 @@ class Utility {
             context: Context
         ) {
             val resources = context.resources
-            if (destination.id == R.id.new_nav) {
+            if (destination.id == R.id.new_nav || destination.id == R.id.savings_nav) {
                 toolbar.setBackgroundColor(resources.getColor(R.color.primary_variant))
                 toolbar.navigationIcon =
                     resources.getDrawable(R.drawable.ic_twotone_keyboard_backspace_24)

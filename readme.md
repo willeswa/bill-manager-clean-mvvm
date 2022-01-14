@@ -43,3 +43,10 @@ The following Libraries are used in the application:
     - [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) - Manages the UI state and provide the bridge between the UI and Domain layer.
     
 - [Hamcrest](http://hamcrest.org/) - Preferred assertion framework for tests to make our tests readable.
+
+## Demo
+|<img src="art/home_screen_1.jpg" width=200/>|<img src="art/home_screen_2.jpg" width=200/>|<img src="art/profile_screen.jpg" width=200/>|<img src="art/edit_screen_1.jpg" width=200/>|
+|:----:|:----:|:----:|:----:|
+
+|<img src="art/edit_screen_2.jpg" width=200/>|<img src="art/create_screen.jpg" width=200/>| 
+|:----:|

@@ -98,6 +98,7 @@
                     android:layout_gravity="center_horizontal"
                     android:hint="Description"
                     android:textSize="15sp"
+                    android:textColor="@color/primary_light"
                     android:textColorHint="@color/primary_light"
                     android:paddingVertical="24dp"
                     android:textAppearance="@style/BillManager.TextAppearance.Light"
