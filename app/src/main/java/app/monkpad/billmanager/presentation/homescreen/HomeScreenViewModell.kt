@@ -28,7 +28,7 @@ class HomeScreenViewModel(
             .sortedBy { it.dueDate }
     }.asLiveData().also {
         viewModelScope.launch {
-            delay(1500)
+            delay(2000)
             isLoading.postValue(false)
         }
     }

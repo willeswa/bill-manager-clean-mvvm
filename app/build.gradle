@@ -44,6 +44,8 @@ android {
         versionCode 1
         versionName "1.0"
 
+        manifestPlaceholders["AD_MOB_API_KEY"] = System.getenv("AD_MOB_ID")
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -103,6 +105,9 @@ dependencies {
 
     //Charts
     implementation 'com.github.PhilJay:MPAndroidChart:v2.1.0'
+
+    //Ads
+    implementation 'com.google.android.gms:play-services-ads:20.5.0'
 
     //Tests
     implementation 'androidx.test.ext:junit-ktx:1.1.3'

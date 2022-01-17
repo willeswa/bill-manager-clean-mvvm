@@ -10,230 +10,249 @@
             type="app.monkpad.billmanager.presentation.newbill.NewBillViewModel" />
     </data>
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".presentation.NewBillFragment"
-        android:background="@color/primary_variant"
-        >
-
-        <LinearLayout
-            style="@style/Widget.BillManager.Backdrop"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_horizontal"
-            android:background="@color/primary_variant"
-            android:orientation="vertical"
-            android:paddingTop="100dp"
-            android:paddingBottom="100dp">
-
-        </LinearLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="30dp"
-            android:background="@drawable/background_rounded_corner_shape"
-            android:padding="32dp"
+   <androidx.core.widget.NestedScrollView
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:fillViewport="true"
+       android:background="@color/primary_variant">
+       <FrameLayout
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:background="@color/primary_variant"
+           tools:context=".presentation.NewBillFragment"
            >
 
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text='@{(viewmodel.error != null) ? viewmodel.error : "Bill Value" }'
-                android:textColor='@{(viewmodel.error != null) ? @color/error_color : @color/primary}'
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+           <LinearLayout
+               style="@style/Widget.BillManager.Backdrop"
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:gravity="center_horizontal"
+               android:background="@color/primary_variant"
+               android:orientation="vertical"
+               android:paddingTop="100dp"
+               android:paddingBottom="100dp">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/bill_value_edittext"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:boxBackgroundColor="@color/background_default"
-                app:hintEnabled="false"
-                app:startIconTint="@color/primary_light"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView"
-                app:boxStrokeWidth="0dp"
-                app:boxStrokeWidthFocused="0dp"
-              >
+           </LinearLayout>
 
-                <com.google.android.material.textfield.TextInputEditText
-                    style="@style/BillManager.TextAppearance.Bold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:hint="0.00"
-                    android:inputType="numberSigned|numberDecimal"
-                    android:textSize="50sp"
-                    app:autoSizeMaxTextSize="13sp"
-                    app:autoSizeMinTextSize="5sp"
-                    android:autoSizeStepGranularity="1sp"
-                    android:autoSizeTextType="uniform"
-                    android:maxLines="1"
-                    />
+           <androidx.constraintlayout.widget.ConstraintLayout
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:layout_marginTop="30dp"
+               android:background="@drawable/background_rounded_corner_shape"
+               android:padding="32dp"
+               >
 
-            </com.google.android.material.textfield.TextInputLayout>
+               <TextView
+                   android:id="@+id/textView"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginTop="16dp"
+                   android:text='@{(viewmodel.error != null) ? viewmodel.error : "Bill Value" }'
+                   android:textColor='@{(viewmodel.error != null) ? @color/error_color : @color/primary}'
+                   app:layout_constraintEnd_toEndOf="parent"
+                   app:layout_constraintStart_toStartOf="parent"
+                   app:layout_constraintTop_toTopOf="parent" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/bill_description_edittext"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:boxBackgroundColor="@color/background_default"
-                app:hintEnabled="false"
-                app:startIconTint="@color/primary_light"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/bill_value_edittext"
-                app:startIconDrawable="@drawable/ic_twotone_edit_24"
-             >
+               <com.google.android.material.textfield.TextInputLayout
+                   android:id="@+id/bill_value_edittext"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   app:boxBackgroundColor="@color/background_default"
+                   app:hintEnabled="false"
+                   app:startIconTint="@color/primary_light"
+                   app:layout_constraintEnd_toEndOf="parent"
+                   app:layout_constraintStart_toStartOf="parent"
+                   app:layout_constraintTop_toBottomOf="@+id/textView"
+                   app:boxStrokeWidth="0dp"
+                   app:boxStrokeWidthFocused="0dp"
+                   >
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:hint="Description"
-                    android:textSize="15sp"
-                    android:textColor="@color/primary_light"
-                    android:textColorHint="@color/primary_light"
-                    android:paddingVertical="24dp"
-                    android:textAppearance="@style/BillManager.TextAppearance.Light"
-                    android:autoSizeStepGranularity="1sp"
-                    android:autoSizeTextType="uniform"
-                    android:maxLines="1" />
+                   <com.google.android.material.textfield.TextInputEditText
+                       style="@style/BillManager.TextAppearance.Bold"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_gravity="center_horizontal"
+                       android:hint="0.00"
+                       android:inputType="numberSigned|numberDecimal"
+                       android:textSize="50sp"
+                       app:autoSizeMaxTextSize="13sp"
+                       app:autoSizeMinTextSize="5sp"
+                       android:autoSizeStepGranularity="1sp"
+                       android:autoSizeTextType="uniform"
+                       android:maxLines="1"
+                       />
 
-            </com.google.android.material.textfield.TextInputLayout>
+               </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/bill_duedate_edittext"
-                style="@style/BillManager.Button.TextButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:startIconTint="@color/primary_light"
-                android:onClick="@{() -> viewmodel.startShowingDatePicker()}"
-                android:padding="16dp"
-                android:text="Due Date"
-                android:textAllCaps="false"
-                android:textSize="15sp"
-                app:iconPadding="12dp"
-                android:textAlignment="viewStart"
-                app:icon="@drawable/ic_twotone_calendar_month_24"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/bill_description_edittext"
-               />
+               <com.google.android.material.textfield.TextInputLayout
+                   android:id="@+id/bill_description_edittext"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   app:boxBackgroundColor="@color/background_default"
+                   app:hintEnabled="false"
+                   app:startIconTint="@color/primary_light"
+                   app:layout_constraintEnd_toEndOf="parent"
+                   app:layout_constraintStart_toStartOf="parent"
+                   app:layout_constraintTop_toBottomOf="@+id/bill_value_edittext"
+                   app:startIconDrawable="@drawable/ic_twotone_edit_24"
+                   >
 
-            <View
-                android:id="@+id/custom_view1"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:alpha="0.4"
-                android:background="@color/primary_variant"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/bill_duedate_edittext"
-               />
+                   <com.google.android.material.textfield.TextInputEditText
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:layout_gravity="center_horizontal"
+                       android:hint="Description"
+                       android:textSize="15sp"
+                       android:textColor="@color/primary_light"
+                       android:textColorHint="@color/primary_light"
+                       android:paddingVertical="24dp"
+                       android:textAppearance="@style/BillManager.TextAppearance.Light"
+                       android:autoSizeStepGranularity="1sp"
+                       android:autoSizeTextType="uniform"
+                       android:maxLines="1" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/bill_category_edittext"
-                style="@style/BillManager.Button.TextButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="@{() -> viewmodel.startShowingCategoriesDialog()}"
-                android:padding="16dp"
-                android:text="Categories"
-                android:textSize="15sp"
-                android:textAlignment="viewStart"
-                android:textAllCaps="false"
-                app:icon="@drawable/ic_twotone_category_24"
-                app:iconPadding="12dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/custom_view1"
-                app:startIconTint="@color/primary_light" />
+               </com.google.android.material.textfield.TextInputLayout>
 
-            <View
-                android:id="@+id/custom_view"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:alpha="0.4"
-                android:background="@color/primary_variant"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/bill_category_edittext"
-                />
+               <com.google.android.material.button.MaterialButton
+                   android:id="@+id/bill_duedate_edittext"
+                   style="@style/BillManager.Button.TextButton"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   app:startIconTint="@color/primary_light"
+                   android:onClick="@{() -> viewmodel.startShowingDatePicker()}"
+                   android:padding="16dp"
+                   android:text="Due Date"
+                   android:textAllCaps="false"
+                   android:textSize="15sp"
+                   app:iconPadding="12dp"
+                   android:textAlignment="viewStart"
+                   app:icon="@drawable/ic_twotone_calendar_month_24"
+                   app:layout_constraintEnd_toEndOf="parent"
+                   app:layout_constraintStart_toStartOf="parent"
+                   app:layout_constraintTop_toBottomOf="@+id/bill_description_edittext"
+                   />
 
-            <com.google.android.material.switchmaterial.SwitchMaterial
-                android:id="@+id/bill_rep_switch"
-                style="@style/Widget.App.Switch"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:drawableStart="@drawable/ic_twotone_event_repeat_24"
-                android:drawablePadding="16dp"
-                android:drawableTint="@color/primary_light"
-                android:padding="16dp"
-                android:text="Repeat"
-                android:textColor="@color/primary_light"
-                android:textSize="15sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/custom_view" />
+               <View
+                   android:id="@+id/custom_view1"
+                   android:layout_width="match_parent"
+                   android:layout_height="1dp"
+                   android:alpha="0.4"
+                   android:background="@color/primary_variant"
+                   app:layout_constraintEnd_toEndOf="parent"
+                   app:layout_constraintStart_toStartOf="parent"
+                   app:layout_constraintTop_toBottomOf="@+id/bill_duedate_edittext"
+                   />
 
-                <RadioGroup
-                    android:id="@+id/requency_group"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:background="@drawable/background_rounded_bottom_corners"
-                    android:paddingVertical="16dp"
-                    android:paddingHorizontal="32dp"
-                    app:layout_constraintBottom_toTopOf="@+id/add_new_bill"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/bill_rep_switch">
+               <com.google.android.material.button.MaterialButton
+                   android:id="@+id/bill_category_edittext"
+                   style="@style/BillManager.Button.TextButton"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:onClick="@{() -> viewmodel.startShowingCategoriesDialog()}"
+                   android:padding="16dp"
+                   android:text="Categories"
+                   android:textSize="15sp"
+                   android:textAlignment="viewStart"
+                   android:textAllCaps="false"
+                   app:icon="@drawable/ic_twotone_category_24"
+                   app:iconPadding="12dp"
+                   app:layout_constraintEnd_toEndOf="parent"
+                   app:layout_constraintStart_toStartOf="parent"
+                   app:layout_constraintTop_toBottomOf="@+id/custom_view1"
+                   app:startIconTint="@color/primary_light" />
 
-                    <RadioButton
-                        android:id="@+id/weekly_radio_button"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Weekly"/>
+               <View
+                   android:id="@+id/custom_view"
+                   android:layout_width="match_parent"
+                   android:layout_height="1dp"
+                   android:alpha="0.4"
+                   android:background="@color/primary_variant"
+                   app:layout_constraintEnd_toEndOf="parent"
+                   app:layout_constraintStart_toStartOf="parent"
+                   app:layout_constraintTop_toBottomOf="@+id/bill_category_edittext"
+                   />
 
-                    <RadioButton
-                        android:id="@+id/bi_monthly_radio_button"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Bi-monthly"/>
+               <com.google.android.material.switchmaterial.SwitchMaterial
+                   android:id="@+id/bill_rep_switch"
+                   style="@style/Widget.App.Switch"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:drawableStart="@drawable/ic_twotone_event_repeat_24"
+                   android:drawablePadding="16dp"
+                   android:drawableTint="@color/primary_light"
+                   android:padding="16dp"
+                   android:text="Repeat"
+                   android:textColor="@color/primary_light"
+                   android:textSize="15sp"
+                   app:layout_constraintEnd_toEndOf="parent"
+                   app:layout_constraintStart_toStartOf="parent"
+                   app:layout_constraintTop_toBottomOf="@+id/custom_view" />
 
-                    <RadioButton
-                        android:id="@+id/monthly_radio_button"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Monthly"/>
-                </RadioGroup>
+               <RadioGroup
+                   android:id="@+id/requency_group"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:visibility="gone"
+                   android:background="@drawable/background_rounded_bottom_corners"
+                   android:paddingVertical="16dp"
+                   android:paddingHorizontal="32dp"
+                   app:layout_constraintBottom_toTopOf="@+id/add_new_bill"
+                   app:layout_constraintEnd_toEndOf="parent"
+                   app:layout_constraintStart_toStartOf="parent"
+                   app:layout_constraintTop_toBottomOf="@+id/bill_rep_switch">
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/add_new_bill"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="@{() -> viewmodel.startSubmitting()}"
-                android:paddingLeft="50dp"
-                android:paddingTop="16dp"
-                android:paddingRight="50dp"
-                android:layout_marginTop="10dp"
-                android:paddingBottom="16dp"
-                android:text="Add Bill"
-                app:cornerRadius="35dp"
-                app:layout_constraintTop_toBottomOf="@id/requency_group"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                tools:layout_editor_absoluteY="448dp" />
+                   <RadioButton
+                       android:id="@+id/weekly_radio_button"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:text="Weekly"/>
+
+                   <RadioButton
+                       android:id="@+id/bi_monthly_radio_button"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:text="Bi-monthly"/>
+
+                   <RadioButton
+                       android:id="@+id/monthly_radio_button"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:text="Monthly"/>
+               </RadioGroup>
+
+               <com.google.android.material.button.MaterialButton
+                   android:id="@+id/add_new_bill"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginTop="10dp"
+                   android:onClick="@{() -> viewmodel.startSubmitting()}"
+                   android:paddingLeft="50dp"
+                   android:paddingTop="16dp"
+                   android:paddingRight="50dp"
+                   android:paddingBottom="16dp"
+                   android:text="Add Bill"
+                   app:cornerRadius="35dp"
+                   app:layout_constraintEnd_toEndOf="parent"
+                   app:layout_constraintStart_toStartOf="parent"
+                   app:layout_constraintTop_toBottomOf="@id/requency_group" />
+
+               <com.google.android.gms.ads.AdView
+                   android:id="@+id/adView3"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_centerHorizontal="true"
+                   android:layout_marginVertical="16dp"
+                   android:layout_marginTop="16dp"
+                   app:adSize="MEDIUM_RECTANGLE"
+                   app:adUnitId="ca-app-pub-3940256099942544/6300978111"
+                   app:layout_constraintBottom_toBottomOf="parent"
+                   app:layout_constraintEnd_toEndOf="parent"
+                   app:layout_constraintStart_toStartOf="parent"
+                   app:layout_constraintTop_toBottomOf="@+id/add_new_bill" />
 
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+           </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </FrameLayout>
+       </FrameLayout>
+   </androidx.core.widget.NestedScrollView>
 </layout>

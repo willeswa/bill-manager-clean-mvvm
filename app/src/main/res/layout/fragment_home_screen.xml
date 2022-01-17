@@ -15,14 +15,14 @@
         android:layout_height="match_parent"
         >
 
-        <ProgressBar
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
             android:indeterminate="true"
             android:elevation="10dp"
+            app:tint="@color/primary"
+            android:src="@drawable/ic_autodraw_1_15_2022"
             android:visibility="@{viewmodel.isLoading ? View.VISIBLE : View.INVISIBLE}"
-            style="@style/Widget.MaterialComponents.CircularProgressIndicator"
-            android:indeterminateTint="@color/primary_variant"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -109,8 +109,8 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="bottom|right"
                             android:layout_weight="2"
-                            android:visibility="@{viewmodel.unpaidBills.size > 0 ? View.VISIBLE : View.INVISIBLE}"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            android:visibility="@{viewmodel.unpaidBills.size > 0 ? View.VISIBLE : View.INVISIBLE}">
 
                             <TextView
                                 android:id="@+id/next_bill_title"
@@ -144,6 +144,18 @@
 
             </com.google.android.material.card.MaterialCardView>
 
+            <com.google.android.gms.ads.AdView
+                android:id="@+id/adView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+               android:layout_marginVertical="16dp"
+                app:adSize="BANNER"
+                app:adUnitId="ca-app-pub-3940256099942544/6300978111"
+                app:layout_constraintEnd_toStartOf="@+id/card_tab"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/materialCardView"></com.google.android.gms.ads.AdView>
+
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/card_tab"
                 android:layout_width="match_parent"
@@ -157,7 +169,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/materialCardView">
+                app:layout_constraintTop_toBottomOf="@+id/adView">
 
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"

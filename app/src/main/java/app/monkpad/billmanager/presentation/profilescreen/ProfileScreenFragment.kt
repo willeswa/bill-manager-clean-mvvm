@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.res.ResourcesCompat
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import app.monkpad.billmanager.R
 import app.monkpad.billmanager.databinding.FragmentProfileScreenBinding
@@ -16,9 +17,10 @@ import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.utils.PercentFormatter
+import com.google.android.gms.ads.AdRequest
 
 class ProfileScreenFragment : Fragment() {
-    private val viewModel: ProfileScreenViewModel by viewModels {
+    private val viewModel: ProfileScreenViewModel by activityViewModels {
         BillManagerViewModelFactory
     }
     private lateinit var binding: FragmentProfileScreenBinding
@@ -37,6 +39,9 @@ class ProfileScreenFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val overviewPie = binding.overviewPie
+
+        val adRequest: AdRequest = AdRequest.Builder().build()
+        binding.adView2.loadAd(adRequest)
 
         viewModel.bills.observe(viewLifecycleOwner, { bills ->
             overviewPie.invalidate()
