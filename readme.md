@@ -10,6 +10,7 @@ An android app to help you track your bills. It is built with the clean architec
 - [Testing](#testing)
 - [Related Posts](#posts)
 - [Demo](#demo)
+- [TODO](#todo)
 
 
 ## Architecture
@@ -41,8 +42,11 @@ The following Libraries are used in the application:
     - [Navigation Component](https://developer.android.com/guide/navigation/) - Elegantly handle navigation using the one Activity/multiple fragment pattern
     - [Data Binding](https://developer.android.com/topic/libraries/data-binding) - Used in combination with ViewModel to provide support for reactive views
     - [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) - Manages the UI state and provide the bridge between the UI and Domain layer.
-    
+    - [WorkManager](https://developer.android.com/topic/libraries/architecture/workmanager/basics) - Schedules repeating bills and reminds user when they are due.
 - [Hamcrest](http://hamcrest.org/) - Preferred assertion framework for tests to make our tests readable.
+- [Robolectric](http://robolectric.org/) - Simulates tests that rely on the android framework.
+- [Glide](https://github.com/bumptech/glide) - Preferred image loading library   
+- [MPAndroidChat](https://github.com/PhilJay/MPAndroidChart/tree/pie-images) - To display beautifully crafted chats
 
 ## Demo
 |<img src="art/home_screen_1.jpg" width=200/>|<img src="art/home_screen_2.jpg" width=200/>|<img src="art/profile_screen.jpg" width=200/>|<img src="art/edit_screen_1.jpg" width=200/>|
@@ -50,3 +54,7 @@ The following Libraries are used in the application:
 
 |<img src="art/create_screen.jpg" width=200/>|<img src="art/edit_screen_2.jpg" width=200/>|
 |:----:|:----:|
+
+## TODO
+This is the fist version of the app and a lot of things are not optimal.
+- This ReadMe
