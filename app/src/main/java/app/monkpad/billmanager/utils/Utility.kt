@@ -62,6 +62,7 @@ class Utility {
             return formatter.format(it)
         }
 
+
         fun getDatePicker(fragmentManager: FragmentManager): MaterialDatePicker<Long> {
             val picker =
                 MaterialDatePicker.Builder.datePicker()

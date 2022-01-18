@@ -34,7 +34,6 @@ class BillsLocalDataSource (context: Context){
     suspend fun updateBill(bill: Bill) =
         billsDao.updateBill(bill.asEntityModel())
 
-
+    suspend fun getBillsForScheduling(): List<Bill> =
+        billsDao.getBillsForScheduling().map { it.asDomainModel()}
 }
-
-

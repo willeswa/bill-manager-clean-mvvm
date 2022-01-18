@@ -1,23 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/group_customize"
-        android:title="Customize">
-        <menu>
-            <group >
-                <item
-                    android:id="@+id/drawer_action_settings"
-                    android:icon="@drawable/ic_twotone_settings_suggest_24"
-                    android:title="Preference" />
-                <item
-                    android:id="@+id/drawer_action_backup"
-                    android:icon="@drawable/ic_twotone_backup_24"
-                    android:title="Backup" />
-            </group>
-        </menu>
-
-    </item>
-    <item
         android:id="@+id/group_interact"
         android:title="Join the Movement">
         <menu>
@@ -38,21 +21,5 @@
         </menu>
 
     </item>
-    <item
-        android:id="@+id/group_support"
-        android:title="Support the Movement">
-        <menu>
-            <group >
-                <item
-                    android:id="@+id/drawer_action_hire"
-                    android:icon="@drawable/ic_twotone_work_24"
-                    android:title="Hire the Dev" />
-                <item
-                    android:id="@+id/drawer_action_buy_coffee"
-                    android:icon="@drawable/ic_twotone_coffee_24"
-                    android:title="Buy Me Coffee" />
-            </group>
-        </menu>
 
-    </item>
 </menu>
