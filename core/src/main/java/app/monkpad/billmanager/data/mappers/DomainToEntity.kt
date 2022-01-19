@@ -13,7 +13,9 @@ internal fun Bill.asEntityModel(): BillEntity =
         repeat = repeat,
         settled = settled,
         dueDate = dueDate,
-        categoryTitle = categoryName
+        categoryTitle = categoryName,
+        nextDueDate = nextDueDate,
+        paidOn = paidOn
     )
 
 internal fun Bill.asCreatedEntityModel(): BillEntity =
@@ -23,7 +25,9 @@ internal fun Bill.asCreatedEntityModel(): BillEntity =
         dueDate = dueDate,
         categoryTitle = categoryName,
         repeat = repeat,
-        settled = settled
+        settled = settled,
+        nextDueDate = nextDueDate,
+        paidOn = paidOn
     )
 
 
@@ -32,4 +36,3 @@ internal fun Category.asEntityModel(): CategoryEntity =
         title = name,
         logo = logo
     )
-

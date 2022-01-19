@@ -97,6 +97,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/next_due_date_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -122,6 +123,37 @@
                 android:text="TextView"
                 style="@style/BillManager.TextAppearance.Normal"
                 android:textSize="14sp" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/paid_on_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="8dp"
+            android:paddingLeft="16dp"
+            android:paddingBottom="8dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                app:srcCompat="@drawable/ic_twotone_check_circle_24"
+                tools:srcCompat="@drawable/ic_twotone_check_circle_24"
+                app:tint="@color/investment_green" />
+
+            <TextView
+                android:id="@+id/paid_on"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:textColor="@color/investment_green"
+                android:layout_marginLeft="16dp"
+                android:layout_gravity="center_vertical"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                style="@style/BillManager.TextAppearance.Normal"
+                android:textSize="14sp" />
+
         </LinearLayout>
 
         <Button

@@ -1,4 +1,4 @@
-package app.monkpad.billmanager.cronjob
+package app.monkpad.billmanager.framework.cronjob
 
 import android.app.NotificationManager
 import android.content.Context
@@ -71,6 +71,5 @@ class ScheduleRepeatingBillsWork(appContext: Context, workParams: WorkerParamete
         }
         return billsPastDue
     }
-
 
 }

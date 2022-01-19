@@ -151,7 +151,7 @@
                 android:layout_centerHorizontal="true"
                android:layout_marginVertical="16dp"
                 app:adSize="BANNER"
-                app:adUnitId="ca-app-pub-3940256099942544/6300978111"
+                app:adUnitId="@string/banner_ad_key"
                 app:layout_constraintEnd_toStartOf="@+id/card_tab"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/materialCardView"></com.google.android.gms.ads.AdView>
