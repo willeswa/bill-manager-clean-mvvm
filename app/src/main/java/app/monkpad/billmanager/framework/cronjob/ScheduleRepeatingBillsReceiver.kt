@@ -1,4 +1,4 @@
-package app.monkpad.billmanager.cronjob
+package app.monkpad.billmanager.framework.cronjob
 
 import android.content.BroadcastReceiver
 import android.content.Context

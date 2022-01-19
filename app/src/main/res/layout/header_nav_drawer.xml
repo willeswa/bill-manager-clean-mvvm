@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:gravity="end"
         android:padding="16dp"
-        android:text="v1.0.0"
+        android:text="@string/app_version"
         android:textColor="@color/primary_variant"
         android:textSize="18sp" />
 </LinearLayout>

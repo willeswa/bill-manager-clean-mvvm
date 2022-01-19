@@ -5,7 +5,6 @@ import app.monkpad.billmanager.domain.models.Category
 import app.monkpad.billmanager.framework.models.BillDTO
 import app.monkpad.billmanager.framework.models.CategoryDTO
 
-
 fun Bill.asPresentationModel(): BillDTO =
     BillDTO(
         id = id,
@@ -15,8 +14,9 @@ fun Bill.asPresentationModel(): BillDTO =
         categoryName = categoryName,
         repeat = repeat,
         paid = settled,
-        overdue = System.currentTimeMillis() > dueDate && !settled)
-
+        overdue = System.currentTimeMillis() > dueDate && !settled,
+        nextDueDate = nextDueDate,
+        paidOn = paidOn)
 
 fun Category.asPresentationModel(): CategoryDTO =
     CategoryDTO(

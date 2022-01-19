@@ -3,6 +3,7 @@ package app.monkpad.billmanager.utils
 import android.content.Context
 import android.text.Html
 import android.text.Spanned
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.core.text.HtmlCompat
@@ -77,10 +78,15 @@ class Utility {
             description: String,
             dueDate: Long,
             category: CategoryDTO,
-            repeat: Int?,
+            repeat: Long?,
             paid: Boolean
         ): BillDTO {
+            Log.i("DAYS", ""+repeat)
             val overdue = System.currentTimeMillis() > dueDate && !paid
+            var nextDueDate:Long? = null
+            if(repeat != null){
+                nextDueDate = (dueDate + (repeat * 86400000))
+            }
             return BillDTO(
                 0,
                 description,
@@ -89,7 +95,9 @@ class Utility {
                 category.name,
                 repeat,
                 paid,
-                overdue
+                overdue,
+                nextDueDate,
+                paidOn = null
             )
         }
 
@@ -130,13 +138,20 @@ class Utility {
             description: String,
             dueDate: Long,
             category: CategoryDTO,
-            repeat: Int?,
+            repeat: Long?,
         ): BillDTO {
             billToEdit.description = description
             billToEdit.amount = amount
             billToEdit.dueDate = dueDate
             billToEdit.categoryName = category.name
+
+            if(repeat != null){
+                billToEdit.nextDueDate = (dueDate + (repeat * 86400000))
+            } else {
+                billToEdit.nextDueDate = null
+            }
             billToEdit.repeat = repeat
+
 
             return billToEdit
         }
@@ -154,11 +169,11 @@ class Utility {
             return Html.fromHtml(text, HtmlCompat.FROM_HTML_MODE_LEGACY)
         }
 
-        fun whichButton(repeat: Int): Int {
+        fun whichButton(repeat: Long): Int {
             return when (repeat) {
-                7 -> R.id.weekly_radio_button
-                14 -> R.id.bi_monthly_radio_button
-                30 -> R.id.monthly_radio_button
+                7L -> R.id.weekly_radio_button
+                14L -> R.id.bi_monthly_radio_button
+                30L -> R.id.monthly_radio_button
                 else -> 0
             }
         }

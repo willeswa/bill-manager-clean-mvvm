@@ -5,7 +5,9 @@ data class Bill(
     val description: String,
     val amount: Float,
     val categoryName: String,
-    val dueDate: Long,
-    val repeat: Int?,
-    val settled: Boolean
+    var dueDate: Long,
+    val repeat: Long?,
+    val settled: Boolean,
+    val nextDueDate: Long?,
+    val paidOn: Long?
 )

@@ -8,7 +8,7 @@ import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
-import app.monkpad.billmanager.cronjob.ScheduleRepeatingBillsWork
+import app.monkpad.billmanager.framework.cronjob.ScheduleRepeatingBillsWork
 import app.monkpad.billmanager.data.local_data.datasource.BillsLocalDataSource
 import app.monkpad.billmanager.data.local_data.datasource.CategoryLocalDataSource
 import app.monkpad.billmanager.data.repositories.BillsRepository

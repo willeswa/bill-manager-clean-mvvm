@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.widget.PopupMenu
 import androidx.core.content.ContextCompat
@@ -61,6 +62,9 @@ class HomeScreenFragment : Fragment() {
                 val dialogCategoryTitle = findViewById<TextView>(R.id.bill_category_dialog)
                 val dialogValue = findViewById<TextView>(R.id.bill_value_dialog)
                 val dialogDueDate = findViewById<TextView>(R.id.due_date_dialog)
+                val dialogPaidOnContainer = findViewById<LinearLayout>(R.id.paid_on_container)
+                val dialogPaidOn = findViewById<TextView>(R.id.paid_on)
+                val dialogNextDueContainer = findViewById<LinearLayout>(R.id.next_due_date_container)
 
 
                 dialogEditMenu?.setOnClickListener {
@@ -89,22 +93,42 @@ class HomeScreenFragment : Fragment() {
                         Utility.formattedDecimal(billDTO.amount)
                     )
                 )
-                dialogDueDate?.text = Utility.formattedPaidStatus(
-                    resources.getString(
-                        R.string.unpaid_diag_string,
-                        Utility.formattedDate(billDTO.dueDate)
-                    )
-                )
+
 
                 if (billDTO.paid) {
                     togglePaid?.text = "Mark as pending"
+                    dialogPaidOnContainer?.visibility = View.VISIBLE
+                    dialogPaidOn?.text = Utility.formattedPaidStatus(
+                        resources.getString(
+                            R.string.paid_on_string,
+                            Utility.formattedDate(billDTO.paidOn)
+                        )
+                    )
                     togglePaid?.setTextColor(
                         ContextCompat.getColor(
                             requireContext(),
                             R.color.error_color
                         )
                     )
+                    if(billDTO.nextDueDate != null){
+                        dialogNextDueContainer?.visibility = View.VISIBLE
+                        dialogDueDate?.text = Utility.formattedPaidStatus(
+                            resources.getString(
+                                R.string.next_payment_string,
+                                Utility.formattedDate(billDTO.nextDueDate)
+                            )
+                        )
+                    } else {
+                        dialogNextDueContainer?.visibility = View.GONE
+                    }
                 } else {
+                    dialogDueDate?.text = Utility.formattedPaidStatus(
+                        resources.getString(
+                            R.string.unpaid_diag_string,
+                            Utility.formattedDate(billDTO.dueDate)
+                        )
+                    )
+                    dialogPaidOnContainer?.visibility = View.GONE
                     togglePaid?.text = "Mark as paid"
                     togglePaid?.setTextColor(
                         ContextCompat.getColor(
@@ -120,6 +144,7 @@ class HomeScreenFragment : Fragment() {
 
             togglePaid?.setOnClickListener { _ ->
                 billDTO.paid = !billDTO.paid
+                billDTO.paidOn = System.currentTimeMillis()
                 viewModel.onBillStatusToggled(billDTO)
                 dialog.dismiss()
             }

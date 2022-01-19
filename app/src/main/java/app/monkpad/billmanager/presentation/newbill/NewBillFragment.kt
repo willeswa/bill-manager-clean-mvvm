@@ -23,7 +23,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 class NewBillFragment : Fragment() {
     private lateinit var binding: FragmentNewBillBinding
     private val args: NewBillFragmentArgs by navArgs()
-    private var repeat: Int? = null
+    private var repeat: Long? = null
 
     private val viewModel: NewBillViewModel by activityViewModels{
         BillManagerViewModelFactory

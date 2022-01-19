@@ -13,7 +13,9 @@ fun BillDTO.asDomainModel(): Bill =
         dueDate = dueDate,
         repeat = repeat,
         settled = paid,
-        categoryName = categoryName
+        categoryName = categoryName,
+        nextDueDate = nextDueDate,
+        paidOn = paidOn
     )
 
 fun CategoryDTO.asDomainModel(): Category =
