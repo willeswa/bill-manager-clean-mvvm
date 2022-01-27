@@ -10,7 +10,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:name=".BillManagerApplication"
-        android:theme="@style/Theme.Billmanager">
+        android:theme="@style/Theme.Billmanager.Light">
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="${AD_MOB_API_KEY}"/>
@@ -26,6 +26,12 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+        <receiver android:name=".framework.cronjob.ScheduleRepeatingBillsReceiver" android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.LOCKED_BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

@@ -40,10 +40,11 @@
                         android:layout_height="?attr/actionBarSize"
                         android:background="@color/background_default"
                         android:textAlignment="viewEnd"
+                        app:titleTextAppearance="@style/BillManager.TextAppearance.Light.Cursive"
                         app:elevation="0dp"
                         app:navigationIconTint="@color/primary_variant"
                         app:navigationIcon="@drawable/ic_twotone_menu_24"
-                        app:titleTextColor="@color/primary" />
+                      />
                 </com.google.android.material.appbar.AppBarLayout>
 
                 <androidx.fragment.app.FragmentContainerView

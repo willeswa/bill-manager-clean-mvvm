@@ -13,6 +13,7 @@ import app.monkpad.billmanager.utils.Utility
 import app.monkpad.billmanager.utils.sendNotification
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import java.util.*
 
 class ScheduleRepeatingBillsWork(appContext: Context, workParams: WorkerParameters) :
         CoroutineWorker(appContext, workParams) {
@@ -28,9 +29,17 @@ class ScheduleRepeatingBillsWork(appContext: Context, workParams: WorkerParamete
         return try {
             withContext(Dispatchers.IO) {
 
-                val billsForScheduling = repository.getBillsForScheduling()
+                val allBills = repository.getBillsForScheduling()
 
-                val billsAlreadyPastDue = billsPastDue(billsForScheduling)
+                val billsAlreadyPastDue = billsPastDue(allBills)
+
+               if(Calendar.getInstance().get(Calendar.DAY_OF_MONTH) == 2){
+                   updateBillsIfSettled(allBills)
+                   notificationManager.sendNotification(
+                       applicationContext.getString(R.string.reset_bills_message),
+                       applicationContext
+                   )
+               }
 
                 withContext(Dispatchers.Main) {
                     if (billsAlreadyPastDue.size > 1) {
@@ -55,6 +64,20 @@ class ScheduleRepeatingBillsWork(appContext: Context, workParams: WorkerParamete
 
         }
 
+    }
+
+    private suspend fun updateBillsIfSettled(allBills: List<Bill>) {
+       withContext(Dispatchers.IO){
+           for(bill in allBills){
+               if(bill.settled && bill.repeat != null){
+                   bill.dueDate = bill.nextDueDate!!
+                   bill.settled = false
+                   repository.updateBill(bill)
+               } else if(bill.settled && bill.repeat == null){
+                   repository.deleteBill(bill)
+               }
+           }
+       }
     }
 
     private fun billsPastDue(billsForScheduling: List<Bill>): MutableList<Bill> {

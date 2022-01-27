@@ -25,6 +25,13 @@
         <item name="android:textColor">@color/primary</item>
         <item name="android:alpha">0.4</item>
     </style>
+    <style name="BillManager.TextAppearance.Light.Cursive" parent="TextAppearance.MaterialComponents.Headline5">
+        <item name="fontFamily">@font/roboto_light</item>
+        <item name="textAllCaps">false</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:textColor">@color/primary_variant</item>
+    </style>
     <style name="BillManager.TextAppearance.Normal" parent="TextAppearance.Design.Tab">
         <item name="fontFamily">@font/roboto</item>
         <item name="textAllCaps">false</item>

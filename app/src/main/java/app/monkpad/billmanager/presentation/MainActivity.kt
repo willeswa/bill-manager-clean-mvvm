@@ -1,5 +1,7 @@
 package app.monkpad.billmanager.presentation
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -9,13 +11,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import app.monkpad.billmanager.R
 import app.monkpad.billmanager.databinding.ActivityMainBinding
 import app.monkpad.billmanager.framework.BillManagerViewModelFactory
 import app.monkpad.billmanager.presentation.homescreen.HomeScreenViewModel
-import app.monkpad.billmanager.utils.Utility.Companion.styleToolbar
+import app.monkpad.billmanager.utils.Utility.styleToolbar
 import com.google.android.gms.ads.MobileAds
 
 class MainActivity : AppCompatActivity() {
@@ -25,7 +26,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        MobileAds.initialize(this){}
+        MobileAds.initialize(this) {}
 
         val binding: ActivityMainBinding = DataBindingUtil
             .setContentView(this, R.layout.activity_main)
@@ -71,6 +72,46 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
+        binding.navDrawer.setNavigationItemSelectedListener {
+            binding.mainDrawerLayout.close()
+            val playLink = getString(R.string.app_playstore_link)
+            when (it.itemId) {
+                R.id.drawer_action_rating -> {
+                    val intent = Intent(Intent.ACTION_VIEW,
+                        Uri.parse(playLink))
+                    if (intent.resolveActivity(packageManager) != null) {
+                        startActivity(intent)
+                    }
+                    true
+                }
+                R.id.drawer_action_share -> {
+                    val intent = Intent(Intent.ACTION_SEND)
+                    val title = getString(R.string.share_title)
+                    val text =
+                        "Checkout this new cool app I am using to track my bills \uD83D\uDE0A: $playLink"
+                    intent.putExtra(Intent.EXTRA_TEXT, text)
+                    intent.type = "text/plain"
+                    val chooser = Intent.createChooser(intent, title)
+                    if (intent.resolveActivity(packageManager) != null) {
+                        startActivity(chooser)
+                    }
+                    true
+                }
+                R.id.drawer_action_feedback -> {
+                    val subject = getString(R.string.feedback_title)
+                    val intent = Intent(Intent.ACTION_VIEW)
+                    val data = Uri.parse("mailto:gwiliez@gmail.com?subject=$subject")
+                    intent.data = data
+                    startActivity(intent)
+                    true
+                }
+                else -> {
+                    false
+                }
+            }
+
+        }
+
     }
 
     //using the actionBar (refer to line 33 c.) forces us to override
@@ -78,6 +119,5 @@ class MainActivity : AppCompatActivity() {
         navController.navigateUp()
         return super.onSupportNavigateUp()
     }
-
 
 }
