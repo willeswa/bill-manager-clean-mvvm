@@ -41,7 +41,7 @@ android {
         applicationId "app.monkpad.billmanager"
         minSdk 21
         targetSdk 31
-        versionCode 2
+        versionCode 3
         versionName "1.0.1"
 
         manifestPlaceholders["AD_MOB_API_KEY"] = System.getenv("AD_MOB_ID")
@@ -82,6 +82,7 @@ android {
 
 dependencies {
     implementation project(':core')
+    implementation 'com.google.android.play:core-ktx:1.8.1'
 
     def nav_version = "2.3.5"
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'

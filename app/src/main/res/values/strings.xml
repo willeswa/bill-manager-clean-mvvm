@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Ping myBill</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="app_name">Ping myBills</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="total_value_title">Total pending</string>
     <string name="total_value_placeholder">0.00</string>
@@ -18,8 +17,12 @@
     <string name="bill_notification_channel_id">BILL_CHANNEL_ID</string>
     <string name="notification_channel_name">Bills Manager Notifications</string>
     <string name="notification_title">It\'s bills time.</string>
-    <string name="many_notification_body_text">You are running behind on %d bills! Tap to view all of them!</string>
-    <string name="one_notification_body_text">Hey there, your bill, \"%s\" is past due. Tap here to view it.</string>
+    <string name="many_notification_body_text">Hey there! Just wanted to let you know that you are running behind on %d bills! Tap to view all of them!</string>
+    <string name="one_notification_body_text">Hey there! Quick reminder; your bill, \"%s\" is past due. Tap here to view it.</string>
     <string name="banner_ad_key">ca-app-pub-3940256099942544/6300978111</string>
     <string name="app_version">v1.0.1</string>
+    <string name="app_playstore_link">https://play.google.com/store/apps/details?id=app.monkpad.billmanager</string>
+    <string name="share_title">Share Ping myBills</string>
+    <string name="feedback_title">Ping myBills is great, but...</string>
+    <string name="reset_bills_message">Happy new month! All your paid bills have been reset and non-repeating ones deleted.</string>
 </resources>
