@@ -1,4 +1,4 @@
-[![Build Status](https://app.travis-ci.com/willeswa/bill-manager.svg?branch=dev)](https://app.travis-ci.com/willeswa/bill-manager) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/fbabd5e62190436f9a930e97510983de)](https://www.codacy.com/gh/willeswa/bill-manager/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=willeswa/bill-manager&amp;utm_campaign=Badge_Grade) [![codecov](https://codecov.io/gh/willeswa/bill-manager-clean-mvvm/branch/dev/graph/badge.svg?token=FB0MNZL3PL)](https://codecov.io/gh/willeswa/bill-manager-clean-mvvm)
+[![Build Status](https://app.travis-ci.com/willeswa/bill-manager-clean-mvvm.svg?branch=dev)](https://app.travis-ci.com/willeswa/bill-manager-clean-mvvm) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/fbabd5e62190436f9a930e97510983de)](https://www.codacy.com/gh/willeswa/bill-manager/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=willeswa/bill-manager&amp;utm_campaign=Badge_Grade) [![codecov](https://codecov.io/gh/willeswa/bill-manager-clean-mvvm/branch/dev/graph/badge.svg?token=FB0MNZL3PL)](https://codecov.io/gh/willeswa/bill-manager-clean-mvvm)
 
 # Ping myBills
 
@@ -56,5 +56,9 @@ The following Libraries are used in the application:
 |:----:|:----:|
 
 ## TODO
-This is the fist version of the app and a lot of things are not optimal.
-- This ReadMe
+- This is the fist version of the app and a lot of things are not optimal.
+- This ReadMe is WIP, obvs.
+
+<a href='https://play.google.com/store/apps/details?id=app.monkpad.billmanager'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' width='170'/></a>
+
+Google Play and the Google Play logo are trademarks of Google LLC.
