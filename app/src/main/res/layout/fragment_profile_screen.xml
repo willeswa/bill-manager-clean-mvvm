@@ -69,30 +69,15 @@
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
-                <com.google.android.gms.ads.AdView
-                    android:id="@+id/adView2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginVertical="16dp"
-                    android:layout_marginEnd="8dp"
-                    app:adSize="MEDIUM_RECTANGLE"
-                    app:adUnitId="@string/banner_ad_key"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/materialCardView2">
-
-                </com.google.android.gms.ads.AdView>
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/materialCardView3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
                     app:cardCornerRadius="25dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/adView2">
+                    app:layout_constraintTop_toBottomOf="@+id/materialCardView2">
 
                     <LinearLayout
                         android:layout_width="match_parent"

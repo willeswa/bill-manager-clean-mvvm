@@ -22,7 +22,7 @@ import app.monkpad.billmanager.utils.Utility
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.tabs.TabLayout
 
-import com.google.android.gms.ads.AdRequest
+//import com.google.android.gms.ads.AdRequest
 
 class HomeScreenFragment : Fragment() {
 
@@ -48,8 +48,8 @@ class HomeScreenFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adRequest: AdRequest = AdRequest.Builder().build()
-        binding.adView.loadAd(adRequest)
+//        val adRequest: AdRequest = AdRequest.Builder().build()
+//        binding.adView.loadAd(adRequest)
 
         var togglePaid: Button?
 
@@ -172,7 +172,7 @@ class HomeScreenFragment : Fragment() {
 
     private fun updateBillItem(billDTO: BillDTO): Boolean {
         dialog.dismiss()
-        val action = HomeScreenFragmentDirections.actionHomeNavToNewNav(billDTO.id)
+        val action = HomeScreenFragmentDirections.actionHomeNavToNewNav()
         findNavController().navigate(action)
         return true
     }

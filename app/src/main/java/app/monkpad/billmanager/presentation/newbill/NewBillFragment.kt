@@ -17,7 +17,7 @@ import app.monkpad.billmanager.framework.BillManagerViewModelFactory
 import app.monkpad.billmanager.framework.models.BillDTO
 import app.monkpad.billmanager.framework.models.CategoryDTO
 import app.monkpad.billmanager.utils.Utility
-import com.google.android.gms.ads.AdRequest
+//import com.google.android.gms.ads.AdRequest
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class NewBillFragment : Fragment() {
@@ -55,8 +55,8 @@ class NewBillFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adRequest: AdRequest = AdRequest.Builder().build()
-        binding.adView3.loadAd(adRequest)
+//        val adRequest: AdRequest = AdRequest.Builder().build()
+//        binding.adView3.loadAd(adRequest)
 
         var dueDate = 0L
         var category: CategoryDTO? = null
