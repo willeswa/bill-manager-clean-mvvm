@@ -11,9 +11,6 @@
         android:supportsRtl="true"
         android:name=".BillManagerApplication"
         android:theme="@style/Theme.Billmanager.Light">
-        <meta-data
-            android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="${AD_MOB_API_KEY}"/>
         <activity
             android:name=".presentation.MainActivity"
             android:exported="true">

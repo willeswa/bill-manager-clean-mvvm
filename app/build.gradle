@@ -2,7 +2,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
-    id("androidx.navigation.safeargs.kotlin")
+    id("androidx.navigation.safeargs")
     id 'jacoco'
 }
 
@@ -44,7 +44,7 @@ android {
         versionCode 3
         versionName "1.0.1"
 
-        manifestPlaceholders["AD_MOB_API_KEY"] = System.getenv("AD_MOB_ID")
+//        manifestPlaceholders["AD_MOB_API_KEY"] = System.getenv("AD_MOB_ID")
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -109,7 +109,7 @@ dependencies {
     implementation 'com.github.PhilJay:MPAndroidChart:v2.1.0'
 
     //Ads
-    implementation 'com.google.android.gms:play-services-ads:20.5.0'
+//    implementation 'com.google.android.gms:play-services-ads:20.5.0'
 
     //BackgroundWork
     implementation 'android.arch.work:work-runtime-ktx:1.0.1'

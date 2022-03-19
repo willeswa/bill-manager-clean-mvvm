@@ -17,7 +17,7 @@ import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.utils.PercentFormatter
-import com.google.android.gms.ads.AdRequest
+//import com.google.android.gms.ads.AdRequest
 
 class ProfileScreenFragment : Fragment() {
     private val viewModel: ProfileScreenViewModel by activityViewModels {
@@ -40,8 +40,8 @@ class ProfileScreenFragment : Fragment() {
 
         val overviewPie = binding.overviewPie
 
-        val adRequest: AdRequest = AdRequest.Builder().build()
-        binding.adView2.loadAd(adRequest)
+//        val adRequest: AdRequest = AdRequest.Builder().build()
+//        binding.adView2.loadAd(adRequest)
 
         viewModel.bills.observe(viewLifecycleOwner, { bills ->
             overviewPie.invalidate()

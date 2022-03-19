@@ -17,7 +17,7 @@ import app.monkpad.billmanager.databinding.ActivityMainBinding
 import app.monkpad.billmanager.framework.BillManagerViewModelFactory
 import app.monkpad.billmanager.presentation.homescreen.HomeScreenViewModel
 import app.monkpad.billmanager.utils.Utility.styleToolbar
-import com.google.android.gms.ads.MobileAds
+//import com.google.android.gms.ads.MobileAds
 
 class MainActivity : AppCompatActivity() {
 
@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        MobileAds.initialize(this) {}
+//        MobileAds.initialize(this) {}
 
         val binding: ActivityMainBinding = DataBindingUtil
             .setContentView(this, R.layout.activity_main)
