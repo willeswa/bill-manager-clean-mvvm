@@ -1,8 +1,9 @@
 package app.monkpad.billmanager.framework
 
 import app.monkpad.billmanager.domain.usecases.*
+import javax.inject.Inject
 
-class UseCases(
+class UseCases @Inject constructor(
     val addBillUseCase: AddBillUseCase,
     val getBillsUseCase: GetBillsUseCase,
     val addCategoryUseCase: AddCategoryUseCase,

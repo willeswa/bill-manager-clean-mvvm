@@ -6,17 +6,20 @@ import android.app.NotificationManager
 import android.os.Build
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.work.WorkManager
-import app.monkpad.billmanager.data.local_data.datasource.BillsLocalDataSource
-import app.monkpad.billmanager.data.local_data.datasource.CategoryLocalDataSource
 import app.monkpad.billmanager.data.repositories.BillsRepository
 import app.monkpad.billmanager.data.repositories.CategoriesRepository
 import app.monkpad.billmanager.domain.usecases.*
-import app.monkpad.billmanager.framework.BillManagerViewModelFactory
 import app.monkpad.billmanager.framework.UseCases
 import app.monkpad.billmanager.utils.Utility.scheduleRepeatingBills
+import dagger.hilt.android.HiltAndroidApp
+import javax.inject.Inject
 
+@HiltAndroidApp
 class BillManagerApplication : Application() {
     private lateinit var workManager: WorkManager
+
+    @Inject lateinit var billRepository: BillsRepository
+    @Inject lateinit var categoryRepository: CategoriesRepository
 
     override fun onCreate() {
         super.onCreate()
@@ -27,22 +30,6 @@ class BillManagerApplication : Application() {
             getString(R.string.notification_channel_name))
         scheduleRepeatingBills(workManager)
 
-        val billRepository = BillsRepository(BillsLocalDataSource(applicationContext))
-        val categoryRepository = CategoriesRepository(CategoryLocalDataSource(applicationContext))
-
-        BillManagerViewModelFactory.inject(
-            this,
-            UseCases(
-                AddBillUseCase(billRepository),
-                GetBillsUseCase(billRepository),
-                AddCategoryUseCase(categoryRepository),
-                GetCategoryUseCase(categoryRepository),
-                ToggleBillStatusUseCase(billRepository),
-                DeleteBillUseCase(billRepository),
-                GetBillUseCase(billRepository),
-                UpdateBillUseCase(billRepository)
-            )
-        )
 
     }
 

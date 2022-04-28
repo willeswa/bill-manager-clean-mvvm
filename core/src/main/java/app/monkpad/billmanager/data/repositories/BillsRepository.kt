@@ -4,8 +4,9 @@ import android.util.Log
 import app.monkpad.billmanager.data.local_data.datasource.BillsLocalDataSource
 import app.monkpad.billmanager.domain.models.Bill
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
-class BillsRepository(
+class BillsRepository @Inject constructor(
     private val localDataSource: BillsLocalDataSource
 ) {
     suspend fun addBill(bill: Bill) {

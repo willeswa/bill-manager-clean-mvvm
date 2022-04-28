@@ -8,9 +8,12 @@ import app.monkpad.billmanager.framework.BillManagerViewModel
 import app.monkpad.billmanager.framework.UseCases
 import app.monkpad.billmanager.framework.mappers.asPresentationModel
 import app.monkpad.billmanager.framework.models.BillDTO
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.map
+import javax.inject.Inject
 
-class ProfileScreenViewModel(
+@HiltViewModel
+class ProfileScreenViewModel @Inject constructor(
     application: Application, useCases: UseCases) : BillManagerViewModel(application, useCases) {
 
     val bills: LiveData<List<BillDTO>> = useCases.getBillsUseCase().map { billList ->

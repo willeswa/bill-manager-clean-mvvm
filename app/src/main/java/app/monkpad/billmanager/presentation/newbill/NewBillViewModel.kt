@@ -12,10 +12,13 @@ import app.monkpad.billmanager.framework.mappers.asDomainModel
 import app.monkpad.billmanager.framework.mappers.asPresentationModel
 import app.monkpad.billmanager.framework.models.BillDTO
 import app.monkpad.billmanager.framework.models.CategoryDTO
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.map
+import javax.inject.Inject
 
-class NewBillViewModel(application: Application, useCases: UseCases):
+@HiltViewModel
+class NewBillViewModel @Inject constructor(application: Application, useCases: UseCases):
     BillManagerViewModel(application, useCases) {
 
     private val _showDatePicker = MutableLiveData(false)

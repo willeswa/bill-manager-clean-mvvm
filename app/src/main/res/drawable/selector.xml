@@ -4,7 +4,7 @@
         android:drawable="@color/white"
         android:state_selected="true"/>
     <item
-        android:drawable="@color/primary_darker_background"
+        android:drawable="@color/primary_light"
         android:state_selected="false"
         />
 

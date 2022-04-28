@@ -45,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 app:cardBackgroundColor="@color/background_default"
-                app:cardCornerRadius="15dp"
+                app:cardCornerRadius="30dp"
                 app:cardElevation="2dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -56,14 +56,15 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="3dp"
                     android:background="@color/secondary"
-                    app:cardCornerRadius="15dp">
+                    app:cardCornerRadius="30dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@color/white"
+                        android:background="@color/primary"
                         android:orientation="horizontal"
-                        android:padding="32dp"
+                        android:paddingHorizontal="32dp"
+                        android:paddingVertical="40dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -84,13 +85,13 @@
                                 android:paddingBottom="4dp"
                                 android:text="@string/total_value_title"
                                 android:textAppearance="@style/BillManager.TextAppearance.Light.Faded"
-                                android:textColor="@color/primary"
+                                android:textColor="@color/white"
                                 android:textSize="14sp"
                                 tools:text="@string/total_value_title" />
 
                             <TextView
                                 android:id="@+id/bill_value"
-                                style="@style/BillManager.TextAppearance.Light"
+                                style="@style/BillManager.TextAppearance.Bold"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:autoSizeTextType="uniform"
@@ -98,7 +99,7 @@
                                 android:paddingTop="4dp"
                                 android:paddingEnd="20dp"
                                 android:paddingBottom="4dp"
-                                android:textColor="@color/primary"
+                                android:textColor="@color/white"
                                 android:textSize="30sp"
                                 app:setFormattedMoney="@{viewmodel.billValue}"
                                 tools:text="@string/total_value_placeholder" />
@@ -118,6 +119,7 @@
                                 android:layout_height="wrap_content"
                                 android:alpha="0.7"
                                 android:paddingTop="4dp"
+                                android:textColor="@color/white"
                                 android:paddingBottom="4dp"
                                 android:text="@string/next_bill_due_title"
                                 android:textAppearance="@style/BillManager.TextAppearance.Light"
@@ -135,7 +137,7 @@
                                 android:paddingTop="4dp"
                                 android:paddingBottom="4dp"
                                 android:textAppearance="@style/BillManager.TextAppearance.Light"
-                                android:textColor="@color/error_color"
+                                android:textColor="@color/food_maize"
                                 android:textSize="12sp"
                                 app:setDate="@{viewmodel.unpaidBills[0].dueDate}" />
                         </LinearLayout>
@@ -163,7 +165,7 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginRight="8dp"
-                app:cardBackgroundColor="@color/primary_darker_background"
+                app:cardBackgroundColor="@color/primary_light"
                 app:cardCornerRadius="25dp"
                 app:cardElevation="0dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -174,8 +176,7 @@
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="3dp"
-                    app:cardBackgroundColor="@color/white"
+                    android:layout_margin="1dp"
                     app:cardCornerRadius="25dp"
                     app:cardElevation="0dp">
 
@@ -188,6 +189,7 @@
                         app:tabMode="fixed"
                         app:tabSelectedTextColor="@color/primary"
                         app:tabTextAppearance="@style/BillManager.TextAppearance.Bold">
+
 
                         <com.google.android.material.tabs.TabItem
                             android:id="@+id/tab_unpaid"

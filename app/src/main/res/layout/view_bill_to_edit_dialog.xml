@@ -63,7 +63,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:text="TextView"
-                android:textColor="@color/primary_light"
                 style="@style/BillManager.TextAppearance.Normal"
                 android:textSize="14sp" />
         </LinearLayout>
@@ -91,7 +90,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:text="TextView"
-                android:textColor="@color/primary_light"
                 style="@style/BillManager.TextAppearance.Normal"
                  />
         </LinearLayout>
@@ -116,7 +114,6 @@
                 android:id="@+id/due_date_dialog"
                 android:layout_weight="1"
                 android:layout_width="0dp"
-                android:textColor="@color/primary_light"
                 android:layout_marginLeft="16dp"
                 android:layout_gravity="center_vertical"
                 android:layout_height="wrap_content"
