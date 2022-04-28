@@ -7,13 +7,16 @@ import app.monkpad.billmanager.framework.UseCases
 import app.monkpad.billmanager.framework.mappers.asDomainModel
 import app.monkpad.billmanager.framework.mappers.asPresentationModel
 import app.monkpad.billmanager.framework.models.BillDTO
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class HomeScreenViewModel(
+@HiltViewModel
+class HomeScreenViewModel @Inject constructor(
     application: Application,
     useCases: UseCases
 ) : BillManagerViewModel(application, useCases) {

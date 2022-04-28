@@ -5,8 +5,9 @@ import app.monkpad.billmanager.data.mappers.asDomainModel
 import app.monkpad.billmanager.domain.models.Category
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import javax.inject.Inject
 
-class CategoriesRepository(
+class CategoriesRepository @Inject constructor(
     private val localDataSource: CategoryLocalDataSource) {
 
 

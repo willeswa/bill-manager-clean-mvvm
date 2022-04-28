@@ -12,6 +12,12 @@ android {
         minSdk 21
         targetSdk 31
 
+        kapt {
+            arguments {
+                arg("room.schemaLocation", "$projectDir/schemas")
+            }
+        }
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -30,4 +36,7 @@ dependencies {
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation "androidx.room:room-ktx:$room_version"
     implementation "androidx.room:room-runtime:$room_version"
+    //Dependency Injection
+    implementation "com.google.dagger:hilt-android:2.41"
+    kapt "com.google.dagger:hilt-compiler:2.41"
 }

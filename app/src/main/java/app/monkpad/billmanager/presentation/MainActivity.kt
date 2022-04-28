@@ -14,11 +14,13 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import app.monkpad.billmanager.R
 import app.monkpad.billmanager.databinding.ActivityMainBinding
-import app.monkpad.billmanager.framework.BillManagerViewModelFactory
 import app.monkpad.billmanager.presentation.homescreen.HomeScreenViewModel
 import app.monkpad.billmanager.utils.Utility.styleToolbar
+import dagger.hilt.android.AndroidEntryPoint
+
 //import com.google.android.gms.ads.MobileAds
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var navController: NavController
@@ -44,8 +46,7 @@ class MainActivity : AppCompatActivity() {
         navController = navHostFragment.navController
 
         bottomNav.setupWithNavController(navController)
-        viewModel = ViewModelProvider(this,
-            BillManagerViewModelFactory).get(HomeScreenViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(HomeScreenViewModel::class.java)
 
         //The menu items have to have the same ids as the destinations
         //for the bottom nav to setupwithnavcontroller

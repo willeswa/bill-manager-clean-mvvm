@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="primary">#184153</color>
-    <color name="primary_light">#466c7f</color>
+    <color name="primary">#204A59</color>
+    <color name="primary_light">#a2bfc4</color>
     <color name="primary_variant">#001b2a</color>
     <color name="secondary">#00731b</color>
     <color name="secondary_light">#20a348</color>
     <color name="primary_darker_background">#e0e0e0</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="background_default">#F5F7FA</color>
+    <color name="background_default">#FEFEFE</color>
+    <color name="card_color">#F5F4F7</color>
     <color name="error_color">#B00020</color>
     <color name="real_estate_blue">#08A7DC</color>
     <color name="education_lilac">#C8A2C8</color>

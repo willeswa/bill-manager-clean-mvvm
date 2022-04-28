@@ -7,27 +7,25 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import app.monkpad.billmanager.R
 import app.monkpad.billmanager.databinding.FragmentNewBillBinding
-import app.monkpad.billmanager.framework.BillManagerViewModelFactory
 import app.monkpad.billmanager.framework.models.BillDTO
 import app.monkpad.billmanager.framework.models.CategoryDTO
 import app.monkpad.billmanager.utils.Utility
 //import com.google.android.gms.ads.AdRequest
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class NewBillFragment : Fragment() {
     private lateinit var binding: FragmentNewBillBinding
     private val args: NewBillFragmentArgs by navArgs()
     private var repeat: Long? = null
 
-    private val viewModel: NewBillViewModel by activityViewModels{
-        BillManagerViewModelFactory
-    }
+    private val viewModel: NewBillViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

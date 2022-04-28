@@ -2,8 +2,9 @@ package app.monkpad.billmanager.domain.usecases
 
 import app.monkpad.billmanager.data.repositories.CategoriesRepository
 import app.monkpad.billmanager.domain.models.Category
+import javax.inject.Inject
 
-class AddCategoryUseCase(private val repository: CategoriesRepository) {
+class AddCategoryUseCase @Inject constructor(private val repository: CategoriesRepository) {
 
     suspend operator fun invoke(category: Category) =
             repository.addCategory(category)

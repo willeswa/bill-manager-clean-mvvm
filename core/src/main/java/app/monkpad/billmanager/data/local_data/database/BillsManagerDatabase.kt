@@ -11,24 +11,14 @@ import app.monkpad.billmanager.data.local_data.models.CategoryEntity
 @Database(
     version = 1,
     entities = [CategoryEntity::class, BillEntity::class],
-    exportSchema = false)
+    exportSchema = true,
+    autoMigrations = [
+    AutoMigration(from = 1, to = 2)
+])
 abstract class BillsManagerDatabase : RoomDatabase() {
 
     companion object {
-        private lateinit var INSTANCE: BillsManagerDatabase
-
-        fun getDatabase(context: Context): BillsManagerDatabase {
-            synchronized(BillsManagerDatabase::class.java) {
-                if (!::INSTANCE.isInitialized) {
-                    INSTANCE = Room.databaseBuilder(
-                        context.applicationContext,
-                        BillsManagerDatabase::class.java,
-                        "bills_database"
-                    ).build()
-                }
-            }
-            return INSTANCE
-        }
+        const val DATABASE_NAME = "bills_database"
     }
 
     abstract fun billDao(): BillDao

@@ -15,23 +15,22 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import app.monkpad.billmanager.R
 import app.monkpad.billmanager.databinding.FragmentHomeScreenBinding
-import app.monkpad.billmanager.framework.BillManagerViewModelFactory
 import app.monkpad.billmanager.framework.models.BillDTO
 import app.monkpad.billmanager.presentation.interactions.BillClickListener
 import app.monkpad.billmanager.utils.Utility
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.tabs.TabLayout
+import dagger.hilt.android.AndroidEntryPoint
 
 //import com.google.android.gms.ads.AdRequest
 
+@AndroidEntryPoint
 class HomeScreenFragment : Fragment() {
 
     private lateinit var mainCollectionsAdapter: HomeScreenRecyclerAdapter
     private lateinit var binding: FragmentHomeScreenBinding
     private lateinit var dialog: BottomSheetDialog
-    private val viewModel: HomeScreenViewModel by activityViewModels {
-        BillManagerViewModelFactory
-    }
+    private val viewModel: HomeScreenViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
