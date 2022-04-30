@@ -7,10 +7,7 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.work.WorkManager
 import app.monkpad.billmanager.data.repositories.BillsRepository
-import app.monkpad.billmanager.data.repositories.CategoriesRepository
 import app.monkpad.billmanager.domain.usecases.*
-import app.monkpad.billmanager.framework.UseCases
-import app.monkpad.billmanager.utils.Utility.scheduleRepeatingBills
 import dagger.hilt.android.HiltAndroidApp
 import javax.inject.Inject
 
@@ -19,7 +16,6 @@ class BillManagerApplication : Application() {
     private lateinit var workManager: WorkManager
 
     @Inject lateinit var billRepository: BillsRepository
-    @Inject lateinit var categoryRepository: CategoriesRepository
 
     override fun onCreate() {
         super.onCreate()
@@ -28,7 +24,7 @@ class BillManagerApplication : Application() {
         workManager = WorkManager.getInstance(applicationContext)
         createChannel(getString(R.string.bill_notification_channel_id),
             getString(R.string.notification_channel_name))
-        scheduleRepeatingBills(workManager)
+//        scheduleRepeatingBills(workManager)
 
 
     }

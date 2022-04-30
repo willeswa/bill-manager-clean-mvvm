@@ -2,11 +2,14 @@ package app.monkpad.billmanager.presentation.homescreen
 
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import app.monkpad.billmanager.R
 import app.monkpad.billmanager.framework.models.BillDTO
+import app.monkpad.billmanager.framework.models.enums.Categories
 import app.monkpad.billmanager.utils.Utility
+import com.bumptech.glide.Glide
 
 @BindingAdapter("submitList")
 fun submitList(recyclerView: RecyclerView, list: List<BillDTO>?) {
@@ -28,13 +31,27 @@ fun setFormattedMoney(textView: TextView, value: Float) {
 }
 
 
-@BindingAdapter("setCategoryLogo")
-fun setCategoryLogo(imageView: ImageView, bill: BillDTO) {
-    val category = Utility.categories.find { it.name == bill.categoryName }
+@BindingAdapter("setCategoryIcon")
+fun setCategoryIcon(imageView: ImageView, categoryName: String){
     val context = imageView.context
-    val resources = context.resources
-    val resourceId = resources.getIdentifier(category?.logo, "drawable", context.packageName)
-    imageView.setImageResource(resourceId)
+    val category = Categories.values().find{categoryName == it.title}
+    category?.let {
+        Glide.with(imageView).load(category.drawable).into(imageView)
+        imageView.setColorFilter(ContextCompat.getColor(context, category.color), android.graphics.PorterDuff.Mode.SRC_IN);
+    }
+
+}
+
+@BindingAdapter("setDrawable")
+fun setDrawable(imageView: ImageView, drawable: Int) {
+    Glide.with(imageView).load(drawable).into(imageView)
+}
+
+
+@BindingAdapter("setTint")
+fun setTint(imageView: ImageView, color: Int) {
+    imageView.setColorFilter(ContextCompat.getColor(imageView.context, color),
+        android.graphics.PorterDuff.Mode.SRC_IN)
 }
 
 

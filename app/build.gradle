@@ -40,7 +40,7 @@ android {
 
     defaultConfig {
         applicationId "app.monkpad.billmanager"
-        minSdk 21
+        minSdk 23
         targetSdk 31
         versionCode 3
         versionName "1.0.1"

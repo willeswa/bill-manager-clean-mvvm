@@ -3,7 +3,6 @@ package app.monkpad.billmanager.framework.mappers
 import app.monkpad.billmanager.domain.models.Bill
 import app.monkpad.billmanager.domain.models.Category
 import app.monkpad.billmanager.framework.models.BillDTO
-import app.monkpad.billmanager.framework.models.CategoryDTO
 
 fun Bill.asPresentationModel(): BillDTO =
     BillDTO(
@@ -18,8 +17,3 @@ fun Bill.asPresentationModel(): BillDTO =
         nextDueDate = nextDueDate,
         paidOn = paidOn)
 
-fun Category.asPresentationModel(): CategoryDTO =
-    CategoryDTO(
-        logo = logo,
-        name = name
-    )

@@ -10,255 +10,261 @@
             type="app.monkpad.billmanager.presentation.homescreen.HomeScreenViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+   <androidx.core.widget.NestedScrollView
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       >
+       <androidx.constraintlayout.widget.ConstraintLayout
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           >
 
-        <ImageView
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:indeterminate="true"
-            android:elevation="10dp"
-            app:tint="@color/primary"
-            android:src="@drawable/ic_autodraw_1_15_2022"
-            android:visibility="@{viewmodel.isLoading ? View.VISIBLE : View.INVISIBLE}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+           <ImageView
+               android:layout_width="200dp"
+               android:layout_height="200dp"
+               android:indeterminate="true"
+               android:elevation="10dp"
+               app:tint="@color/primary"
+               android:src="@drawable/ic_autodraw_1_15_2022"
+               android:visibility="@{viewmodel.isLoading ? View.VISIBLE : View.INVISIBLE}"
+               app:layout_constraintBottom_toBottomOf="parent"
+               app:layout_constraintEnd_toEndOf="parent"
+               app:layout_constraintStart_toStartOf="parent"
+               app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/background_default"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:visibility="@{viewmodel.isLoading ? View.INVISIBLE : View.VISIBLE}">
+           <androidx.constraintlayout.widget.ConstraintLayout
+               android:id="@+id/constraintLayout"
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:background="@color/background_default"
+               app:layout_constraintBottom_toBottomOf="parent"
+               app:layout_constraintEnd_toEndOf="parent"
+               app:layout_constraintStart_toStartOf="parent"
+               app:layout_constraintTop_toTopOf="parent"
+               android:visibility="@{viewmodel.isLoading ? View.INVISIBLE : View.VISIBLE}">
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/materialCardView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                app:cardBackgroundColor="@color/background_default"
-                app:cardCornerRadius="30dp"
-                app:cardElevation="2dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+               <com.google.android.material.card.MaterialCardView
+                   android:id="@+id/materialCardView"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_margin="8dp"
+                   app:cardBackgroundColor="@color/background_default"
+                   app:cardCornerRadius="30dp"
+                   app:cardElevation="2dp"
+                   app:layout_constraintEnd_toEndOf="parent"
+                   app:layout_constraintStart_toStartOf="parent"
+                   app:layout_constraintTop_toTopOf="parent">
 
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="3dp"
-                    android:background="@color/secondary"
-                    app:cardCornerRadius="30dp">
+                   <com.google.android.material.card.MaterialCardView
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:layout_margin="3dp"
+                       android:background="@color/secondary"
+                       app:cardCornerRadius="30dp">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/primary"
-                        android:orientation="horizontal"
-                        android:paddingHorizontal="32dp"
-                        android:paddingVertical="40dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
+                       <LinearLayout
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:background="@color/primary"
+                           android:orientation="horizontal"
+                           android:paddingHorizontal="32dp"
+                           android:paddingVertical="40dp"
+                           app:layout_constraintBottom_toBottomOf="parent"
+                           app:layout_constraintEnd_toEndOf="parent"
+                           app:layout_constraintStart_toStartOf="parent"
+                           app:layout_constraintTop_toTopOf="parent">
 
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="4"
-                            android:orientation="vertical">
+                           <LinearLayout
+                               android:layout_width="0dp"
+                               android:layout_height="wrap_content"
+                               android:layout_weight="4"
+                               android:orientation="vertical">
 
-                            <TextView
-                                android:id="@+id/bill_value_title"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:alpha="0.7"
-                                android:paddingTop="4dp"
-                                android:paddingBottom="4dp"
-                                android:text="@string/total_value_title"
-                                android:textAppearance="@style/BillManager.TextAppearance.Light.Faded"
-                                android:textColor="@color/white"
-                                android:textSize="14sp"
-                                tools:text="@string/total_value_title" />
+                               <TextView
+                                   android:id="@+id/bill_value_title"
+                                   android:layout_width="match_parent"
+                                   android:layout_height="wrap_content"
+                                   android:alpha="0.7"
+                                   android:paddingTop="4dp"
+                                   android:paddingBottom="4dp"
+                                   android:text="@string/total_value_title"
+                                   android:textAppearance="@style/BillManager.TextAppearance.Light.Faded"
+                                   android:textColor="@color/white"
+                                   android:textSize="14sp"
+                                   tools:text="@string/total_value_title" />
 
-                            <TextView
-                                android:id="@+id/bill_value"
-                                style="@style/BillManager.TextAppearance.Bold"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:autoSizeTextType="uniform"
-                                android:maxLines="1"
-                                android:paddingTop="4dp"
-                                android:paddingEnd="20dp"
-                                android:paddingBottom="4dp"
-                                android:textColor="@color/white"
-                                android:textSize="30sp"
-                                app:setFormattedMoney="@{viewmodel.billValue}"
-                                tools:text="@string/total_value_placeholder" />
-                        </LinearLayout>
+                               <TextView
+                                   android:id="@+id/bill_value"
+                                   style="@style/BillManager.TextAppearance.Bold"
+                                   android:layout_width="match_parent"
+                                   android:layout_height="wrap_content"
+                                   android:autoSizeTextType="uniform"
+                                   android:maxLines="1"
+                                   android:paddingTop="4dp"
+                                   android:paddingEnd="20dp"
+                                   android:paddingBottom="4dp"
+                                   android:textColor="@color/white"
+                                   android:textSize="30sp"
+                                   app:setFormattedMoney="@{viewmodel.billValue}"
+                                   tools:text="@string/total_value_placeholder" />
+                           </LinearLayout>
 
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="bottom|right"
-                            android:layout_weight="2"
-                            android:orientation="vertical"
-                            android:visibility="@{viewmodel.unpaidBills.size > 0 ? View.VISIBLE : View.INVISIBLE}">
+                           <LinearLayout
+                               android:layout_width="0dp"
+                               android:layout_height="wrap_content"
+                               android:layout_gravity="bottom|right"
+                               android:layout_weight="2"
+                               android:orientation="vertical"
+                               android:visibility="@{viewmodel.unpaidBills.size > 0 ? View.VISIBLE : View.INVISIBLE}">
 
-                            <TextView
-                                android:id="@+id/next_bill_title"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:alpha="0.7"
-                                android:paddingTop="4dp"
-                                android:textColor="@color/white"
-                                android:paddingBottom="4dp"
-                                android:text="@string/next_bill_due_title"
-                                android:textAppearance="@style/BillManager.TextAppearance.Light"
-                                android:textSize="12sp" />
+                               <TextView
+                                   android:id="@+id/next_bill_title"
+                                   android:layout_width="match_parent"
+                                   android:layout_height="wrap_content"
+                                   android:alpha="0.7"
+                                   android:paddingTop="4dp"
+                                   android:textColor="@color/white"
+                                   android:paddingBottom="4dp"
+                                   android:text="@string/next_bill_due_title"
+                                   android:textAppearance="@style/BillManager.TextAppearance.Light"
+                                   android:textSize="12sp" />
 
-                            <TextView
-                                android:id="@+id/next_bill_due_date"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginEnd="23dp"
-                                android:layout_marginBottom="17dp"
-                                android:alpha="0.8"
-                                android:autoSizeTextType="uniform"
-                                android:maxLines="1"
-                                android:paddingTop="4dp"
-                                android:paddingBottom="4dp"
-                                android:textAppearance="@style/BillManager.TextAppearance.Light"
-                                android:textColor="@color/food_maize"
-                                android:textSize="12sp"
-                                app:setDate="@{viewmodel.unpaidBills[0].dueDate}" />
-                        </LinearLayout>
-                    </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
+                               <TextView
+                                   android:id="@+id/next_bill_due_date"
+                                   android:layout_width="match_parent"
+                                   android:layout_height="wrap_content"
+                                   android:layout_marginEnd="23dp"
+                                   android:layout_marginBottom="17dp"
+                                   android:alpha="0.8"
+                                   android:autoSizeTextType="uniform"
+                                   android:maxLines="1"
+                                   android:paddingTop="4dp"
+                                   android:paddingBottom="4dp"
+                                   android:textAppearance="@style/BillManager.TextAppearance.Light"
+                                   android:textColor="@color/food_maize"
+                                   android:textSize="12sp"
+                                   app:setDate="@{viewmodel.unpaidBills[0].dueDate}" />
+                           </LinearLayout>
+                       </LinearLayout>
+                   </com.google.android.material.card.MaterialCardView>
 
-            </com.google.android.material.card.MaterialCardView>
+               </com.google.android.material.card.MaterialCardView>
 
-<!--            <com.google.android.gms.ads.AdView-->
-<!--                android:id="@+id/adView"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_centerHorizontal="true"-->
-<!--               android:layout_marginVertical="16dp"-->
-<!--                app:adSize="BANNER"-->
-<!--                app:adUnitId="@string/banner_ad_key"-->
-<!--                app:layout_constraintEnd_toStartOf="@+id/card_tab"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/materialCardView"></com.google.android.gms.ads.AdView>-->
+               <!--            <com.google.android.gms.ads.AdView-->
+               <!--                android:id="@+id/adView"-->
+               <!--                android:layout_width="match_parent"-->
+               <!--                android:layout_height="wrap_content"-->
+               <!--                android:layout_centerHorizontal="true"-->
+               <!--               android:layout_marginVertical="16dp"-->
+               <!--                app:adSize="BANNER"-->
+               <!--                app:adUnitId="@string/banner_ad_key"-->
+               <!--                app:layout_constraintEnd_toStartOf="@+id/card_tab"-->
+               <!--                app:layout_constraintStart_toStartOf="parent"-->
+               <!--                app:layout_constraintTop_toBottomOf="@+id/materialCardView"></com.google.android.gms.ads.AdView>-->
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/card_tab"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginRight="8dp"
-                app:cardBackgroundColor="@color/primary_light"
-                app:cardCornerRadius="25dp"
-                app:cardElevation="0dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/materialCardView">
+               <com.google.android.material.card.MaterialCardView
+                   android:id="@+id/card_tab"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_marginLeft="8dp"
+                   android:layout_marginTop="16dp"
+                   android:layout_marginRight="8dp"
+                   app:cardBackgroundColor="@color/primary_light"
+                   app:cardCornerRadius="25dp"
+                   app:cardElevation="0dp"
+                   app:layout_constraintEnd_toEndOf="parent"
+                   app:layout_constraintHorizontal_bias="1.0"
+                   app:layout_constraintStart_toStartOf="parent"
+                   app:layout_constraintTop_toBottomOf="@+id/materialCardView">
 
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="1dp"
-                    app:cardCornerRadius="25dp"
-                    app:cardElevation="0dp">
+                   <com.google.android.material.card.MaterialCardView
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:layout_margin="1dp"
+                       app:cardCornerRadius="25dp"
+                       app:cardElevation="0dp">
 
-                    <com.google.android.material.tabs.TabLayout
-                        android:id="@+id/tabLayout"
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        app:tabBackground="@drawable/selector"
-                        app:tabIndicatorColor="@color/white"
-                        app:tabMode="fixed"
-                        app:tabSelectedTextColor="@color/primary"
-                        app:tabTextAppearance="@style/BillManager.TextAppearance.Bold">
-
-
-                        <com.google.android.material.tabs.TabItem
-                            android:id="@+id/tab_unpaid"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Unpaid"
-
-                            />
-
-                        <com.google.android.material.tabs.TabItem
-                            android:id="@+id/tab_paid"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Paid" />
-                    </com.google.android.material.tabs.TabLayout>
-
-                </com.google.android.material.card.MaterialCardView>
-            </com.google.android.material.card.MaterialCardView>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:orientation="vertical"
-                android:paddingLeft="32dp"
-                android:paddingTop="16dp"
-                android:paddingRight="32dp"
-                android:visibility="@{viewmodel.paidBills.size == 0 || viewmodel.unpaidBills.size == 0  ? View.VISIBLE : View.GONE}"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/card_tab">
-
-                <TextView
-                    android:id="@+id/textView2"
-                    style="@style/BillManager.TextAppearance.Bold"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:alpha="0.5"
-                    android:lineHeight="22dp"
-                    android:visibility="@{viewmodel.unpaidBills.size == 0 &amp;&amp; !viewmodel.showPaid ? View.VISIBLE : View.GONE}"
-                    app:setEmptyViewText="@{viewmodel.unpaidBills}" />
-
-                <TextView
-                    style="@style/BillManager.TextAppearance.Bold"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:alpha="0.5"
-                    android:lineHeight="22dp"
-                    android:visibility="@{viewmodel.paidBills.size == 0 &amp;&amp; viewmodel.showPaid ? View.VISIBLE : View.GONE}"
-                    app:setEmptyViewText="@{viewmodel.unpaidBills}" />
+                       <com.google.android.material.tabs.TabLayout
+                           android:id="@+id/tabLayout"
+                           android:layout_width="match_parent"
+                           android:layout_height="40dp"
+                           app:tabBackground="@drawable/selector"
+                           app:tabIndicatorColor="@color/white"
+                           app:tabMode="fixed"
+                           app:tabSelectedTextColor="@color/primary"
+                           app:tabTextAppearance="@style/BillManager.TextAppearance.Bold">
 
 
-            </LinearLayout>
+                           <com.google.android.material.tabs.TabItem
+                               android:id="@+id/tab_unpaid"
+                               android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"
+                               android:text="Unpaid"
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/main_screen_recycler"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginTop="16dp"
-                android:orientation="vertical"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/card_tab"
-                app:submitList="@{viewmodel.showPaid ? viewmodel.paidBills : viewmodel.unpaidBills }"
-                tools:listitem="@layout/bill_recycler_item" />
+                               />
+
+                           <com.google.android.material.tabs.TabItem
+                               android:id="@+id/tab_paid"
+                               android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"
+                               android:text="Paid" />
+                       </com.google.android.material.tabs.TabLayout>
+
+                   </com.google.android.material.card.MaterialCardView>
+               </com.google.android.material.card.MaterialCardView>
+
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="0dp"
+                   android:orientation="vertical"
+                   android:paddingLeft="32dp"
+                   android:paddingTop="16dp"
+                   android:paddingRight="32dp"
+                   android:visibility="@{viewmodel.paidBills.size == 0 || viewmodel.unpaidBills.size == 0  ? View.VISIBLE : View.GONE}"
+                   app:layout_constraintBottom_toBottomOf="parent"
+                   app:layout_constraintEnd_toEndOf="parent"
+                   app:layout_constraintStart_toStartOf="parent"
+                   app:layout_constraintTop_toBottomOf="@+id/card_tab">
+
+                   <TextView
+                       android:id="@+id/textView2"
+                       style="@style/BillManager.TextAppearance.Bold"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:alpha="0.5"
+                       android:lineHeight="22dp"
+                       android:visibility="@{viewmodel.unpaidBills.size == 0 &amp;&amp; !viewmodel.showPaid ? View.VISIBLE : View.GONE}"
+                       app:setEmptyViewText="@{viewmodel.unpaidBills}" />
+
+                   <TextView
+                       style="@style/BillManager.TextAppearance.Bold"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:alpha="0.5"
+                       android:lineHeight="22dp"
+                       android:visibility="@{viewmodel.paidBills.size == 0 &amp;&amp; viewmodel.showPaid ? View.VISIBLE : View.GONE}"
+                       app:setEmptyViewText="@{viewmodel.unpaidBills}" />
 
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+               </LinearLayout>
+
+               <androidx.recyclerview.widget.RecyclerView
+                   android:id="@+id/main_screen_recycler"
+                   android:layout_width="match_parent"
+                   android:nestedScrollingEnabled="false"
+                   android:layout_height="wrap_content"
+                   android:layout_marginTop="16dp"
+                   android:orientation="vertical"
+                   app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                   app:layout_constraintBottom_toBottomOf="parent"
+                   app:layout_constraintEnd_toEndOf="parent"
+                   app:layout_constraintStart_toStartOf="parent"
+                   app:layout_constraintTop_toBottomOf="@+id/card_tab"
+                   app:submitList="@{viewmodel.showPaid ? viewmodel.paidBills : viewmodel.unpaidBills }"
+                   tools:listitem="@layout/bill_recycler_item" />
+
+
+           </androidx.constraintlayout.widget.ConstraintLayout>
+       </androidx.constraintlayout.widget.ConstraintLayout>
+   </androidx.core.widget.NestedScrollView>
 </layout>

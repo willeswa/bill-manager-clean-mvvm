@@ -58,7 +58,7 @@ class ProfileScreenFragment : Fragment() {
                 resources.getColor(R.color.health_care_pink),
                 resources.getColor(R.color.personal_drab),
                 resources.getColor(R.color.investment_green),
-                resources.getColor(R.color.primary_light),
+                resources.getColor(R.color.housing),
                 resources.getColor(R.color.error_color),
                 resources.getColor(R.color.white)
             )

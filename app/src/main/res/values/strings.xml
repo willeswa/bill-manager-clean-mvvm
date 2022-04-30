@@ -25,4 +25,19 @@
     <string name="share_title">Share Ping myBills</string>
     <string name="feedback_title">Ping myBills is great, but...</string>
     <string name="reset_bills_message">Happy new month! All your paid bills have been reset and non-repeating ones deleted.</string>
+    <string name="title_health_care">Health</string>
+    <string name="title_utility">Utilities</string>
+    <string name="title_investment">Investment</string>
+    <string name="title_education">Education</string>
+    <string name="title_others">Others</string>
+    <string name="title_housing">Housing</string>
+    <string name="title_debt">Debt</string>
+    <string name="title_transport">Transport</string>
+    <string name="title_personal">Personal</string>
+    <string name="title_food">Food</string>
+    <string name="title_select_due_date">Select Due Date</string>
+    <string name="msg_invalid_date_error">Date already passed</string>
+    <string name="msg_error_empty_bill_value">Bill value cannot be empty</string>
+    <string name="msg_bill_value_zero">Bill value must be more than 0</string>
+    <string name="msg_empty_description_error">Description cannot be empty</string>
 </resources>

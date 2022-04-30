@@ -20,9 +20,6 @@ object DatabaseModule {
 
 
     @Provides
-    fun provideCategoriesDao(db: BillsManagerDatabase) = db.categoryDao()
-
-    @Provides
     @Singleton
     fun provideDatabase(@ApplicationContext context: Context): BillsManagerDatabase{
         return Room.databaseBuilder(

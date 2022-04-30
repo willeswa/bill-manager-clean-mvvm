@@ -12,9 +12,7 @@
         tools:layout="@layout/fragment_home_screen" >
         <action
             android:id="@+id/action_home_nav_to_new_nav"
-            app:destination="@id/new_nav"
-            app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@android:anim/fade_out" />
+            app:destination="@id/new_nav" />
     </fragment>
     <fragment
         android:id="@+id/new_nav"
@@ -23,8 +21,8 @@
         tools:layout="@layout/fragment_new_bill" >
         <argument
             android:name="billId"
-            app:argType="integer"
-            android:defaultValue="-1" />
+
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/savings_nav"

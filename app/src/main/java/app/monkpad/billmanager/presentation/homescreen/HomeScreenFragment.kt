@@ -1,5 +1,6 @@
 package app.monkpad.billmanager.presentation.homescreen
 
+import android.media.Image
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,9 +17,11 @@ import androidx.navigation.fragment.findNavController
 import app.monkpad.billmanager.R
 import app.monkpad.billmanager.databinding.FragmentHomeScreenBinding
 import app.monkpad.billmanager.framework.models.BillDTO
+import app.monkpad.billmanager.framework.models.enums.Categories
 import app.monkpad.billmanager.presentation.interactions.BillClickListener
 import app.monkpad.billmanager.utils.Utility
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.tabs.TabLayout
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -31,6 +34,9 @@ class HomeScreenFragment : Fragment() {
     private lateinit var binding: FragmentHomeScreenBinding
     private lateinit var dialog: BottomSheetDialog
     private val viewModel: HomeScreenViewModel by activityViewModels()
+    private val categories by lazy {
+        Categories.values()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,6 +48,11 @@ class HomeScreenFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
 
         return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        IS_NEW_BILL = true
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -56,14 +67,14 @@ class HomeScreenFragment : Fragment() {
             dialog = BottomSheetDialog(requireContext(), R.style.AppBottomSheetDialogTheme).apply {
                 setContentView(R.layout.view_bill_to_edit_dialog)
 
+                val category = categories.find { it.title == billDTO.categoryName }
+
                 val dialogEditMenu = findViewById<ImageView>(R.id.edit_bill_menu_flow_dialog)
                 val dialogTitle = findViewById<TextView>(R.id.bill_description_dialog)
-                val dialogCategoryTitle = findViewById<TextView>(R.id.bill_category_dialog)
+                val dialogCategoryTitle = findViewById<MaterialButton>(R.id.bill_category_dialog)
                 val dialogValue = findViewById<TextView>(R.id.bill_value_dialog)
                 val dialogDueDate = findViewById<TextView>(R.id.due_date_dialog)
-                val dialogPaidOnContainer = findViewById<LinearLayout>(R.id.paid_on_container)
-                val dialogPaidOn = findViewById<TextView>(R.id.paid_on)
-                val dialogNextDueContainer = findViewById<LinearLayout>(R.id.next_due_date_container)
+                val dialogPaidOn = findViewById<MaterialButton>(R.id.paid_on)
 
 
                 dialogEditMenu?.setOnClickListener {
@@ -83,9 +94,16 @@ class HomeScreenFragment : Fragment() {
 
                 togglePaid = findViewById(R.id.toggle_paid_dialog)
 
+                category?.let {
+                    dialogCategoryTitle?.apply {
+                        text = it.title
+                        icon = Utility.getDrawable(requireContext(), it.drawable)
+                        iconTint = Utility.getDrawableTint(requireContext(), it.color)
+                    }
+                }
+
 
                 dialogTitle?.text = billDTO.description
-                dialogCategoryTitle?.text = billDTO.categoryName
                 dialogValue?.text = Utility.formattedMoney(
                     resources.getString(
                         R.string.money_value_of_2,
@@ -96,7 +114,7 @@ class HomeScreenFragment : Fragment() {
 
                 if (billDTO.paid) {
                     togglePaid?.text = "Mark as pending"
-                    dialogPaidOnContainer?.visibility = View.VISIBLE
+
                     dialogPaidOn?.text = Utility.formattedPaidStatus(
                         resources.getString(
                             R.string.paid_on_string,
@@ -110,7 +128,6 @@ class HomeScreenFragment : Fragment() {
                         )
                     )
                     if(billDTO.nextDueDate != null){
-                        dialogNextDueContainer?.visibility = View.VISIBLE
                         dialogDueDate?.text = Utility.formattedPaidStatus(
                             resources.getString(
                                 R.string.next_payment_string,
@@ -118,7 +135,6 @@ class HomeScreenFragment : Fragment() {
                             )
                         )
                     } else {
-                        dialogNextDueContainer?.visibility = View.GONE
                     }
                 } else {
                     dialogDueDate?.text = Utility.formattedPaidStatus(
@@ -127,7 +143,7 @@ class HomeScreenFragment : Fragment() {
                             Utility.formattedDate(billDTO.dueDate)
                         )
                     )
-                    dialogPaidOnContainer?.visibility = View.GONE
+                    dialogPaidOn?.visibility = View.GONE
                     togglePaid?.text = "Mark as paid"
                     togglePaid?.setTextColor(
                         ContextCompat.getColor(
@@ -170,8 +186,9 @@ class HomeScreenFragment : Fragment() {
     }
 
     private fun updateBillItem(billDTO: BillDTO): Boolean {
+        IS_NEW_BILL = false
         dialog.dismiss()
-        val action = HomeScreenFragmentDirections.actionHomeNavToNewNav()
+        val action = HomeScreenFragmentDirections.actionHomeNavToNewNav(billDTO.id)
         findNavController().navigate(action)
         return true
     }
@@ -182,6 +199,10 @@ class HomeScreenFragment : Fragment() {
         val message = "Bill has been deleted!"
         Utility.notifyUser(message, requireContext())
         return true
+    }
+
+    companion object {
+        var IS_NEW_BILL = true
     }
 
 }

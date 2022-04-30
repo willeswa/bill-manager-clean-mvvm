@@ -6,10 +6,8 @@ import javax.inject.Inject
 class UseCases @Inject constructor(
     val addBillUseCase: AddBillUseCase,
     val getBillsUseCase: GetBillsUseCase,
-    val addCategoryUseCase: AddCategoryUseCase,
-    val getCategoryUseCase: GetCategoryUseCase,
     val toggleBillStatusUseCase: ToggleBillStatusUseCase,
     val deleteBillUseCase: DeleteBillUseCase,
     val getBillUseCase: GetBillUseCase,
-    val updateBillUseCase: UpdateBillUseCase
+    val updateBillUseCase: UpdateBillUseCase,
 )

@@ -30,6 +30,4 @@ class BillsRepository @Inject constructor(
     suspend fun updateBill(bill: Bill) =
         localDataSource.updateBill(bill)
 
-    suspend fun getBillsForScheduling(): List<Bill> =
-        localDataSource.getBillsForScheduling()
 }
