@@ -15,7 +15,6 @@ class CategoriesAdapter(private val callback: CategoryItemSelect): RecyclerView.
         CategoriesViewHolder.from(parent)
 
     override fun onBindViewHolder(holder: CategoriesViewHolder, position: Int) {
-        Log.d("TAG_CALLING", "here we did something")
        val item = categories[position]
         holder.bind(item, callback)
     }

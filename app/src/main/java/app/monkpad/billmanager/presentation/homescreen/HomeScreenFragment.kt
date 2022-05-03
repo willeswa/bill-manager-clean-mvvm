@@ -1,13 +1,12 @@
 package app.monkpad.billmanager.presentation.homescreen
 
-import android.media.Image
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.widget.PopupMenu
 import androidx.core.content.ContextCompat
@@ -18,6 +17,8 @@ import app.monkpad.billmanager.R
 import app.monkpad.billmanager.databinding.FragmentHomeScreenBinding
 import app.monkpad.billmanager.framework.models.BillDTO
 import app.monkpad.billmanager.framework.models.enums.Categories
+import app.monkpad.billmanager.framework.models.enums.Country
+import app.monkpad.billmanager.presentation.MainActivity
 import app.monkpad.billmanager.presentation.interactions.BillClickListener
 import app.monkpad.billmanager.utils.Utility
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -40,12 +41,13 @@ class HomeScreenFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
 
         binding = FragmentHomeScreenBinding.inflate(inflater, container, false)
 
         binding.lifecycleOwner = viewLifecycleOwner
+        viewModel.onHomeNavItemClicked()
 
         return binding.root
     }
@@ -60,6 +62,27 @@ class HomeScreenFragment : Fragment() {
 
 //        val adRequest: AdRequest = AdRequest.Builder().build()
 //        binding.adView.loadAd(adRequest)
+
+        val country = Country.values().find { it.isoCode == Utility.userCountry(requireContext()) }
+
+        country?.let {
+            binding.flag.text = it.flag
+            binding.countryname.text = Utility.getCurrency(requireContext())
+        }
+
+        viewModel.isLoading.observe(viewLifecycleOwner) {
+
+            val act = activity as? MainActivity
+
+            act?.apply {
+                if(it){
+                    getBottomNavbar().visibility = View.GONE
+                } else {
+                    getBottomNavbar().visibility = View.VISIBLE
+                }
+            }
+
+        }
 
         var togglePaid: Button?
 
@@ -104,16 +127,18 @@ class HomeScreenFragment : Fragment() {
 
 
                 dialogTitle?.text = billDTO.description
+                val currency = Utility.getCurrency(requireContext())
                 dialogValue?.text = Utility.formattedMoney(
                     resources.getString(
                         R.string.money_value_of_2,
+                        currency,
                         Utility.formattedDecimal(billDTO.amount)
                     )
                 )
 
 
                 if (billDTO.paid) {
-                    togglePaid?.text = "Mark as pending"
+                    togglePaid?.text = getString(R.string.title_mark_as_pending)
 
                     dialogPaidOn?.text = Utility.formattedPaidStatus(
                         resources.getString(
@@ -127,7 +152,7 @@ class HomeScreenFragment : Fragment() {
                             R.color.error_color
                         )
                     )
-                    if(billDTO.nextDueDate != null){
+                    if (billDTO.nextDueDate != null) {
                         dialogDueDate?.text = Utility.formattedPaidStatus(
                             resources.getString(
                                 R.string.next_payment_string,
@@ -135,6 +160,7 @@ class HomeScreenFragment : Fragment() {
                             )
                         )
                     } else {
+                        dialogDueDate?.visibility = View.GONE
                     }
                 } else {
                     dialogDueDate?.text = Utility.formattedPaidStatus(
@@ -144,7 +170,7 @@ class HomeScreenFragment : Fragment() {
                         )
                     )
                     dialogPaidOn?.visibility = View.GONE
-                    togglePaid?.text = "Mark as paid"
+                    togglePaid?.text = getString(R.string.title_mark_as_paid)
                     togglePaid?.setTextColor(
                         ContextCompat.getColor(
                             requireContext(),
@@ -162,6 +188,7 @@ class HomeScreenFragment : Fragment() {
                 billDTO.paidOn = System.currentTimeMillis()
                 viewModel.onBillStatusToggled(billDTO)
                 dialog.dismiss()
+                Utility.notifyUser("Successful!", requireView())
             }
         })
 
@@ -195,9 +222,14 @@ class HomeScreenFragment : Fragment() {
 
     private fun deletedItem(bill: BillDTO): Boolean {
         dialog.dismiss()
-        viewModel.onBillDeleted(bill)
-        val message = "Bill has been deleted!"
-        Utility.notifyUser(message, requireContext())
+        try {
+            viewModel.onBillDeleted(bill)
+            val message = getString(R.string.msg_deleted_succefully)
+            Utility.notifyUser(message, requireView())
+        } catch (e: Exception){
+            Log.d("deletion error", ""+e)
+        }
+
         return true
     }
 

@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import app.monkpad.billmanager.R
 import app.monkpad.billmanager.framework.models.BillDTO
 import app.monkpad.billmanager.framework.models.enums.Categories
+import app.monkpad.billmanager.framework.models.enums.Country
+import app.monkpad.billmanager.framework.models.enums.CountryManager
 import app.monkpad.billmanager.utils.Utility
 import com.bumptech.glide.Glide
 
@@ -22,13 +24,17 @@ fun submitList(recyclerView: RecyclerView, list: List<BillDTO>?) {
 @BindingAdapter("setFormattedMoney")
 fun setFormattedMoney(textView: TextView, value: Float) {
     val context = textView.context
-    textView.text = Utility.formattedMoney(
-        context.resources.getString(
-            R.string.money_value_of,
-            Utility.formattedDecimal(value)
+    val currency = Utility.getCurrency(textView.context)
+        textView.text = Utility.formattedMoney(
+            context.resources.getString(
+                R.string.money_value_of,
+                currency,
+                Utility.formattedDecimal(value)
+            )
         )
-    )
 }
+
+
 
 
 @BindingAdapter("setCategoryIcon")

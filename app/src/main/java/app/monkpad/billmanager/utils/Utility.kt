@@ -2,22 +2,25 @@ package app.monkpad.billmanager.utils
 
 import android.content.Context
 import android.content.res.ColorStateList
-import android.graphics.drawable.AdaptiveIconDrawable
 import android.graphics.drawable.Drawable
+import android.os.Build
 import android.text.Html
 import android.text.Spanned
 import android.util.Log
-import android.widget.Toast
+import android.view.View
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.text.HtmlCompat
 import androidx.fragment.app.FragmentManager
 import app.monkpad.billmanager.R
-import app.monkpad.billmanager.databinding.FragmentNewBillBinding
 import app.monkpad.billmanager.framework.models.BillDTO
-import app.monkpad.billmanager.presentation.newbill.NewBillViewModel
+import app.monkpad.billmanager.framework.models.enums.Country
+import app.monkpad.billmanager.framework.models.enums.CountryManager
 import com.google.android.material.datepicker.MaterialDatePicker
+import com.google.android.material.snackbar.Snackbar
 import java.text.DecimalFormat
 import java.text.SimpleDateFormat
+import java.util.*
+
 
 object Utility {
     const val BILL_REMINDER_JOB = "bill_reminder_job"
@@ -68,9 +71,11 @@ object Utility {
 
 
 
-    fun notifyUser(message: String, context: Context) {
-        val toast = Toast.makeText(context, message, Toast.LENGTH_LONG)
-        toast.show()
+    fun notifyUser(message: String, view: View) {
+        Snackbar.make(view, message, Snackbar.LENGTH_LONG)
+            .setBackgroundTint(view.context.resources.getColor(R.color.primary_light))
+            .setTextColor(view.context.resources.getColor(R.color.primary))
+            .show()
     }
 
     fun updateBill(
@@ -125,6 +130,29 @@ object Utility {
 
     fun getDrawableTint(context: Context, tint: Int): ColorStateList? {
         return  ResourcesCompat.getColorStateList(context.resources, tint, null)
+    }
+
+    fun userCountry(context: Context): String? {
+        return if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            context.resources.configuration.locales.get(0).country
+        } else {
+            context.resources.configuration.locale.country
+        }
+    }
+
+    fun getCurrency(context: Context): String? {
+        val country = userCountry(context)
+
+        return country?.let {
+          CountryManager.getCurrency("en", it)
+        }
+    }
+
+    fun getCurrencyName(context: Context): String? {
+        val country = userCountry(context)
+        return  country?.let {
+            CountryManager.getCurrencyName("en", it)
+        }
     }
 
 //    fun scheduleRepeatingBills(workManager: WorkManager) {

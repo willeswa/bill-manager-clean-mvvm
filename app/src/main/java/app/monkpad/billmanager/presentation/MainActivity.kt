@@ -1,16 +1,14 @@
 package app.monkpad.billmanager.presentation
 
-import android.content.Intent
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
+import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import app.monkpad.billmanager.R
 import app.monkpad.billmanager.databinding.ActivityMainBinding
@@ -22,13 +20,14 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var navController: NavController
+    private lateinit var binding: ActivityMainBinding
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 //        MobileAds.initialize(this) {}
 
-        val binding: ActivityMainBinding = DataBindingUtil
+        binding = DataBindingUtil
             .setContentView(this, R.layout.activity_main)
 
         val bottomNav = binding.bottomNavigationView
@@ -44,11 +43,6 @@ class MainActivity : AppCompatActivity() {
 
         bottomNav.setupWithNavController(navController)
 
-
-
-
-
-
     }
 
     //using the actionBar (refer to line 33 c.) forces us to override
@@ -56,5 +50,7 @@ class MainActivity : AppCompatActivity() {
         navController.navigateUp()
         return super.onSupportNavigateUp()
     }
+
+    fun getBottomNavbar() = binding.bottomNavigationView
 
 }

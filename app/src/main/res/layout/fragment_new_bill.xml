@@ -22,6 +22,7 @@
            tools:context=".presentation.NewBillFragment"
            >
 
+
            <LinearLayout
                style="@style/Widget.BillManager.Backdrop"
                android:layout_width="match_parent"

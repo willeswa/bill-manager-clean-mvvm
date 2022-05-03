@@ -43,7 +43,7 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/bill_category_dialog"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
+            style="@style/BillManager.Button.TextButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingHorizontal="10dp"
@@ -55,7 +55,7 @@
             android:textAllCaps="false"
             android:gravity="start"
             android:clickable="false"
-            app:iconPadding="16dp"
+            app:iconPadding="10dp"
             app:icon="@drawable/category_debt"
             />
 
@@ -89,7 +89,7 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/paid_on"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
+            style="@style/BillManager.Button.TextButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"

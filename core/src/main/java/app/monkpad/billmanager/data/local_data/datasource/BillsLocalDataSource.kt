@@ -36,6 +36,6 @@ class BillsLocalDataSource @Inject constructor(@ApplicationContext context: Cont
     suspend fun updateBill(bill: Bill) =
         billsDao.updateBill(bill.asEntityModel())
 
-    suspend fun getBillsForScheduling(): List<Bill> =
+    fun getBillsForScheduling(): List<Bill> =
         billsDao.getBillsForScheduling().map { it.asDomainModel()}
 }

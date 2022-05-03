@@ -134,7 +134,9 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/imageView2"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:setDate="@{bill.dueDate}"
+                    app:dueDate="@{bill.dueDate}"
+                    app:paid="@{bill.paid}"
+                    app:paidOn="@{bill.paidOn}"
                     />
             </androidx.constraintlayout.widget.ConstraintLayout>
 

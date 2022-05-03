@@ -40,11 +40,15 @@ class NewBillViewModel @Inject constructor(application: Application, useCases: U
     val showCategories: LiveData<Boolean> = _showCategories
 
 
-    private val _selectedCat = MutableLiveData<Categories>()
-    val selectedCat: LiveData<Categories> = _selectedCat
+    private val _selectedCat = MutableLiveData<Categories?>()
+    val selectedCat: LiveData<Categories?> = _selectedCat
 
     fun setSelectedCat(cat: Categories){
         _selectedCat.postValue(cat)
+    }
+
+    fun resetCategory(){
+        _selectedCat.postValue(null)
     }
 
     fun startShowingDatePicker(){

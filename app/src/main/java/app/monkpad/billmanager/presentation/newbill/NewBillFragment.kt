@@ -7,12 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import app.monkpad.billmanager.R
 import app.monkpad.billmanager.databinding.FragmentNewBillBinding
 import app.monkpad.billmanager.framework.models.BillDTO
 import app.monkpad.billmanager.framework.models.enums.Categories
+import app.monkpad.billmanager.presentation.MainActivity
 import app.monkpad.billmanager.presentation.bottom_sheets.CategoriesBottomSheet
 import app.monkpad.billmanager.presentation.homescreen.HomeScreenFragment
 import app.monkpad.billmanager.utils.Utility
@@ -48,6 +50,11 @@ class NewBillFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val act = activity as? MainActivity
+        act?.apply {
+            getBottomNavbar().visibility = View.GONE
+        }
 
 //        val adRequest: AdRequest = AdRequest.Builder().build()
 //        binding.adView3.loadAd(adRequest)
@@ -92,8 +99,10 @@ class NewBillFragment : Fragment() {
         }
 
         viewModel.selectedCat.observe(viewLifecycleOwner) {
-            bindCategory(it)
-            category = it
+           it.let {
+               bindCategory(it)
+               category = it
+           }
         }
 
         viewModel.submit.observe(viewLifecycleOwner) { readyToSubmit ->
@@ -103,8 +112,6 @@ class NewBillFragment : Fragment() {
                     val description = getBillDescription()
                     val dueDate = getDueDate()
                     val category = getCategory()
-
-
 
                     if (HomeScreenFragment.IS_NEW_BILL) {
                         val bill = Utility.makeBill(billValue,
@@ -126,7 +133,9 @@ class NewBillFragment : Fragment() {
                         }
                     }
                     viewModel.finishSubmitting()
+                    viewModel.resetCategory()
                     findNavController().popBackStack()
+                    Utility.notifyUser("Bill created successfully", requireView())
                 } catch (e: Exception) {
                     viewModel.setError(e.message)
                 }
@@ -134,12 +143,13 @@ class NewBillFragment : Fragment() {
         }
     }
 
+
     private fun getDueDate(): Long {
-        return dueDate ?: throw Exception("Please select a category")
+        return dueDate ?: throw Exception("Please set a valid due date")
     }
 
     private fun getCategory(): Categories {
-        return category ?: throw Exception("Please set a valid due date")
+        return category ?: throw Exception("Please select a category")
     }
 
 
@@ -210,6 +220,7 @@ class NewBillFragment : Fragment() {
         } else {
             binding.requencyGroup.clearCheck()
             binding.requencyGroup.visibility = View.GONE
+            frequency = null
         }
     }
 
@@ -218,8 +229,7 @@ class NewBillFragment : Fragment() {
         val switch = binding.billRepSwitch
         bill?.let {
             switch.isChecked = it.repeat != null
-            val category = categories.find { category -> category.title == it.categoryName }
-            this.category = category
+            category = categories.find { category -> category.title == it.categoryName }
             this.dueDate = it.dueDate
             this.frequency = it.repeat
 
