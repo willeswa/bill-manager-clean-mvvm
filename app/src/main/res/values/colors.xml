@@ -18,4 +18,8 @@
     <color name="utility_orange">#FFA500</color>
     <color name="health_care_pink">#FA8072</color>
     <color name="personal_drab">#967117</color>
+    <color name="transport">#BBCCD0</color>
+    <color name="debt">#FF0000</color>
+    <color name="housing">#792411</color>
+    <color name="others">#A2AB2F</color>
 </resources>

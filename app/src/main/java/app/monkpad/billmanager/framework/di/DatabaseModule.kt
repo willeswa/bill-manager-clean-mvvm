@@ -4,6 +4,8 @@ import android.content.Context
 import androidx.room.Room
 import app.monkpad.billmanager.data.local_data.database.BillDao
 import app.monkpad.billmanager.data.local_data.database.BillsManagerDatabase
+import app.monkpad.billmanager.data.local_data.datasource.BillsLocalDataSource
+import app.monkpad.billmanager.data.repositories.BillsRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -18,9 +20,11 @@ object DatabaseModule {
     @Provides
     fun provideBillsDao(db: BillsManagerDatabase) = db.billDao()
 
-
     @Provides
-    fun provideCategoriesDao(db: BillsManagerDatabase) = db.categoryDao()
+    fun provideRepository(localDataSource: BillsLocalDataSource): BillsRepository {
+        return BillsRepository(localDataSource)
+    }
+
 
     @Provides
     @Singleton

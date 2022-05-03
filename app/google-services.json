@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "625845343603",
+    "project_id": "ping-mybills",
+    "storage_bucket": "ping-mybills.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:625845343603:android:6e40cbe70efa8034c5a106",
+        "android_client_info": {
+          "package_name": "app.monkpad.billmanager"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "625845343603-490q3191amcje6gcvqloft4hnuuqfug3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "app.monkpad.billmanager",
+            "certificate_hash": "a36684590c760e60fbbda8fa34257aff09e15808"
+          }
+        },
+        {
+          "client_id": "625845343603-vm1ep7kcos6fr296t15v4a0fac77cmrn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAudQi1QmL0E9gzgYH7L8czgVbbNQVM42I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "625845343603-vm1ep7kcos6fr296t15v4a0fac77cmrn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

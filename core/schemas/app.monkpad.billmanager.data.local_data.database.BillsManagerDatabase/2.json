@@ -2,34 +2,8 @@
   "formatVersion": 1,
   "database": {
     "version": 2,
-    "identityHash": "fcd2b18560586d8e3e3b570a978ddcc6",
+    "identityHash": "fd6bf13e6e73704db7a54fdbbb646e62",
     "entities": [
-      {
-        "tableName": "categories_table",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`title` TEXT NOT NULL, `logo` TEXT NOT NULL, PRIMARY KEY(`title`))",
-        "fields": [
-          {
-            "fieldPath": "title",
-            "columnName": "title",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "logo",
-            "columnName": "logo",
-            "affinity": "TEXT",
-            "notNull": true
-          }
-        ],
-        "primaryKey": {
-          "columnNames": [
-            "title"
-          ],
-          "autoGenerate": false
-        },
-        "indices": [],
-        "foreignKeys": []
-      },
       {
         "tableName": "bills_table",
         "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `description` TEXT NOT NULL, `amount` REAL NOT NULL, `due_date` INTEGER NOT NULL, `category_title` TEXT NOT NULL, `repeat` INTEGER, `settled` INTEGER NOT NULL, `next_due_date` INTEGER, `paid_on` INTEGER)",
@@ -102,7 +76,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'fcd2b18560586d8e3e3b570a978ddcc6')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'fd6bf13e6e73704db7a54fdbbb646e62')"
     ]
   }
 }

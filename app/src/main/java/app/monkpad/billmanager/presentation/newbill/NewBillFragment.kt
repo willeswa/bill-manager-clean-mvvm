@@ -1,150 +1,256 @@
 package app.monkpad.billmanager.presentation.newbill
 
+//import com.google.android.gms.ads.AdRequest
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import app.monkpad.billmanager.R
 import app.monkpad.billmanager.databinding.FragmentNewBillBinding
 import app.monkpad.billmanager.framework.models.BillDTO
-import app.monkpad.billmanager.framework.models.CategoryDTO
+import app.monkpad.billmanager.framework.models.enums.Categories
+import app.monkpad.billmanager.presentation.MainActivity
+import app.monkpad.billmanager.presentation.bottom_sheets.CategoriesBottomSheet
+import app.monkpad.billmanager.presentation.homescreen.HomeScreenFragment
 import app.monkpad.billmanager.utils.Utility
-//import com.google.android.gms.ads.AdRequest
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class NewBillFragment : Fragment() {
     private lateinit var binding: FragmentNewBillBinding
-    private val args: NewBillFragmentArgs by navArgs()
-    private var repeat: Long? = null
+    private val categories by lazy {
+        Categories.values()
+    }
 
     private val viewModel: NewBillViewModel by activityViewModels()
 
+    private var dueDate: Long? = null
+    private var frequency: Long? = null
+    private var category: Categories? = null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
 
         binding = FragmentNewBillBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewmodel = viewModel
 
-
-        binding.billRepSwitch.setOnCheckedChangeListener{_, isChecked ->
-            if(isChecked){
-                binding.requencyGroup.visibility = View.VISIBLE
-            } else {
-                binding.requencyGroup.clearCheck()
-                repeat = null
-                binding.requencyGroup.visibility = View.GONE
-            }
-        }
+        observeCategories()
 
         return binding.root
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val act = activity as? MainActivity
+        act?.apply {
+            getBottomNavbar().visibility = View.GONE
+        }
+
 //        val adRequest: AdRequest = AdRequest.Builder().build()
 //        binding.adView3.loadAd(adRequest)
-
-        var dueDate = 0L
-        var category: CategoryDTO? = null
-        val paid = false
-
         var billToEdit: BillDTO? = null
 
-        if(args.billId != -1){
-
+        if (!HomeScreenFragment.IS_NEW_BILL) {
+            val args: NewBillFragmentArgs by navArgs()
+            val billId = args.billId
             binding.addNewBill.text = getString(R.string.update_bill_string)
-            viewModel.getBill(args.billId).observe(viewLifecycleOwner, {
+            viewModel.getBill(billId).observe(viewLifecycleOwner) {
+                populateUpdateBillFormWith(it)
                 billToEdit = it
-                populateFormWithBill(it)
-                dueDate = it.dueDate
-                category = Utility.categories.find{cat -> cat.name == it.categoryName}
-                binding.billRepSwitch.isChecked = it.repeat != null
-            })
+            }
+
         }
 
-        viewModel.showDatePicker.observe(viewLifecycleOwner, Observer(){yes ->
-            if(yes){
+        binding.billRepSwitch.setOnCheckedChangeListener { _, isChecked ->
+            isRepeatOn(isChecked)
+        }
+
+        binding.requencyGroup.setOnCheckedChangeListener { button, s ->
+            when (button.checkedRadioButtonId) {
+                R.id.monthly_radio_button -> frequency = 30
+                R.id.bi_monthly_radio_button -> frequency = 14
+                R.id.weekly_radio_button -> frequency = 7
+            }
+        }
+
+        viewModel.showDatePicker.observe(viewLifecycleOwner) { yes ->
+            if (yes) {
                 val picker = Utility.getDatePicker(requireActivity().supportFragmentManager)
-                Utility.listenOnDatePicker(binding, viewModel, picker)
+
+                picker.addOnPositiveButtonClickListener {
+                    dueDate = bindDate(it)
+                }
+
+                picker.addOnNegativeButtonClickListener {
+                    dueDate = bindDate()
+                }
             }
             viewModel.finishShowingDatePicker()
-        })
-
-        viewModel.dueDate.observe(viewLifecycleOwner, Observer(){timeInLong ->
-            if(timeInLong != null){ dueDate = timeInLong }
-        })
-
-        viewModel.showCategories.observe(viewLifecycleOwner, Observer(){yes ->
-            val categories = Utility.categories.map{it.name}.toTypedArray()
-            if(yes) {
-              MaterialAlertDialogBuilder(requireContext())
-                  .setTitle("Select a category")
-                  .setItems(categories){ _, picked ->
-                      binding.billCategoryEdittext.text = Utility.categories.elementAt(picked).name
-                      viewModel.setCategory(Utility.categories.elementAt(picked))
-                  }
-                  .show()
-            }
-            viewModel.finishShowingCategoriesDialog()
-        })
-
-        viewModel.category.observe(viewLifecycleOwner, Observer(){
-            category = it
-            viewModel.addCategoryIfDoesNotExist(it)
-        })
-
-        binding.requencyGroup.setOnCheckedChangeListener{button, _ ->
-            when(button.checkedRadioButtonId){
-                R.id.monthly_radio_button -> repeat = 30
-                R.id.bi_monthly_radio_button -> repeat = 14
-                R.id.weekly_radio_button -> repeat = 7
-            }
         }
 
-        viewModel.submit.observe(viewLifecycleOwner, Observer(){readyToSubmit ->
-            if(readyToSubmit){
-                val amount = binding.billValueEdittext.editText?.text.toString()
-                val description = binding.billDescriptionEdittext.editText?.text.toString()
+        viewModel.selectedCat.observe(viewLifecycleOwner) {
+           it.let {
+               bindCategory(it)
+               category = it
+           }
+        }
 
+        viewModel.submit.observe(viewLifecycleOwner) { readyToSubmit ->
+            if (readyToSubmit) {
                 try {
-                    Utility.validateEntries(dueDate, amount, description, category)
-                    if(args.billId == -1){
-                        val bill = Utility.makeBill(amount.toFloat(), description, dueDate, category!!, repeat, paid)
+                    val billValue = getBillValue()
+                    val description = getBillDescription()
+                    val dueDate = getDueDate()
+                    val category = getCategory()
+
+                    if (HomeScreenFragment.IS_NEW_BILL) {
+                        val bill = Utility.makeBill(billValue,
+                            description,
+                            dueDate,
+                            category.title,
+                            frequency,
+                            false)
                         viewModel.addNewBill(bill)
                     } else {
-                        val bill = Utility.updateBill(billToEdit!!, amount.toFloat(), description, dueDate, category!!, repeat)
-                        viewModel.updateBill(bill)
+                        billToEdit?.let {
+                            val bill = Utility.updateBill(it,
+                                billValue,
+                                description,
+                                dueDate,
+                                category.title,
+                                frequency)
+                            viewModel.updateBill(bill)
+                        }
                     }
                     viewModel.finishSubmitting()
+                    viewModel.resetCategory()
                     findNavController().popBackStack()
+                    Utility.notifyUser("Bill created successfully", requireView())
                 } catch (e: Exception) {
                     viewModel.setError(e.message)
                 }
             }
-        })
+        }
     }
 
-    private fun populateFormWithBill(bill: BillDTO?) {
-        binding.billValueEdittext.editText?.setText(bill?.amount.toString())
-        binding.billDescriptionEdittext.editText?.setText(bill?.description)
-        binding.billDuedateEdittext.text = Utility.formattedDate(bill?.dueDate)
-        binding.billCategoryEdittext.text = bill?.categoryName
-        Log.i("BILL_REPEAT", ""+bill?.repeat)
-        if(bill?.repeat != null){
-            binding.requencyGroup.visibility = View.VISIBLE
-            binding.requencyGroup.check(Utility.whichButton(bill?.repeat!!))
+
+    private fun getDueDate(): Long {
+        return dueDate ?: throw Exception("Please set a valid due date")
+    }
+
+    private fun getCategory(): Categories {
+        return category ?: throw Exception("Please select a category")
+    }
+
+
+    @Throws(Exception::class)
+    private fun getBillDescription(): String {
+        val description = binding.billDescriptionEdittext.editText?.text.toString()
+        return description.ifEmpty {
+            throw Exception(getString(R.string.msg_empty_description_error))
         }
+    }
+
+    @Throws(Exception::class)
+    private fun getBillValue(): Float {
+        val billValue = binding.billValueEdittext.editText?.text.toString()
+        return if (billValue.isEmpty()) {
+            throw  Exception(getString(R.string.msg_error_empty_bill_value))
+        } else {
+            val billValueFloat = billValue.toFloat()
+            if (billValueFloat <= 0) {
+                throw Exception(getString(R.string.msg_bill_value_zero))
+            } else {
+                billValueFloat
+            }
+        }
+    }
+
+    private fun bindCategory(it: Categories?) {
+        it?.let {
+            binding.billCategoryEdittext.icon = Utility.getDrawable(requireContext(), it.drawable)
+            binding.billCategoryEdittext.text = it.title
+            binding.billCategoryEdittext.iconTint =
+                Utility.getDrawableTint(requireContext(), it.color)
+        }
+    }
+
+    private fun bindDate(it: Long? = null): Long? {
+        return if (it == null) {
+            binding.billDuedateEdittext.text = getString(R.string.title_select_due_date)
+            null
+        } else {
+            if (it < System.currentTimeMillis()) {
+                viewModel.setError(getString(R.string.msg_invalid_date_error))
+                binding.billDuedateEdittext.text = getString(R.string.msg_invalid_date_error)
+                null
+            } else {
+                binding.billDuedateEdittext.text = Utility.formattedDate(it)
+                it
+            }
+        }
+
+    }
+
+
+    private fun observeCategories() {
+        viewModel.showCategories.observe(viewLifecycleOwner) { yes ->
+            if (yes) {
+                val categoriesModal = CategoriesBottomSheet()
+                activity?.supportFragmentManager?.let { categoriesModal.show(it, "") }
+            }
+            viewModel.finishShowingCategoriesDialog()
+        }
+    }
+
+
+    private fun isRepeatOn(isChecked: Boolean) {
+        if (isChecked) {
+            binding.requencyGroup.visibility = View.VISIBLE
+        } else {
+            binding.requencyGroup.clearCheck()
+            binding.requencyGroup.visibility = View.GONE
+            frequency = null
+        }
+    }
+
+    private fun populateUpdateBillFormWith(bill: BillDTO?) {
+
+        val switch = binding.billRepSwitch
+        bill?.let {
+            switch.isChecked = it.repeat != null
+            category = categories.find { category -> category.title == it.categoryName }
+            this.dueDate = it.dueDate
+            this.frequency = it.repeat
+
+            if (switch.isChecked) {
+                binding.requencyGroup.visibility = View.VISIBLE
+                binding.requencyGroup.check(Utility.whichButton(it.repeat))
+            }
+
+            binding.billValueEdittext.editText?.setText(it.amount.toString())
+            binding.billDescriptionEdittext.editText?.setText(it.description)
+            binding.billDuedateEdittext.text = Utility.formattedDate(it.dueDate)
+
+            category?.let { cat ->
+                binding.billCategoryEdittext.text = cat.title
+                binding.billCategoryEdittext.icon =
+                    Utility.getDrawable(requireContext(), cat.drawable)
+                binding.billCategoryEdittext.iconTint =
+                    Utility.getDrawableTint(requireContext(), cat.color)
+            }
+
+        }
+
     }
 }

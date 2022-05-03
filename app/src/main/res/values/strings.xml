@@ -7,8 +7,8 @@
     <string name="next_bill_due_date_value">May 29, 2022</string>
     <string name="next_bill_due_title">Next bill on</string>
     <string name="update_bill_string">Update Bill</string>
-    <string name="money_value_of"> &lt;small>ksh. &lt;/small> &lt;big> %s &lt;/big></string>
-    <string name="money_value_of_2">KSh. %s</string>
+    <string name="money_value_of"> &lt;small>%1$s. &lt;/small> &lt;big> %2$s &lt;/big></string>
+    <string name="money_value_of_2">%1$s. %2$s</string>
     <string name="unpaid_diag_string">To be paid before %s</string>
     <string name="paid_diag_string">To be paid before %s</string>
     <string name="next_payment_string">Next payment due on %s</string>
@@ -25,4 +25,26 @@
     <string name="share_title">Share Ping myBills</string>
     <string name="feedback_title">Ping myBills is great, but...</string>
     <string name="reset_bills_message">Happy new month! All your paid bills have been reset and non-repeating ones deleted.</string>
+    <string name="title_health_care">Health</string>
+    <string name="title_utility">Utilities</string>
+    <string name="title_investment">Investment</string>
+    <string name="title_education">Education</string>
+    <string name="title_others">Others</string>
+    <string name="title_housing">Housing</string>
+    <string name="title_debt">Debt</string>
+    <string name="title_transport">Transport</string>
+    <string name="title_personal">Personal</string>
+    <string name="title_food">Food</string>
+    <string name="title_select_due_date">Select Due Date</string>
+    <string name="msg_invalid_date_error">Date already passed</string>
+    <string name="msg_error_empty_bill_value">Bill value cannot be empty</string>
+    <string name="msg_bill_value_zero">Bill value must be more than 0</string>
+    <string name="msg_empty_description_error">Description cannot be empty</string>
+    <string name="msg_notification_many">"You have %$s bills pending. Click here to check them out!"</string>
+    <string name="title_mark_as_pending">Mark as pending</string>
+    <string name="msg_deleted_succefully">Bill has been deleted!</string>
+    <string name="title_mark_as_paid">Mark as paid</string>
+    <string name="title_unpaid">Unpaid</string>
+    <string name="title_paid">Paid</string>
+    <string name="msg_notification_reset">Happy new month champ! We have reset all your paid bills from last month. All non-repeating ones have been deleted.</string>
 </resources>

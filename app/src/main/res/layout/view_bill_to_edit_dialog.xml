@@ -10,9 +10,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/background_rounded_corner_shape"
         android:orientation="vertical"
-        android:padding="16dp"
-        android:background="@drawable/background_rounded_corner_shape">
+        android:padding="16dp">
 
 
         <LinearLayout
@@ -22,12 +22,12 @@
 
             <TextView
                 android:id="@+id/bill_description_dialog"
+                style="@style/BillManager.TextAppearance.Bold"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:padding="16dp"
                 android:text="TextView"
-                style="@style/BillManager.TextAppearance.Bold"
                 android:textSize="18sp" />
 
             <ImageView
@@ -40,118 +40,72 @@
                 tools:srcCompat="@drawable/ic_twotone_more_vert_24" />
         </LinearLayout>
 
-        <LinearLayout
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/bill_category_dialog"
+            style="@style/BillManager.Button.TextButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingTop="8dp"
-            android:paddingLeft="16dp"
-            android:paddingBottom="8dp">
+            android:paddingHorizontal="10dp"
+            android:textColor="@color/primary"
+            android:paddingVertical="8dp"
+            android:layout_gravity="center_vertical"
+            android:text="TextView"
+            android:textSize="14sp"
+            android:textAllCaps="false"
+            android:gravity="start"
+            android:clickable="false"
+            app:iconPadding="10dp"
+            app:icon="@drawable/category_debt"
+            />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                app:srcCompat="@drawable/ic_twotone_category_24"
-                tools:srcCompat="@drawable/ic_twotone_category_24" />
 
-            <TextView
-                android:id="@+id/bill_category_dialog"
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_marginLeft="16dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:text="TextView"
-                style="@style/BillManager.TextAppearance.Normal"
-                android:textSize="14sp" />
-        </LinearLayout>
+        <TextView
+            android:id="@+id/bill_value_dialog"
+            style="@style/BillManager.TextAppearance.Normal"
+            android:layout_width="match_parent"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="8dp"
+            android:drawablePadding="10dp"
+            android:drawableStart="@drawable/category_debt"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="TextView" />
 
-        <LinearLayout
+
+        <TextView
+            android:id="@+id/due_date_dialog"
+            style="@style/BillManager.TextAppearance.Normal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingTop="8dp"
-            android:paddingLeft="16dp"
-            android:paddingBottom="8dp">
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="8dp"
+            android:drawablePadding="10dp"
+            android:drawableStart="@drawable/ic_twotone_calendar_month_24"
+            android:layout_gravity="center_vertical"
+            android:text="TextView"
+            android:textSize="14sp" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                app:srcCompat="@drawable/category_debt"
-                tools:srcCompat="@drawable/category_debt" />
 
-            <TextView
-                android:id="@+id/bill_value_dialog"
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_marginLeft="16dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:text="TextView"
-                style="@style/BillManager.TextAppearance.Normal"
-                 />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/next_due_date_container"
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/paid_on"
+            style="@style/BillManager.Button.TextButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingTop="8dp"
-            android:paddingLeft="16dp"
-            android:paddingBottom="8dp">
+            android:layout_gravity="center_vertical"
+            android:text="TextView"
+            android:gravity="start"
+            android:clickable="false"
+            app:iconPadding="10dp"
+            android:textAllCaps="false"
+            app:iconTint="@color/investment_green"
+            android:drawablePadding="16dp"
+            app:icon="@drawable/ic_twotone_check_circle_24"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="8dp"
+            android:textColor="@color/investment_green"
+            android:textSize="14sp" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                app:srcCompat="@drawable/ic_twotone_history_toggle_off_24"
-                tools:srcCompat="@drawable/ic_twotone_history_toggle_off_24" />
-
-            <TextView
-                android:id="@+id/due_date_dialog"
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_marginLeft="16dp"
-                android:layout_gravity="center_vertical"
-                android:layout_height="wrap_content"
-                android:text="TextView"
-                style="@style/BillManager.TextAppearance.Normal"
-                android:textSize="14sp" />
-
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/paid_on_container"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingTop="8dp"
-            android:paddingLeft="16dp"
-            android:paddingBottom="8dp">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                app:srcCompat="@drawable/ic_twotone_check_circle_24"
-                tools:srcCompat="@drawable/ic_twotone_check_circle_24"
-                app:tint="@color/investment_green" />
-
-            <TextView
-                android:id="@+id/paid_on"
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:textColor="@color/investment_green"
-                android:layout_marginLeft="16dp"
-                android:layout_gravity="center_vertical"
-                android:layout_height="wrap_content"
-                android:text="TextView"
-                style="@style/BillManager.TextAppearance.Normal"
-                android:textSize="14sp" />
-
-        </LinearLayout>
 
         <Button
             android:id="@+id/toggle_paid_dialog"
@@ -159,9 +113,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textStyle="bold"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
+            android:textStyle="bold"
             app:textAllCaps="true" />
 
 

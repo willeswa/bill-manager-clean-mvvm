@@ -11,7 +11,7 @@ import app.monkpad.billmanager.framework.UseCases
 import app.monkpad.billmanager.framework.mappers.asDomainModel
 import app.monkpad.billmanager.framework.mappers.asPresentationModel
 import app.monkpad.billmanager.framework.models.BillDTO
-import app.monkpad.billmanager.framework.models.CategoryDTO
+import app.monkpad.billmanager.framework.models.enums.Categories
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.map
@@ -38,9 +38,18 @@ class NewBillViewModel @Inject constructor(application: Application, useCases: U
 
     private val _showCategories = MutableLiveData(false)
     val showCategories: LiveData<Boolean> = _showCategories
-    
-    private val _category = MutableLiveData<CategoryDTO>()
-    val category: LiveData<CategoryDTO> = _category
+
+
+    private val _selectedCat = MutableLiveData<Categories?>()
+    val selectedCat: LiveData<Categories?> = _selectedCat
+
+    fun setSelectedCat(cat: Categories){
+        _selectedCat.postValue(cat)
+    }
+
+    fun resetCategory(){
+        _selectedCat.postValue(null)
+    }
 
     fun startShowingDatePicker(){
         _showDatePicker.postValue(true)
@@ -58,17 +67,6 @@ class NewBillViewModel @Inject constructor(application: Application, useCases: U
         _showCategories.postValue(false)
     }
 
-    fun addCategoryIfDoesNotExist(category: CategoryDTO){
-        coroutineScope.launch {
-            withContext(Dispatchers.IO){
-                useCases.addCategoryUseCase(category.asDomainModel())
-            }
-        }
-    }
-    
-    fun setCategory(category: CategoryDTO){
-        _category.postValue(category)
-    }
 
     fun addNewBill(bill: BillDTO){
         Log.i("viewmodel_say_some", ""+bill.repeat)
